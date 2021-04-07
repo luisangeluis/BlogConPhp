@@ -11,8 +11,9 @@
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
   <title>Blog 3</title>
-  <link rel="stylesheet" href="/BLOGCONPHP/styles/mainStyles.css">
+  <link rel="stylesheet" href="./styles/mainStyles.css">
   <style>
+
     body {
       padding-top: 3.5rem;
     }
@@ -128,6 +129,12 @@
             Ultimas entradas
           </div>
           <div class="card-body">
+            <?php
+              include_once 'app/Conexion.inc.php';
+
+              Conexion::openConexion();
+              Conexion::closeConexion();
+            ?>
             <p>Todavia no hay entradas</p>
           </div>
         </div>
