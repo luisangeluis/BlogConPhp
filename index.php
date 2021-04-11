@@ -1,3 +1,15 @@
+<?php
+  include_once 'app/Conexion.inc.php';
+  include_once 'app/CRepositorioUsuarios.inc.php';
+  
+  Conexion:: openConexion();
+  $usuarios = CRepositorioUsuarios :: getAllUsers(Conexion::getConexion());
+  echo count($usuarios);
+  Conexion:: closeConexion();
+
+
+
+?>
 <!doctype html>
 <html lang="es">
 
@@ -129,12 +141,7 @@
             Ultimas entradas
           </div>
           <div class="card-body">
-            <?php
-              include_once 'app/Conexion.inc.php';
-
-              Conexion::openConexion();
-              Conexion::closeConexion();
-            ?>
+            
             <p>Todavia no hay entradas</p>
           </div>
         </div>
