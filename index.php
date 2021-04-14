@@ -3,12 +3,11 @@
   include_once 'app/CRepositorioUsuarios.inc.php';
   
   Conexion:: openConexion();
-  $usuarios = CRepositorioUsuarios :: getAllUsers(Conexion::getConexion());
-  echo count($usuarios);
+
+  //$usuarios = CRepositorioUsuarios :: getAllUsers(Conexion::getConexion());
+  $totalUsuarios = CRepositorioUsuarios :: getNumUsers(Conexion::getConexion());
+  echo $totalUsuarios;
   Conexion:: closeConexion();
-
-
-
 ?>
 <!doctype html>
 <html lang="es">
@@ -72,7 +71,7 @@
   </nav>
   <!--JUMBOTRON-->
   <div class="container ">
-    <div class="jumbotron  p-5 rounded-bottom my-3 h-100">
+    <div class="jumbotron rounded-bottom my-3 h-50 p-3">
       <h1>Blog tercer intento</h1>
       <p>Blog dedicado a la programacion y desarrollo</p>
     </div>

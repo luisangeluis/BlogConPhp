@@ -31,4 +31,25 @@ class CRepositorioUsuarios{
         
         return $usuarios;
     }
+
+    public static function getNumUsers($pConexion){
+
+        $totalUsuarios =0;
+
+        if(isset($pConexion)){
+            try{
+                $sql = 'SELECT COUNT(*) AS total FROM usuarios';
+
+                $sentencia =  $pConexion -> prepare($sql);
+                $sentencia -> execute();
+                $resultado = $sentencia -> fetch();
+
+                $totalUsuarios = $resultado['total'];
+            }catch(PDOException $e){
+                print 'ERROR' . $e->getMessage();
+            }
+        }
+
+        return $totalUsuarios;
+    }
 }
