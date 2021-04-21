@@ -58,6 +58,14 @@
 
         <ul class="navbar-nav ml-auto mb-2 mb-md-0 ">
           <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="#">
+            Usuarios Registrados
+            <?php
+              echo $totalUsuarios;
+            ?>
+            </a>
+          </li>
+          <li class="nav-item active">
             <a class="nav-link" aria-current="page" href="#">Iniciar Sesion</a>
           </li>
           <li class="nav-item">
@@ -70,10 +78,13 @@
     </div>
   </nav>
   <!--JUMBOTRON-->
-  <div class="container ">
-    <div class="jumbotron rounded-bottom my-3 h-50 p-3">
-      <h1>Blog tercer intento</h1>
+  <div class="container">
+    <div class="jumbotron rounded my-3 px-5 ">
+      
+      <h1 class="">Blog tercer intento</h1>
       <p>Blog dedicado a la programacion y desarrollo</p>
+      
+      
     </div>
 
   </div>
