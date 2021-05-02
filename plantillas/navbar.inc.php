@@ -6,7 +6,7 @@
     echo $totalUsuarios;
     Conexion:: closeConexion();
 ?>
-<nav class="navbar navbar-expand-md  fixed-top bg-secondary">
+<nav class="navbar navbar-expand-md  fixed-top  bg-secondary ">
     <div class="container">
       <a class="navbar-brand" href="#">BLOG LUIS-3</a>
 
@@ -43,7 +43,7 @@
             <a class="nav-link" aria-current="page" href="#"><span><i class="fas fa-sign-in-alt"></i></span>Iniciar Sesion</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-plus"></i>Registro</a>
+            <a class="nav-link" href="registro.php"><i class="fas fa-plus"></i>Registro</a>
           </li>
 
         </ul>

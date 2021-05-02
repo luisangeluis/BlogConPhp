@@ -2,7 +2,8 @@
   include_once 'app/Conexion.inc.php';
   include_once 'app/CRepositorioUsuarios.inc.php';
   
-  
+  $titulo = 'Blog de JavaDevOne';
+
   include_once './plantillas/documento-declaracion.inc.php';
   include_once './plantillas/navbar.inc.php';
 ?>
