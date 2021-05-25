@@ -2,6 +2,8 @@
 include_once 'app/Conexion.inc.php';
 include_once 'app/CRepositorioUsuarios.inc.php';
 
+include_once 'app/validadorRegisto.inc.php';
+
 $titulo = 'Registro';
 
 include_once './plantillas/documento-declaracion.inc.php';
@@ -41,7 +43,7 @@ include_once './plantillas/navbar.inc.php';
                     Introduce tus datos
                 </div>
                 <div class="card-body text-wrap">
-                    <form role="form" method="POST" action="registro_action.php">
+                    <form role="form" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Nombre de Usuario</span>
                             <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="nombre">

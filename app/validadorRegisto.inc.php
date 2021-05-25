@@ -8,11 +8,14 @@
         private $errorClave1;
         private $errorClave2;
 
-        public function __construct($pNombre, $email, $pClave1,$pClave2){
+        public function __construct($pNombre, $pEmail, $pClave1,$pClave2){
             $this->nombre="";
             $this->email="";
 
-            $this->errorNombre =validarNombre(pNombre);
+            $this->errorNombre =$this->validarNombre($pNombre);
+            $this->errorEmail = $this->ValidarEmail($pEmail);
+            $this->errorClave1 = $this->validarClave1($pClave1);
+            $this->errorClave2 = $this->validarClave2($pClave2);
         }
 
         private function variableIniciada($variable){
@@ -23,8 +26,8 @@
             }
         }
 
-        private function validarNombre($pNombre);{
-            if(!variableIniciada($pNombre)){
+        private function validarNombre($pNombre){
+            if(!$this-> variableIniciada($pNombre)){
                 return "Debes escribir un nombre de usuario";
             }else{
                 $this->nombre=$pNombre;
@@ -39,6 +42,58 @@
 
             return "";
         }
-        
+
+        private function ValidarEmail($pEmail){
+            if(!$this->variableIniciada($pNombre)){
+                return "Debes escribir un email";
+            }else{
+                $this->email = $pEmail;
+            }
+
+            return "";
+        }
+
+        private function validarClave1($pClave1){
+            if(!$this ->variableIniciada($pClave1)){
+                return "debes escribir una clave";
+            }
+            return "";
+        }
+
+        private function validarClave2($pClave1,$pClave2){
+
+            if(!$this->variableIniciada($pClave1)){
+                return "debes rellar primero la clave 1";
+            }           
+            if($pClave1!==$pClave2){
+                return "debes repetir la contraseña correctamente";
+            }
+            if(!$this->variableIniciada($pClave2)){
+                return "Debes repetir la clave";
+            }
+        }
+
+        //getters
+        public function getNombre(){
+            return $this->nombre;
+
+        }
+        public function getEmail(){
+            return $this->email;
+        }
+
+        public function getErrorNombre(){
+            return $this->errorNombre;
+        }
+        public function getErrorEmail(){
+            return $this->errorEmail;
+        }
+        public function getErrorClave1(){
+            return $this->errorClave1;
+        }
+        public function getErrorClave2(){
+            return $this->errorClave2;
+        }
+
     }
 ?>
