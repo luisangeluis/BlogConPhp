@@ -1,5 +1,9 @@
 <?php
     class validadorRegistro{
+        //Varibles para crear un aviso en pantalla
+        private $avisoInicio;
+        private $avisoCierre;
+
         private $nombre;
         private $email;
 
@@ -9,13 +13,16 @@
         private $errorClave2;
 
         public function __construct($pNombre, $pEmail, $pClave1,$pClave2){
+
+            $this->avisoInicio = '<br><div class="alert alert-danger" role="alert">';
+            $this->avisoCierre='<div>';
             $this->nombre="";
             $this->email="";
 
             $this->errorNombre =$this->validarNombre($pNombre);
             $this->errorEmail = $this->ValidarEmail($pEmail);
             $this->errorClave1 = $this->validarClave1($pClave1);
-            $this->errorClave2 = $this->validarClave2($pClave2);
+            $this->errorClave2 = $this->validarClave2($pClave1,$pClave2);
         }
 
         private function variableIniciada($variable){
@@ -44,7 +51,7 @@
         }
 
         private function ValidarEmail($pEmail){
-            if(!$this->variableIniciada($pNombre)){
+            if(!$this->variableIniciada($pEmail)){
                 return "Debes escribir un email";
             }else{
                 $this->email = $pEmail;
@@ -95,5 +102,16 @@
             return $this->errorClave2;
         }
 
+        public function mostrarNombreEnPantalla(){
+            if($this->nombre!==""){
+                echo 'value"' . $this->nombre . '"';
+            }
+        }
+
+        public function mostrarErrorNombreEnPantalla(){
+            if($this->errorNombre!==""){
+                echo $this->avisoInicio . $this->errorNombre . $this->avisoCierre;
+            }
+        }
+
     }
-?>

@@ -4,6 +4,10 @@ include_once 'app/CRepositorioUsuarios.inc.php';
 
 include_once 'app/validadorRegisto.inc.php';
 
+if(isset($_POST['enviar'])){
+    $validador = new validadorRegistro($_POST['nombre'],$_POST['email'],$_POST['password1'],$_POST['password2']);
+}
+
 $titulo = 'Registro';
 
 include_once './plantillas/documento-declaracion.inc.php';
@@ -44,25 +48,13 @@ include_once './plantillas/navbar.inc.php';
                 </div>
                 <div class="card-body text-wrap">
                     <form role="form" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Nombre de Usuario</span>
-                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="nombre">
-
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Email</span>
-                            <input type="email" class="form-control" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1" name="email">
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Password</span>
-                            <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" name="password1">
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Repite el Password</span>
-                            <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" name="password2">
-                        </div>
-                            <button type="submit" class="btn btn-primary" name="enviar">Enviar Datos</button>
-                            <button type="reset" class="btn btn-primary" name="limpiar">Limpiar Formulario</button>
+                        <?php
+                            if(isset($_POST['enviar'])){
+                               include_once 'plantillas/registro_validado.inc.php'; 
+                            }else{
+                                include_once 'plantillas/registro_vacio.inc.php';
+                            }
+                        ?>
 
                     </form>
 
