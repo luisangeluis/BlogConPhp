@@ -15,7 +15,7 @@
         public function __construct($pNombre, $pEmail, $pClave1,$pClave2){
 
             $this->avisoInicio = '<br><div class="alert alert-danger" role="alert">';
-            $this->avisoCierre='<div>';
+            $this->avisoCierre='</div>';
             $this->nombre="";
             $this->email="";
 
@@ -26,7 +26,7 @@
         }
 
         private function variableIniciada($variable){
-            if(isset($varible) && !empty($variable)){
+            if(isset($variable) && !empty($variable)){
                 return true;
             }else{
                 return false;
@@ -52,7 +52,7 @@
 
         private function ValidarEmail($pEmail){
             if(!$this->variableIniciada($pEmail)){
-                return "Debes escribir un email";
+                return "Debes escribir un email de usuario es panta";
             }else{
                 $this->email = $pEmail;
             }
@@ -108,10 +108,47 @@
             }
         }
 
+        
+
+        public function mostrarEmailEnPantalla(){
+            if($this->email!==""){
+                echo 'value"' . $this->email . '"';
+            }
+        }
+
+
         public function mostrarErrorNombreEnPantalla(){
             if($this->errorNombre!==""){
                 echo $this->avisoInicio . $this->errorNombre . $this->avisoCierre;
             }
+        }
+        public function mostrarErrorEmailEnPantalla(){
+            if($this->errorEmail!==""){
+                echo $this->avisoInicio . $this->errorEmail . $this->avisoCierre;
+            }
+        }
+
+        public function mostrarErrorClave1EnPantalla(){
+            if($this->errorClave1!==""){
+                echo $this->avisoInicio . $this->errorClave1 . $this->avisoCierre;
+            }
+        }
+
+        public function mostrarErrorClave2EnPantalla(){
+            if($this->errorClave2!==""){
+                echo $this->avisoInicio . $this->errorClave2 . $this->avisoCierre;
+            }
+        }
+
+        public function validarFormulario(){
+            if($this->errorNombre==="" &&
+                $this->errorEmail==="" &&
+                $this->errorClave1==="" &&
+                $this->errorClave2===""){
+                    return true;
+                }else{
+                    return false;
+                }
         }
 
     }

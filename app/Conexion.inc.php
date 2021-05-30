@@ -14,7 +14,7 @@ class Conexion{
                 //Para que en la conexion se usen utf-8
                 self::$conexion -> exec("SET CHARACTER SET utf8");
 
-                print "Conexion abierta <br>";
+                // print "Conexion abierta <br>";
             }catch(PDOException $ex){
                 //El punto se usa para concatenar
                 print 'ERROR: ' . $ex -> getMessage() . "<br>";        
@@ -28,7 +28,7 @@ class Conexion{
         if(isset(self::$conexion)){
             self::$conexion =null;
             
-            print "Conexion cerrada";
+            // print "Conexion cerrada";
         }
 
     }
