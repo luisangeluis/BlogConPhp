@@ -24,9 +24,9 @@
 
   <style>
 
-    body {
+    /* body {
       padding-top: 3.5rem;
-    }
+    } */
   </style>
 </head>
 

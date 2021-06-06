@@ -104,7 +104,7 @@
 
         public function mostrarNombreEnPantalla(){
             if($this->nombre!==""){
-                echo 'value"' . $this->nombre . '"';
+                echo 'value="' . $this->nombre . '"';
             }
         }
 
@@ -112,7 +112,7 @@
 
         public function mostrarEmailEnPantalla(){
             if($this->email!==""){
-                echo 'value"' . $this->email . '"';
+                echo 'value="' . $this->email . '"';
             }
         }
 
@@ -141,10 +141,7 @@
         }
 
         public function validarFormulario(){
-            if($this->errorNombre==="" &&
-                $this->errorEmail==="" &&
-                $this->errorClave1==="" &&
-                $this->errorClave2===""){
+            if($this->errorNombre=="" && $this->errorEmail=="" && $this->errorClave1=="" && $this->errorClave2==""){
                     return true;
                 }else{
                     return false;

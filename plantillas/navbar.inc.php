@@ -3,10 +3,10 @@
 
     //$usuarios = CRepositorioUsuarios :: getAllUsers(Conexion::getConexion());
     $totalUsuarios = CRepositorioUsuarios :: getNumUsers(Conexion::getConexion());
-    echo $totalUsuarios;
+    // echo $totalUsuarios;
     Conexion:: closeConexion();
 ?>
-<nav class="navbar navbar-expand-md  fixed-top  bg-secondary ">
+<nav class="navbar navbar-expand-md bg-secondary ">
     <div class="container">
       <a class="navbar-brand" href="#">BLOG LUIS-3</a>
 

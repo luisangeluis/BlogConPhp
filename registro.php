@@ -7,8 +7,18 @@ include_once 'app/validadorRegisto.inc.php';
 if(isset($_POST['enviar'])){
     $validador = new validadorRegistro($_POST['nombre'],$_POST['email'],$_POST['password1'],$_POST['password2']);
 
+    echo $validador->getErrorNombre();
+    echo $validador->getErrorEmail();
+    echo $validador->getErrorClave1();
+    echo $validador->getErrorClave2();
+
     if($validador->validarFormulario()){
-        print "TOdo correcto";    }
+
+        echo "Todo correcto";    
+        
+    }
+
+
 }
 
 $titulo = 'Registro';

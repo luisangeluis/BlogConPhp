@@ -19,22 +19,22 @@ class CUsuario {
     }
     //GETTERS Y SETTERS
     public function getId(){
-        return $id;
+        return $this->id;
     }
     public function getNombre(){
-        return $nombre;
+        return $this->nombre;
     }
     public function getEmail(){
-        return $email;
+        return $this->email;
     }
     public function getPassword(){
-        return $password;
+        return $this->password;
     }
     public function getFechaRegistro(){
-        return $fechaRegistro;
+        return $this->fechaRegistro;
     }
     public function getActivo(){
-        return $activo;
+        return $this->activo;
     }
 
     public function setNombre($pNombre){

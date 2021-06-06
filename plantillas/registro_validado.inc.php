@@ -15,7 +15,7 @@
 </div>
 <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1">Password</span>
-    <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" name="password1" <?php $validador->mostrarEmailEnPantalla() ?>>
+    <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" name="password1">
     <?php
     $validador->mostrarErrorClave1EnPantalla();
     ?>
