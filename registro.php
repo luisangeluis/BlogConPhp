@@ -1,10 +1,13 @@
 <?php
 include_once 'app/Conexion.inc.php';
+include_once 'app/CUsuario.inc.php';
 include_once 'app/CRepositorioUsuarios.inc.php';
 
 include_once 'app/validadorRegisto.inc.php';
 
 if(isset($_POST['enviar'])){
+    Conexion:: openConexion();
+
     $validador = new validadorRegistro($_POST['nombre'],$_POST['email'],$_POST['password1'],$_POST['password2']);
 
     echo $validador->getErrorNombre();
@@ -14,10 +17,15 @@ if(isset($_POST['enviar'])){
 
     if($validador->validarFormulario()){
 
-        echo "Todo correcto";    
+        $usuario = new CUsuario('',$validador->getNombre(),$validador->getEmail(),$validador->getPassword(),'','');
+        $usuarioInsertado=CRepositorioUsuarios:: InsertarUsuario(Conexion::getConexion(),$usuario);
+        if($usuarioInsertado){
+            //Redigir a login
+
+        }
         
     }
-
+    Conexion::closeConexion();
 
 }
 

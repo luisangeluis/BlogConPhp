@@ -2,7 +2,7 @@
     Conexion:: openConexion();
 
     //$usuarios = CRepositorioUsuarios :: getAllUsers(Conexion::getConexion());
-    $totalUsuarios = CRepositorioUsuarios :: getNumUsers(Conexion::getConexion());
+    $totalUsuarios =   CRepositorioUsuarios:: getNumUsers(Conexion::getConexion());
     // echo $totalUsuarios;
     Conexion:: closeConexion();
 ?>
