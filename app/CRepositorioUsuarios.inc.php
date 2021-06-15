@@ -53,25 +53,27 @@ class CRepositorioUsuarios{
         return $totalUsuarios;
     }
 
-    //Insertar usuario
+    //Insertar un usuario
     public static function InsertarUsuario($pConexion, $pUsuario){
 
         $usuarioInsertado=false;
 
         if(isset($pConexion)){
             try{
-                $sql = 'INSERT INTO usuarios(nombre,email,password,fecha_registro,activo) VALUES(:nombre,:email,:password,NOW(),0)';
+                $sql = 'INSERT INTO usuarios(nombre,email,password,fecha_registro,activo) VALUES(:nombre,:email,:pass,NOW(),0)';
+                
                 $sentencia = $pConexion->prepare($sql);
 
-                $nombre =$pUsuario->getNombre();
-                $email = $pUsuario->getEmail();
-                $password = $pUsuario->getPassword();
+                $NOMBRE =$pUsuario->getNombre();
+                $EMAIL = $pUsuario->getEmail();
+                $PASSWORD = $pUsuario->getPassword();
 
-                $sentencia ->bindParam(':nombre',$nombre, PDO::PARAM_STR);
-                $sentencia ->bindParam(':email',$email, PDO::PARAM_STR);
-                $sentencia ->bindParam(':password',$password, PDO::PARAM_STR);
+                $sentencia ->bindParam(':nombre',$NOMBRE, PDO::PARAM_STR);
+                $sentencia ->bindParam(':email',$EMAIL, PDO::PARAM_STR);
+                $sentencia ->bindParam(':pass',$PASSWORD, PDO::PARAM_STR);
 
                 $usuarioInsertado = $sentencia->execute();
+
             }catch(PDOException $e){
                 print 'ERROR' . $e->getMessage();
 

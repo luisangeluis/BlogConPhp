@@ -9,12 +9,12 @@ class CUsuario {
     private $activo;
 
     public function __construct($pId, $pNombre, $pEmail, $pPassword, $pFechaRegistro, $pActivo){
-        $id =$pId;
-        $nombre = $pNombre;
-        $email = $pEmail;
-        $password = $pPassword;
-        $fechaRegistro = $pFechaRegistro;
-        $activo = $pActivo;
+        $this->id =$pId;
+        $this->nombre = $pNombre;
+        $this->email = $pEmail;
+        $this->password = $pPassword;
+        $this->fechaRegistro = $pFechaRegistro;
+        $this->activo = $pActivo;
 
     }
     //GETTERS Y SETTERS
