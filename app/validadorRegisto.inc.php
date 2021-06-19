@@ -1,4 +1,5 @@
 <?php
+include_once 'app/CRepositorioUsuarios.inc.php';
 class validadorRegistro
 {
     //Varibles para crear un aviso en pantalla
@@ -58,6 +59,10 @@ class validadorRegistro
             return "El nombre no debe ser mas largo de 24 caracteres";
         }
 
+        if(CRepositorioUsuarios::nombreExiste(Conexion::getConexion(),$pNombre)){
+            return "El nombre de usuario ya existe";
+        }
+
         return "";
     }
 
@@ -68,7 +73,10 @@ class validadorRegistro
         } else {
             $this->email = $pEmail;
         }
+        if(CRepositorioUsuarios::emailExiste(Conexion::getConexion(),$pEmail)){
+            return "El correo ya existe";
 
+        }
         return "";
     }
 
