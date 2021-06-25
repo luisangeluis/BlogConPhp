@@ -8,7 +8,7 @@ include_once 'app/validadorRegisto.inc.php';
 if(isset($_POST['enviar'])){
     Conexion:: openConexion();
 
-    $validador = new validadorRegistro($_POST['nombre'],$_POST['email'],$_POST['password1'],$_POST['password2']);
+    $validador = new validadorRegistro($_POST['nombre'],$_POST['email'],$_POST['password1'],$_POST['password2'],Conexion::getConexion());
 
     echo $validador->getErrorNombre();
     echo $validador->getErrorEmail();
@@ -20,6 +20,7 @@ if(isset($_POST['enviar'])){
         // $usuario = new CUsuario('',$validador->getNombre(),$validador->getEmail(),$validador->getPassword(),'','');
         
         $usuarioInsertado=CRepositorioUsuarios:: InsertarUsuario(Conexion::getConexion(),$usuario);
+
         if($usuarioInsertado){
             //Redigir a login
             

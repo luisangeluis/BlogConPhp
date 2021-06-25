@@ -15,7 +15,7 @@ class validadorRegistro
     private $errorClave1;
     private $errorClave2;
 
-    public function __construct($pNombre, $pEmail, $pClave1, $pClave2)
+    public function __construct($pNombre, $pEmail, $pClave1, $pClave2,$pConexion)
     {
 
         $this->avisoInicio = '<br><div class="alert alert-danger" role="alert">';
@@ -25,8 +25,8 @@ class validadorRegistro
         $this->email = "";
         $this->password ="";
 
-        $this->errorNombre = $this->validarNombre($pNombre);
-        $this->errorEmail = $this->ValidarEmail($pEmail);
+        $this->errorNombre = $this->validarNombre($pConexion,$pNombre);
+        $this->errorEmail = $this->ValidarEmail($pConexion,$pEmail);
         $this->errorClave1 = $this->validarClave1($pClave1);
         $this->errorClave2 = $this->validarClave2($pClave1, $pClave2);
 
@@ -44,7 +44,7 @@ class validadorRegistro
         }
     }
 
-    private function validarNombre($pNombre)
+    private function validarNombre($pConexion,$pNombre)
     {
         if (!$this->variableIniciada($pNombre)) {
             return "Debes escribir un nombre de usuario";
@@ -59,21 +59,21 @@ class validadorRegistro
             return "El nombre no debe ser mas largo de 24 caracteres";
         }
 
-        if(CRepositorioUsuarios::nombreExiste(Conexion::getConexion(),$pNombre)){
+        if(CRepositorioUsuarios::nombreExiste($pConexion,$pNombre)){
             return "El nombre de usuario ya existe";
         }
 
         return "";
     }
 
-    private function ValidarEmail($pEmail)
+    private function ValidarEmail($pConexion,$pEmail)
     {
         if (!$this->variableIniciada($pEmail)) {
             return "Debes escribir un email de usuario es panta";
         } else {
             $this->email = $pEmail;
         }
-        if(CRepositorioUsuarios::emailExiste(Conexion::getConexion(),$pEmail)){
+        if(CRepositorioUsuarios::emailExiste($pConexion,$pEmail)){
             return "El correo ya existe";
 
         }
