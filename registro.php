@@ -23,8 +23,7 @@ if(isset($_POST['enviar'])){
         $usuarioInsertado=CRepositorioUsuarios:: InsertarUsuario(Conexion::getConexion(),$usuario);
 
         if($usuarioInsertado){
-            //Redigir a login
-            
+            //Redigir a registro correcto
         }
         
     }
