@@ -5,13 +5,33 @@ include_once 'app/CRepositorioUsuarios.inc.php';
 include_once 'app/Redireccion.inc.php';
 
 
-if( isset($_GET['nombre']) && !empty($_GET['nombre'])){
-    echo 'hola '.$_GET['nombre'];
-}else{
-    echo 'no hay nombre';
+if (isset($_GET['nombre']) && !empty($_GET['nombre'])) {
+    $nombre = $_GET['nombre'];
+} else {
+    Redireccion::Redirigir(SERVIDOR);
 }
-if( isset($_GET['id']) && !empty($_GET['id'])){
-    echo ' id '.$_GET['id'];
-}else{
-    echo 'no hay id';
-}
+$titulo = 'Registro correcto!';
+include_once 'plantillas/documento-declaracion.inc.php';
+include_once 'plantillas/navbar.inc.php';
+?>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12  justify-content-center">
+            <div class="card text-center mt-5">
+                <div class="card-header">
+                    <p></p>
+                </div>
+                <div class="card-body py-5">
+                    <h5 class="card-title"> <span><i class="far fa-check-circle"></i></span> Felicidades <?php $nombre ?> te has registrado correctamente!</h5>
+                    <p class="card-text">Muchas gracias por registrarte</p>
+                    <a href="<?php echo RUTA_LOGIN?>" class="btn btn-primary">Iniciar Sesion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+include_once 'plantillas/documento-cierre.inc.php';
+?>

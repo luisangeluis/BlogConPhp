@@ -4,6 +4,7 @@ include_once 'app/CUsuario.inc.php';
 include_once 'app/CRepositorioUsuarios.inc.php';
 
 include_once 'app/validadorRegisto.inc.php';
+include_once 'app/Redireccion.inc.php';
 
 if(isset($_POST['enviar'])){
     Conexion:: openConexion();
@@ -24,6 +25,7 @@ if(isset($_POST['enviar'])){
 
         if($usuarioInsertado){
             //Redigir a registro correcto
+            Redireccion::Redirigir(RUTA_REGISTRO_CORRECTO. '?nombre='.$usuario->getNombre());
         }
         
     }
