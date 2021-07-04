@@ -40,7 +40,7 @@
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" aria-current="page" href="#"><span><i class="fas fa-sign-in-alt"></i></span>Iniciar Sesion</a>
+            <a class="nav-link" aria-current="page" href="<?php echo RUTA_LOGIN?>"><span><i class="fas fa-sign-in-alt"></i></span>Iniciar Sesion</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="registro.php"><i class="fas fa-plus"></i>Registro</a>
