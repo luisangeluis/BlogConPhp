@@ -95,13 +95,11 @@ class CRepositorioUsuarios
 
                 $resultado = $sentencia->fetchAll();
 
-                if(count($resultado)){
-                    $nombreExiste=true;
-                }else{
-                    $nombreExiste=false;
-
+                if (count($resultado)) {
+                    $nombreExiste = true;
+                } else {
+                    $nombreExiste = false;
                 }
-
             } catch (PDOException $e) {
                 print 'ERROR' . $e->getMessage();
             }
@@ -110,30 +108,58 @@ class CRepositorioUsuarios
         return $nombreExiste;
     }
 
-    public static function emailExiste($pConexion,$pEmail){
+    public static function emailExiste($pConexion, $pEmail)
+    {
         $emailExiste = true;
-        if(isset($pConexion)){
-            try{
+        if (isset($pConexion)) {
+            try {
 
                 $sql = 'SELECT * FROM usuarios where email=:email';
                 $sentencia = $pConexion->prepare($sql);
-                $sentencia ->bindParam(':email',$pEmail,PDO::PARAM_STR);
+                $sentencia->bindParam(':email', $pEmail, PDO::PARAM_STR);
                 $sentencia->execute();
 
                 $resultado = $sentencia->fetchAll();
 
-                if(count($resultado)){
-                    $emailExiste=true;
-                }else{
-                    $emailExiste=false;
-
+                if (count($resultado)) {
+                    $emailExiste = true;
+                } else {
+                    $emailExiste = false;
                 }
-
-            }catch(PDOException $e){
-                print 'ERROR '. $e->getMessage();
+            } catch (PDOException $e) {
+                print 'ERROR ' . $e->getMessage();
             }
         }
 
         return $emailExiste;
+    }
+
+    //Obtener usuario por email
+    public static function getUserPorEmail($pConexion, $pEmail)
+    {
+        $usuario = null;
+
+        if (isset($pConexion)) {
+            try {
+                $sql = 'SELECT * FROM usuarios WHERE email= :email';
+                $sentencia = $pConexion->prepare($sql);
+                $sentencia->bindParam(':email', $pEmail, PDO::PARAM_STR);
+                $sentencia->execute();
+                $resultado = $sentencia->fetch();
+
+                if (!empty($resultado)) {
+                    $usuario = new CUsuario(
+                        $resultado['id'],
+                        $resultado['nombre'],
+                        $resultado['email'],
+                        $resultado['password'],
+                        $resultado['fecha_registro'],
+                        $resultado['activo'],
+                    );
+                }
+            } catch (PDOException $e) {
+                print 'ERROR ' . $e->getMessage();
+            }
+        }
     }
 }

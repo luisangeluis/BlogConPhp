@@ -30,6 +30,7 @@ include_once 'plantillas/navbar.inc.php'
                             <!-- <span class="input-group-text" id="password">Password</span> -->
                             <input type="password" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
+                        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
 
                         
                     </form>
