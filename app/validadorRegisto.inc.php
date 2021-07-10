@@ -39,7 +39,7 @@ class validadorRegistro
     {
         if (isset($variable) && !empty($variable)) {
             return true;
-        } else {
+        } else {    
             return false;
         }
     }

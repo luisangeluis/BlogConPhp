@@ -161,5 +161,7 @@ class CRepositorioUsuarios
                 print 'ERROR ' . $e->getMessage();
             }
         }
+
+        return $usuario;
     }
 }
