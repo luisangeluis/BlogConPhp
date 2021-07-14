@@ -137,12 +137,15 @@ class CRepositorioUsuarios
     //Obtener usuario por email
     public static function getUserPorEmail($pConexion, $pEmail)
     {
-        $usuario = null;
+        $usuario=null;
 
         if (isset($pConexion)) {
             try {
+                include_once 'CUsuario.inc.php';
+
                 $sql = 'SELECT * FROM usuarios WHERE email= :email';
                 $sentencia = $pConexion->prepare($sql);
+                
                 $sentencia->bindParam(':email', $pEmail, PDO::PARAM_STR);
                 $sentencia->execute();
                 $resultado = $sentencia->fetch();

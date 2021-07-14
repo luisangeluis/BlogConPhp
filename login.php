@@ -2,6 +2,26 @@
 include_once 'app/Conexion.inc.php';
 include_once 'app/config.inc.php';
 include_once 'app/CRepositorioUsuarios.inc.php';
+include_once 'app/CValidadorLogin.inc.php';
+
+if (isset($_POST['login'])) {
+
+    Conexion::openConexion();
+
+    $validador = new CValidadorLogin($_POST['email'], $_POST['password'], Conexion::getConexion());
+
+    if ($validador->getError() === "" && !is_null($validador->getUsuario())) {
+        //iniciar sesion
+        //redirigir a index
+        echo "inicio de sesion ok";
+        
+    }else{
+        echo "inicio de sesion fallo";
+
+    }
+    
+    Conexion::closeConexion();
+}
 
 $titulo = 'Pagina de login';
 
@@ -23,16 +43,28 @@ include_once 'plantillas/navbar.inc.php'
                             <label for="" class="form-label">Email</label>
                             <!-- <span class="input-group-text" id="email">Email</span> -->
 
-                            <input type="email" class="form-control" id="email"placeholder="Email" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="email" name="email" class="form-control" id="email" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1" required autofocus
+                            <?php
+                                if(isset($_POST['login']) && isset($_POST['email']) && !empty($_POST['email'])){
+                                    echo 'value="'. $_POST['email']. '"';
+                                }
+                            ?>
+                            > 
+                            
                         </div>
                         <div class=" mb-3">
                             <label for="" class="form-label">Password</label>
                             <!-- <span class="input-group-text" id="password">Password</span> -->
-                            <input type="password" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="password" name="password" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>
+                            <?php
+                                if(isset($_POST['login'])){
+                                    $validador->getError();
+                                }
+                            ?>    
                         </div>
-                        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                        <button type="submit" class="btn btn-primary" name="login">Iniciar Sesión</button>
 
-                        
+
                     </form>
 
                 </div>

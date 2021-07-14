@@ -13,7 +13,7 @@ class CValidadorLogin{
         if($pCorreo==null || $pClave==null){
             $this->error = "Debes escribir tu usuario y contraseña";
         }else{
-            $usuario = CRepositorioUsuarios::getUserPorEmail($pConexion,$pCorreo);  
+            $this->usuario = CRepositorioUsuarios::getUserPorEmail($pConexion,$pCorreo);  
 
             if(is_null($this->usuario) || !password_verify($pClave, $this->usuario->getPassword())){
                 $this->error = "Datos incorrectos";
