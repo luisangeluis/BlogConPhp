@@ -3,7 +3,13 @@ include_once 'app/Conexion.inc.php';
 include_once 'app/config.inc.php';
 include_once 'app/CRepositorioUsuarios.inc.php';
 include_once 'app/CValidadorLogin.inc.php';
+include_once 'app/CControlSesion.inc.php';
+include_once 'app/Redireccion.inc.php';
 
+if(CControlSesion:: sesionIniciada()){
+    Redireccion::Redirigir(SERVIDOR);
+    echo 'hola';
+}
 if (isset($_POST['login'])) {
 
     Conexion::openConexion();
@@ -11,13 +17,13 @@ if (isset($_POST['login'])) {
     $validador = new CValidadorLogin($_POST['email'], $_POST['password'], Conexion::getConexion());
 
     if ($validador->getError() === "" && !is_null($validador->getUsuario())) {
+
+        CControlSesion:: openSession($validador->getUsuario()->getId(),$validador->getUsuario()->getNombre());
+
+        Redireccion:: Redirigir(SERVIDOR);
         //iniciar sesion
         //redirigir a index
-        echo "inicio de sesion ok";
         
-    }else{
-        echo "inicio de sesion fallo";
-
     }
     
     Conexion::closeConexion();
