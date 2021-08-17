@@ -1,32 +1,18 @@
 body{
     background-image: url(/BLOGCONPHP/IMG/folk-pattern.png);
 }
-.navbar{
-    background-color: #2b2b2b !important;
-}
+/*jumbotron*/
 .jumbotron{
     background-color:#658197;
     color:black;
     font-weight: bold;
     min-height: 300px;
-    
-
-
-
 }
 
-
-   
-
-.card-header{
-    background-color:#658197;
-    color: white;
-    font-weight: bold;
+/*Navegacion principal*/
+.navbar{
+    background-color: #2b2b2b !important;
 }
-.card-body{
-    background-color:#D3DBE4;
-}
-
 .navbar-brand:link,.navbar-brand:visited{
     color:lightseagreen;
     
@@ -41,5 +27,26 @@ body{
 
 .navbar li a:link, .navbar li a:visited{
     color:whitesmoke;
+}
+
+.navbar .btn{
+    background-color: #658199;
+}
+.dropdown-menu{
+    background-color:rgba(60, 60, 60,.8);
+}
+.show > a{
+    color: whitesmoke !important;
+}
+
+/*Cards principales*/
+
+.card-header{
+    background-color:#658197;
+    color: white;
+    font-weight: bold;
+}
+.card-body{
+    background-color:#D3DBE4;
 }
 
