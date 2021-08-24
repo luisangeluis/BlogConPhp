@@ -21,6 +21,36 @@ class CEntrada{
 
     //Getters y Setters
 
+    public function getId(){
+        return $this->id;
+    }
+    public function getAutor(){
+        return $this->autor_id;
+    }
+    public function getTitulo(){
+        return $this->titulo;
+    }
+    public function getTexto(){
+        return $this->texto;
+    }
+    public function getFecha(){
+        return $this->fecha;
+    }
+    public function getActiva(){
+        return $this->activa;
+    }
+
+
+    public function setTitulo($pTitulo){
+        $this->autor = $pTitulo;
+    }
+    public function setTexto($pTexto){
+        $this->autor = $pTexto;
+    }
+    public function setActiva($pActiva){
+        $this->activa = $pActiva;
+    }
     
+
 }
 ?>
