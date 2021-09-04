@@ -11,12 +11,11 @@ class CRepositorioComentario
 
         if (isset($pConexion)) {
             try {
-                $sql = 'INSERT INTO comentarios(autor_id,entrada_id,titulo,texto,fecha) 
-                    VALUES(:autor_id,entrada_id,:titulo,:texto,NOW())';
+                $sql = 'INSERT INTO comentarios(autor_id,entrada_id,titulo,texto,fecha) VALUES(:autor_id,entrada_id,:titulo,:texto,NOW())';
 
                 $sentencia = $pConexion->prepare($sql);
 
-                $AUTOR_ID = $pComentario->getAutor();
+                $AUTOR_ID = $pComentario->getAutorId();
                 $ENTRADA_ID =$pComentario ->getEntradaId();
                 $TITULO = $pComentario->getTitulo();
                 $TEXTO = $pComentario->getTexto();
@@ -28,7 +27,7 @@ class CRepositorioComentario
 
                 $comentarioInsertado = $sentencia->execute();
             } catch (PDOException $e) {
-                print 'ERROR: '. $e->getMessage();
+                print 'ERROR Insertar comentario: '. $e->getMessage();
             }
         }
         return $comentarioInsertado;

@@ -6,6 +6,7 @@
 
   include_once './plantillas/documento-declaracion.inc.php';
   include_once './plantillas/navbar.inc.php';
+
 ?>
 
   
