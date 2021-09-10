@@ -14,7 +14,7 @@
   <div class="container">
     <div class="jumbotron rounded my-3 px-5 ">
       
-      <h1 class="">Blog tercer intento</h1>
+      <h1 class="">Blog tercer intent</h1>
       <p>Blog dedicado a la programacion y desarrollo</p>
       
       

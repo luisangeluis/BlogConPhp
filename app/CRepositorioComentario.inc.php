@@ -11,7 +11,8 @@ class CRepositorioComentario
 
         if (isset($pConexion)) {
             try {
-                $sql = 'INSERT INTO comentarios(autor_id,entrada_id,titulo,texto,fecha) VALUES(:autor_id,entrada_id,:titulo,:texto,NOW())';
+                $sql = 'INSERT INTO comentarios(autor_id,entrada_id,titulo,texto,fecha) 
+                    VALUES(:autor_id,:entrada_id,:titulo,:texto,NOW())';
 
                 $sentencia = $pConexion->prepare($sql);
 

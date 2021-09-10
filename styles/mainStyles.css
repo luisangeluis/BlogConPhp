@@ -1,5 +1,10 @@
 body{
-    background-image: url(/BLOGCONPHP/IMG/folk-pattern.png);
+    /* background-image: url(/BLOGCONPHP/IMG/folk-pattern.png);
+    background-image: url(BLOGCONPHP/IMG/moroccan-flower-dark.png); */
+    /* background-image: url('/img/moroccan-flower-dark.png'); */
+    background-image: url('/BLOGCONPHP/img/moroccan-flower-dark.png');
+    /* background-image: url('./img/moroccan-flower-dark.png'); */
+
 }
 /*jumbotron*/
 .jumbotron{

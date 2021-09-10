@@ -21,7 +21,7 @@
     //     CRepositorioUsuarios::InsertarUsuario(Conexion::getConexion(),$usuario);
     // }
 
-    // for($entradas =0;$entradas<3;$entradas++){
+    // for($entradas =0;$entradas<100;$entradas++){
     //     $autor = rand(1,100);
     //     $titulo = crearStringAleatorio(10);
     //     $texto = lorem();
@@ -38,7 +38,7 @@
         $comentario = new CComentario('',$autorId,$entradaId,$titulo,$texto,'');
         CRepositorioComentario::insertarComentario(Conexion::getConexion(),$comentario);
     }
-
+    // print 'EL ID'.$comentario->getId();
     function crearStringAleatorio($pLongitud){
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $string ="";
