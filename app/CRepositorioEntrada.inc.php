@@ -30,4 +30,28 @@ class CRepositorioEntrada
         }
         return $entradaInsertada;
     }
+
+    public static function GetEntradasFechaDescendiente($pConexion){
+        $entradas=[];
+        
+        if(isset($pConexion)){
+            try{
+                $sql ='SELECT * FROM entradas ORDER BY fecha DESC';
+                
+                $sentencia = $pConexion->prepare($sql);
+
+                $sentencia->execute();
+
+                $resultado = $sentencia->fetchAll();
+
+                foreach($resultado as $fila){
+                    $entrada = new CEntrada($fila['id'],$fila['autor_id'],$fila['titulo'],$fila['texto'],$fila['fecha'],$fila['activa']);
+                }
+
+            }catch(PDOException $e){
+                print 'ERROR: '. $e->getMessage();
+ 
+            }
+        }
+    }
 }
