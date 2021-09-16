@@ -29,7 +29,7 @@
     //     $entrada = new CEntrada('',$autor,$titulo,$texto,'','');
     //     CRepositorioEntrada::insertarEntrada(Conexion::getConexion(),$entrada);
     // }
-    for($comentarios =0;$comentarios<3;$comentarios++){
+    for($comentarios =0;$comentarios<97;$comentarios++){
         $autorId = rand(1,100);
         $entradaId = rand(1,100);
         $titulo = crearStringAleatorio(10);
