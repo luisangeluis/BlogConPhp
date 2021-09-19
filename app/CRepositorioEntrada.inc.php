@@ -46,6 +46,7 @@ class CRepositorioEntrada
 
                 foreach($resultado as $fila){
                     $entrada = new CEntrada($fila['id'],$fila['autor_id'],$fila['titulo'],$fila['texto'],$fila['fecha'],$fila['activa']);
+                    array_push($entradas,$fila);
                 }
 
             }catch(PDOException $e){
@@ -53,5 +54,6 @@ class CRepositorioEntrada
  
             }
         }
+        return $entradas;
     }
 }
