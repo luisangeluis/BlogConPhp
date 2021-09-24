@@ -12,6 +12,8 @@ class EscritorioDeEntradas{
                 self::escribirEntrada($entrada);
             }
         }
+
+        return $entradas;
     } 
 
      public static function escribirEntrada($entrada){
@@ -23,12 +25,12 @@ class EscritorioDeEntradas{
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <?php echo $entrada-> getTitulo()?>
+                        <?php echo $entrada -> getTitulo()?>
                     </div>
                     <div class="card-body">
-                        <div class="card-title"><?php echo $entrada-> getFecha()?></div>
+                        <div class="card-title"><?php echo nl2br($entrada-> getFecha())?></div>
                         <div class="card-text">
-                            <?php echo $entrada -> getTexto()?>
+                            <?php echo nl2br($entrada -> getTexto())?>
                         </div>
                     </div>
                 </div>

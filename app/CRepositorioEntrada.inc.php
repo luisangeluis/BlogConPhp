@@ -43,17 +43,21 @@ class CRepositorioEntrada
                 $sentencia->execute();
 
                 $resultado = $sentencia->fetchAll();
+                if(count($resultado)){
+                    foreach($resultado as $fila){
+                        $entradas[] = new CEntrada($fila['id'],$fila['autor_id'],$fila['titulo'],$fila['texto'],$fila['fecha'],$fila['activa']);
+                        
+                        
+                    }
 
-                foreach($resultado as $fila){
-                    $entrada = new CEntrada($fila['id'],$fila['autor_id'],$fila['titulo'],$fila['texto'],$fila['fecha'],$fila['activa']);
-                    array_push($entradas,$fila);
                 }
-
-            }catch(PDOException $e){
+                }catch(PDOException $e){
                 print 'ERROR: '. $e->getMessage();
  
             }
+
         }
         return $entradas;
+
     }
 }
