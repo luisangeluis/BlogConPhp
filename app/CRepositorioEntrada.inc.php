@@ -36,7 +36,7 @@ class CRepositorioEntrada
         
         if(isset($pConexion)){
             try{
-                $sql ='SELECT * FROM entradas ORDER BY fecha DESC';
+                $sql ='SELECT * FROM entradas ORDER BY fecha DESC LIMIT 5';
                 
                 $sentencia = $pConexion->prepare($sql);
 
