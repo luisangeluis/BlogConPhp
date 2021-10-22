@@ -43,6 +43,11 @@
                     $rutaElegida ='vistas/registro.php';
                 break;
             }
+        }else if(count($partesRuta)==3){
+            if($partesRuta[1]=='registro-correcto'){
+                $nombre = $partesRuta[2];
+                $rutaElegida = 'vistas/registro-correcto.php';
+            }
         }
 
     }

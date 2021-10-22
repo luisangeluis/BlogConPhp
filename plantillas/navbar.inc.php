@@ -8,7 +8,7 @@ $totalUsuarios =   CRepositorioUsuarios::getNumUsers(Conexion::getConexion());
 ?>
 <nav class="navbar navbar-expand-md bg-secondary ">
   <div class="container">
-    <a class="navbar-brand" href="#">BLOG LUIS-3</a>
+    <a class="navbar-brand" href="<?php echo SERVIDOR?>">BLOG LUIS-3</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="visually-hidden">Boton para barra de navegacion</span>
@@ -75,7 +75,7 @@ $totalUsuarios =   CRepositorioUsuarios::getNumUsers(Conexion::getConexion());
             <a class="nav-link" aria-current="page" href="<?php echo RUTA_LOGIN ?>"><span><i class="fas fa-sign-in-alt"></i></span>Iniciar Sesion</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="registro.php"><i class="fas fa-plus"></i>Registro</a>
+            <a class="nav-link" href="<?php echo RUTA_REGISTRO?>"><i class="fas fa-plus"></i>Registro</a>
           </li>
         <?php
         }

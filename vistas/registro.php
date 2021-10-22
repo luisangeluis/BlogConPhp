@@ -30,7 +30,7 @@ if(isset($_POST['enviar'])){
 
         if($usuarioInsertado){
             //Redigir a registro correcto
-            Redireccion::Redirigir(RUTA_REGISTRO_CORRECTO. '?nombre='.$usuario->getNombre());
+            Redireccion::Redirigir(RUTA_REGISTRO_CORRECTO . '/' . $usuario->getNombre());
         }
         
     }
@@ -77,7 +77,7 @@ include_once './plantillas/navbar.inc.php';
                     Introduce tus datos
                 </div>
                 <div class="card-body text-wrap">
-                    <form role="form" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                    <form role="form" method="POST" action="<?php echo RUTA_REGISTRO ?>">
                         <?php
                             if(isset($_POST['enviar'])){
                                include_once 'plantillas/registro_validado.inc.php'; 
