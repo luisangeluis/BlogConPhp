@@ -3,16 +3,18 @@
 class CEntrada{
     private $id;
     private $autor_id;
+    private $url;
     private $titulo;
     private $texto;
     private $fecha;
     private $activa;
 
 
-    public function __construct($pId, $pAutor_id,$pTitulo,$pTexto,$pFecha,$pActiva){
+    public function __construct($pId, $pAutor_id,$pUrl,$pTitulo,$pTexto,$pFecha,$pActiva){
 
         $this->id = $pId;
         $this->autor_id = $pAutor_id;
+        $this->url = $pUrl;
         $this->titulo = $pTitulo;
         $this->texto = $pTexto;
         $this->fecha = $pFecha;
@@ -27,6 +29,9 @@ class CEntrada{
     public function getAutor(){
         return $this->autor_id;
     }
+    public function getUrl(){
+        return $this->url;
+    }
     public function getTitulo(){
         return $this->titulo;
     }
@@ -40,7 +45,9 @@ class CEntrada{
         return $this->activa;
     }
 
-
+    public function setUrl($pUrl){
+        $this->url = $pUrl;
+    }
     public function setTitulo($pTitulo){
         $this->autor = $pTitulo;
     }

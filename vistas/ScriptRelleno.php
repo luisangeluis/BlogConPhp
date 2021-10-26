@@ -12,23 +12,24 @@
 
     Conexion::openConexion();
 
-    // for($usuarios =0; $usuarios<100; $usuarios++){
-    //     $nombre = crearStringAleatorio(10);
-    //     $email = crearStringAleatorio(5).'@'.crearStringAleatorio(3);
-    //     $password = password_hash('12345',PASSWORD_DEFAULT);
+    for($usuarios =0; $usuarios<100; $usuarios++){
+        $nombre = crearStringAleatorio(10);
+        $email = crearStringAleatorio(5).'@'.crearStringAleatorio(3);
+        $password = password_hash('12345',PASSWORD_DEFAULT);
 
-    //     $usuario = new CUsuario('',$nombre,$email,$password,'','');
-    //     CRepositorioUsuarios::InsertarUsuario(Conexion::getConexion(),$usuario);
-    // }
+        $usuario = new CUsuario('',$nombre,$email,$password,'','');
+        CRepositorioUsuarios::InsertarUsuario(Conexion::getConexion(),$usuario);
+    }
 
-    // for($entradas =0;$entradas<100;$entradas++){
-    //     $autor = rand(1,100);
-    //     $titulo = crearStringAleatorio(10);
-    //     $texto = lorem();
+    for($entradas =0;$entradas<100;$entradas++){
+        $autor = rand(1,100);
+        $titulo = crearStringAleatorio(10);
+        $url = $titulo;
+        $texto = lorem();
 
-    //     $entrada = new CEntrada('',$autor,$titulo,$texto,'','');
-    //     CRepositorioEntrada::insertarEntrada(Conexion::getConexion(),$entrada);
-    // }
+        $entrada = new CEntrada('',$autor,$url,$titulo,$texto,'','');
+        CRepositorioEntrada::insertarEntrada(Conexion::getConexion(),$entrada);
+    }
     for($comentarios =0;$comentarios<97;$comentarios++){
         $autorId = rand(1,100);
         $entradaId = rand(1,100);

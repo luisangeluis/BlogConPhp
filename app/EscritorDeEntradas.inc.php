@@ -12,7 +12,7 @@ class EscritorioDeEntradas
         if (count($entradas)) {
             foreach ($entradas as $entrada) {
                 self::escribirEntrada($entrada);
-            }
+            }   
         }
 
         return $entradas;
@@ -36,7 +36,7 @@ class EscritorioDeEntradas
                             <?php echo nl2br( self::resumirTexto($entrada->getTexto()) ) ?>
                         </div>
                         <div class="text-center">
-                            <a href="#" class="btn btn-primary">Seguir leyendo</a>
+                            <a href="<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl()?>" class="btn btn-primary">Seguir leyendo</a>
 
                         </div>
                     </div>

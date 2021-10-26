@@ -11,15 +11,17 @@ class CRepositorioEntrada
 
         if (isset($pConexion)) {
             try {
-                $sql = 'INSERT INTO entradas(autor_id,titulo,texto,fecha,activa) VALUES(:autor_id,:titulo,:texto,NOW(),0)';
+                $sql = 'INSERT INTO entradas(autor_id,url,titulo,texto,fecha,activa) VALUES(:autor_id,:url,:titulo,:texto,NOW(),0)';
 
                 $sentencia = $pConexion->prepare($sql);
 
                 $AUTOR_ID = $pEntrada->getAutor();
+                $URL = $pEntrada->getUrl();
                 $TITULO = $pEntrada->getTitulo();
                 $TEXTO = $pEntrada->getTexto();
 
                 $sentencia->bindparam(':autor_id', $AUTOR_ID, PDO::PARAM_STR);
+                $sentencia->bindparam(':url', $URL, PDO::PARAM_STR);
                 $sentencia->bindparam(':titulo', $TITULO, PDO::PARAM_STR);
                 $sentencia->bindparam(':texto', $TEXTO, PDO::PARAM_STR);
 
@@ -45,8 +47,8 @@ class CRepositorioEntrada
                 $resultado = $sentencia->fetchAll();
                 if(count($resultado)){
                     foreach($resultado as $fila){
-                        $entradas[] = new CEntrada($fila['id'],$fila['autor_id'],$fila['titulo'],$fila['texto'],$fila['fecha'],$fila['activa']);
-                        
+                        $entradas[] = new CEntrada($fila['id'],$fila['autor_id'],$fila['url'],$fila['titulo'],$fila['texto'],
+                                        $fila['fecha'],$fila['activa']);
                         
                     }
 
