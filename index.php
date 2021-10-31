@@ -1,4 +1,15 @@
 <?php
+include_once 'app/config.inc.php';
+include_once 'app/Conexion.inc.php';
+
+include_once 'app/CUsuario.inc.php';
+include_once 'app/CEntrada.inc.php';
+include_once 'app/CComentario.inc.php';
+
+include_once 'app/CRepositorioUsuarios.inc.php';
+include_once 'app/CRepositorioEntrada.inc.php';
+include_once 'app/CRepositorioComentario.inc.php';
+
     //Las primeras 2 lineas obtienen la ruta
     $componentesUrl = parse_url($_SERVER["REQUEST_URI"]);
     $ruta = $componentesUrl['path'];
@@ -50,6 +61,14 @@
             if($partesRuta[1]=='registro-correcto'){
                 $nombre = $partesRuta[2];
                 $rutaElegida = 'vistas/registro-correcto.php';
+            }
+            if($partesRuta[1] == 'entrada'){
+                $url = $partesRuta[2];
+                Conexion::openConexion();
+                $entrada = CRepositorioEntrada :: getEntradaByUrl(Conexion::getConexion(),$url);
+                if($entrada!=null){
+                    $rutaElegida = 'vistas/entrada.php';
+                }
             }
         }
 

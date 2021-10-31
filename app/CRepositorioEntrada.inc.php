@@ -62,4 +62,27 @@ class CRepositorioEntrada
         return $entradas;
 
     }
+
+    public static function getEntradaByUrl($pConexion,$pUrl){
+        $entrada = null;
+        if(isset($pConexion)){
+            try{
+                $sql = 'SELECT * FROM entradas WHERE url LIKE :url'; 
+
+                $sentencia = $pConexion->prepare($sql);
+
+                $sentencia->bindparam(':url', $pUrl, PDO::PARAM_STR);
+                $sentencia -> execute(); 
+                $resultado = $sentencia->fetch();
+
+                if(!empty($resultado)){
+                    $entrada = new CEntrada($resultado['id'],$resultado['autor_id'],$resultado['url'],$resultado['titulo'],
+                        $resultado['texto'],$resultado['fecha'],$resultado['activa']);
+                }
+            }catch(PDOException $e){
+                print 'ERROR: '. $e->getMessage();
+            }
+        }
+        return $entrada;
+    }
 }
