@@ -10,6 +10,7 @@ include_once 'app/CRepositorioUsuarios.inc.php';
 include_once 'app/CRepositorioEntrada.inc.php';
 include_once 'app/CRepositorioComentario.inc.php';
 
+
     //Las primeras 2 lineas obtienen la ruta
     $componentesUrl = parse_url($_SERVER["REQUEST_URI"]);
     $ruta = $componentesUrl['path'];
