@@ -55,3 +55,19 @@ body{
     background-color:#D3DBE4;
 }
 
+/*Estilos de botones*/
+
+.btn-primary{
+    background-color: #658197;
+    border:none;
+}
+.btn-primary:hover{
+    background-color: #2b2b2b;
+}
+
+/*Articulos como entradas*/
+.contenido-articulo article{
+    text-align: justify;
+}
+
+

@@ -67,7 +67,9 @@ include_once 'app/CRepositorioComentario.inc.php';
                 $url = $partesRuta[2];
                 Conexion::openConexion();
                 $entrada = CRepositorioEntrada :: getEntradaByUrl(Conexion::getConexion(),$url);
+
                 if($entrada!=null){
+                    $usuario = CRepositorioUsuarios::GetUserById(Conexion::getConexion(),$entrada -> getAutor());
                     $rutaElegida = 'vistas/entrada.php';
                 }
             }

@@ -26,7 +26,7 @@ class EscritorioDeEntradas
         ?>
         <div class="row">
             <div class="col-lg-12">
-                <div class="card">
+                <div class="card ">
                     <div class="card-header">
                         <?php echo $entrada->getTitulo() ?>
                     </div>
@@ -35,7 +35,7 @@ class EscritorioDeEntradas
                         <div class="card-text ">
                             <?php echo nl2br( self::resumirTexto($entrada->getTexto()) ) ?>
                         </div>
-                        <div class="text-center">
+                        <div class="text-center pt-3">
                             <a href="<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl()?>" class="btn btn-primary">Seguir leyendo</a>
 
                         </div>

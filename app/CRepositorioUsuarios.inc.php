@@ -167,4 +167,35 @@ class CRepositorioUsuarios
 
         return $usuario;
     }
+
+    public static function GetUserById($pConexion,$pId){
+        $usuario = null;
+        if(isset($pConexion)){
+            try{
+                $sql = 'SELECT * FROM usuarios WHERE id = :id';
+                $sentencia = $pConexion -> prepare($sql);
+
+                $sentencia ->bindParam(':id',$pId,PDO::PARAM_STR);
+                $sentencia -> execute();
+                $resultado = $sentencia -> fetch();
+
+                if(!empty($resultado)){
+                    $usuario = new CUsuario(
+                        $resultado['id'],
+                        $resultado['nombre'],
+                        $resultado['email'],
+                        $resultado['password'],
+                        $resultado['fecha_registro'],
+                        $resultado['activo'],
+                    );
+                }
+
+            }catch(PDOException $e){
+                print 'ERROR ' . $e->getMessage();
+
+            }
+        }
+
+        return $usuario;
+    }
 }
