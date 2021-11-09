@@ -6,15 +6,7 @@
     include_once 'plantillas/documento-declaracion.inc.php';
     include_once 'plantillas/navbar.inc.php';
     ?>
-    <!-- <div class="container mt-3">
-            <div class="row ">
-                <div class="col-lg-9 mx-auto">
-                    <?php
-                    EscritorioDeEntradas::escribirEntrada($entrada);
-                    ?>
-                </div>
-            </div>
-        </div> -->
+   
     <div class="contenido-articulo">
         <div class="container bg-light py-5 px-5 my-3 mx-auto">
             <div class="row">
@@ -38,7 +30,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <article class=" text-break">
+                    <article class=" text-break text">
                         <?php
                         echo nl2br($entrada->getTexto());
                         ?>
