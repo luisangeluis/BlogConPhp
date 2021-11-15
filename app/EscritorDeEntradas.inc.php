@@ -30,7 +30,7 @@ class EscritorioDeEntradas
                     <div class="card-header">
                         <?php echo $entrada->getTitulo() ?>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" >
                         <div class="card-title"><?php echo nl2br($entrada->getFecha()) ?></div>
                         <div class="card-text ">
                             <?php echo nl2br( self::resumirTexto($entrada->getTexto()) ) ?>
