@@ -91,7 +91,7 @@ class CRepositorioEntrada
 
         if(isset($pConexion)){
             try{
-                $sql = 'SELECT * FROM entradas ORDER BY id DESC :pLimit';
+                $sql = 'SELECT * FROM entradas ORDER BY id DESC LIMIT :pLimit';
                 $sentencia = $pConexion->prepare($sql);
 
                 $sentencia ->bindparam(':pLimit', $pLimit,PDO::PARAM_STR);
@@ -110,6 +110,38 @@ class CRepositorioEntrada
             }
         }
         
+        return $entradas;
+    }
+    
+    public static function getEntradasAzarByAutor($pConexion,$usuario,$pLimit){
+        $entradas=[];
+
+        if(isset($pConexion)){
+            try{
+                include_once './app/CUsuario.inc.php';
+
+                $sql = 'SELECT * FROM entradas WHERE autor_id = :pIdUsuario LIMIT 3';
+
+                $IDUSUARIO = $usuario -> getId();
+
+                $sentencia = $pConexion -> prepare($sql);
+                // $sentencia -> bindParam(':pLimit',$pLimit,PDO::PARAM_STR);
+                $sentencia -> bindParam(':pIdUsuario',$IDUSUARIO,PDO::PARAM_STR);
+                $sentencia ->execute();
+
+                $resultado = $sentencia -> fetchAll();
+
+                if(count($resultado)){
+                    foreach($resultado as $entrada){
+                        $entradas[] = new CEntrada($entrada['id'],$entrada['autor_id'],$entrada['url'],$entrada['titulo'],$entrada['texto'],
+                        $entrada['fecha'],$entrada['activa']);
+                    }
+                }
+            }catch(PDOException $e){
+                print 'ERROR: '. $e->getMessage();
+
+            }
+        }
         return $entradas;
     }
 }
