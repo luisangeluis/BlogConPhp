@@ -113,20 +113,16 @@ class CRepositorioEntrada
         return $entradas;
     }
     
-    public static function getEntradasAzarByAutor($pConexion,$usuario,$pLimit){
+    public static function getEntradasAzarByAutor($pConexion,$pLimit){
         $entradas=[];
 
         if(isset($pConexion)){
             try{
                 include_once './app/CUsuario.inc.php';
 
-                $sql = 'SELECT * FROM entradas WHERE autor_id = :pIdUsuario LIMIT 3';
-
-                $IDUSUARIO = $usuario -> getId();
+                $sql = "SELECT * FROM entradas ORDER BY RAND() LIMIT $pLimit";
 
                 $sentencia = $pConexion -> prepare($sql);
-                // $sentencia -> bindParam(':pLimit',$pLimit,PDO::PARAM_STR);
-                $sentencia -> bindParam(':pIdUsuario',$IDUSUARIO,PDO::PARAM_STR);
                 $sentencia ->execute();
 
                 $resultado = $sentencia -> fetchAll();

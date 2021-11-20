@@ -38,8 +38,12 @@
 
                 </div>
             </div>
+            <?php
+                include_once './plantillas/entradasAzar.inc.php';
+            ?>
         </div>
     </div>
+
 
     <?php
     include_once 'plantillas/documento-cierre.inc.php';
