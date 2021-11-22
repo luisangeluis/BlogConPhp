@@ -15,11 +15,15 @@ include_once './app/EscritorDeEntradas.inc.php';
                 <div class="card">
                     <div class="card-header">
                         <?php echo $entrada->getTitulo() ?>
+                        <p>Autor<?php echo $entrada->getAutor()?></p>
+
                     </div>
                     <div class="card-body">
                         <div class="card-title"><?php echo nl2br($entrada->getFecha()) ?></div>
                         <div class="card-text ">
-                            <?php echo nl2br(EscritorioDeEntradas::resumirTexto($entrada->getTexto())) ?>
+                            <?php echo nl2br(EscritorioDeEntradas::resumirTexto($entrada->getTexto())) 
+                                 
+                            ?>
                         </div>
                         <!-- <div class="text-center pt-3">
                             <a href="<?php echo RUTA_ENTRADA . '/' . $entrada->getUrl() ?>" class="btn btn-primary">Seguir leyendo</a>

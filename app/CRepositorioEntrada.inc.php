@@ -86,34 +86,34 @@ class CRepositorioEntrada
         return $entrada;
     }
 
-    public static function getEntradasAzar($pConexion,$pLimit){
-        $entradas = [];
+    // public static function getEntradasAzar($pConexion,$pLimit){
+    //     $entradas = [];
 
-        if(isset($pConexion)){
-            try{
-                $sql = 'SELECT * FROM entradas ORDER BY id DESC LIMIT :pLimit';
-                $sentencia = $pConexion->prepare($sql);
+    //     if(isset($pConexion)){
+    //         try{
+    //             $sql = 'SELECT * FROM entradas ORDER BY id DESC LIMIT :pLimit';
+    //             $sentencia = $pConexion->prepare($sql);
 
-                $sentencia ->bindparam(':pLimit', $pLimit,PDO::PARAM_STR);
-                $sentencia -> execute();
-                $resultado = $sentencia -> fetchAll();
+    //             $sentencia ->bindparam(':pLimit', $pLimit,PDO::PARAM_STR);
+    //             $sentencia -> execute();
+    //             $resultado = $sentencia -> fetchAll();
 
-                if(count($resultado)){
-                    foreach($resultado as $entrada){
-                        $entradas[] = new CEntrada($entrada['id'],$entrada['autor_id'],$entrada['url'],$entrada['titulo'],$entrada['texto'],
-                        $entrada['fecha'],$entrada['activa']);
-                    }
-                }
-            }catch(PDOException $e){
-                print 'ERROR: '. $e->getMessage();
+    //             if(count($resultado)){
+    //                 foreach($resultado as $entrada){
+    //                     $entradas[] = new CEntrada($entrada['id'],$entrada['autor_id'],$entrada['url'],$entrada['titulo'],$entrada['texto'],
+    //                     $entrada['fecha'],$entrada['activa']);
+    //                 }
+    //             }
+    //         }catch(PDOException $e){
+    //             print 'ERROR: '. $e->getMessage();
 
-            }
-        }
+    //         }
+    //     }
         
-        return $entradas;
-    }
+    //     return $entradas;
+    // }
     
-    public static function getEntradasAzarByAutor($pConexion,$pLimit){
+    public static function getEntradasAzar($pConexion,$pLimit){
         $entradas=[];
 
         if(isset($pConexion)){
@@ -135,6 +135,30 @@ class CRepositorioEntrada
                 }
             }catch(PDOException $e){
                 print 'ERROR: '. $e->getMessage();
+
+            }
+        }
+        return $entradas;
+    }
+
+    public static function getEntradasAzarByAutor($pConexion,$pUsuario,$pLimit){
+        $entradas = [];
+        if(isset($pConexion)){
+            try{
+
+                $idUsuario = $pUsuario -> getId();
+                $sql = "SELECT * FROM entradas WHERE autor_id = $idUsuario ORDER BY id ASC LIMIT $pLimit";
+                $sentencia = $pConexion->prepare($sql);
+                $sentencia -> execute();
+                $resultado = $sentencia -> fetchAll();
+
+                if(count($resultado)){
+                    foreach($resultado as $entrada){
+                        $entradas[] = new CEntrada($entrada['id'],$entrada['autor_id'],$entrada['url'],$entrada['titulo'],$entrada['texto'],
+                        $entrada['fecha'],$entrada['activa']);
+                    } 
+                }
+            }catch(PDOException $e){
 
             }
         }

@@ -70,8 +70,10 @@ include_once 'app/CRepositorioComentario.inc.php';
 
                 if($entrada!=null){
                     $usuario = CRepositorioUsuarios::GetUserById(Conexion::getConexion(),$entrada -> getAutor());
-                    $entradasAzar = CRepositorioEntrada::getEntradasAzarByAutor(Conexion::getConexion(),3);
-                    echo 'numero de entradas'.count($entradasAzar);
+                    // $entradasAzar = CRepositorioEntrada::getEntradasAzar(Conexion::getConexion(),3);
+                    $entradasAzar = CRepositorioEntrada::getEntradasAzarByAutor(Conexion::getConexion(),$usuario,3);
+                    echo $usuario->getID();
+
                     $rutaElegida = 'vistas/entrada.php';
                 }
             }
