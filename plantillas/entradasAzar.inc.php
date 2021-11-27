@@ -11,7 +11,7 @@ include_once './app/EscritorDeEntradas.inc.php';
         $entrada = $entradasAzar[$i];
     ?>
         
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
                         <?php echo $entrada->getTitulo() ?>

@@ -71,8 +71,9 @@ include_once 'app/CRepositorioComentario.inc.php';
                 if($entrada!=null){
                     $usuario = CRepositorioUsuarios::GetUserById(Conexion::getConexion(),$entrada -> getAutor());
                     // $entradasAzar = CRepositorioEntrada::getEntradasAzar(Conexion::getConexion(),3);
-                    $entradasAzar = CRepositorioEntrada::getEntradasAzarByAutor(Conexion::getConexion(),$usuario,3);
-                    echo $usuario->getID();
+                    // $entradasAzar = CRepositorioEntrada::getEntradasAzarByAutor(Conexion::getConexion(),$usuario,3);
+                    $entradasAzar = CRepositorioEntrada::getEntradasAzar(Conexion::getConexion(),3);
+
 
                     $rutaElegida = 'vistas/entrada.php';
                 }

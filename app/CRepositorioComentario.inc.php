@@ -33,4 +33,30 @@ class CRepositorioComentario
         }
         return $comentarioInsertado;
     }
+
+    public static function getComentarios($pConexion,$pEntradaId){
+        $comentarios = [];
+
+        if(isset($pConexion)){
+            try{
+                $sql = "SELECT * FROM comentarios WHERE entrada_id = :pEntradaId ORDER BY id DESC";
+                $sentencia = $pConexion ->prepare($sql);
+                $sentencia -> bindParam(':pEntradaId',$pEntradaId,PDO::PARAM_STR);
+                $sentencia -> execute();
+                
+                $resultado = $sentencia -> fetchAll();
+
+                if(count($resultado)){
+                    foreach($resultado as $comentario){
+                        $comentarios[] = new CComentario($comentario['id'],$comentario['autor_id'],$comentario['entrada_id'],
+                        $comentario['titulo'],$comentario['texto'],$comentario['fecha']); 
+                    }
+                }
+
+            }catch(PDOException $e){
+                print "ERROR". $e -> getMessage();
+            }
+        }
+        return $comentarios;
+    }
 }
