@@ -41,6 +41,12 @@
             <?php
                 include_once './plantillas/entradasAzar.inc.php';
             ?>
+            <?php
+                if(count($comentarios))
+                    include_once './plantillas/comentariosEntrada.inc.php';
+                else
+                    echo '<p>Todavia no hay comentarios</p>';
+            ?>
         </div>
     </div>
 

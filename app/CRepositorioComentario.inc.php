@@ -39,9 +39,9 @@ class CRepositorioComentario
 
         if(isset($pConexion)){
             try{
-                $sql = "SELECT * FROM comentarios WHERE entrada_id = :pEntradaId ORDER BY id DESC";
+                $sql = "SELECT * FROM comentarios WHERE entrada_id = $pEntradaId";
                 $sentencia = $pConexion ->prepare($sql);
-                $sentencia -> bindParam(':pEntradaId',$pEntradaId,PDO::PARAM_STR);
+                // $sentencia -> bindParam(':pEntradaId',$pEntradaId,PDO::PARAM_STR);
                 $sentencia -> execute();
                 
                 $resultado = $sentencia -> fetchAll();
