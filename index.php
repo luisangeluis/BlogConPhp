@@ -72,7 +72,7 @@ include_once 'app/CRepositorioComentario.inc.php';
                     $usuario = CRepositorioUsuarios::GetUserById(Conexion::getConexion(),$entrada -> getAutor());
                     echo "id de entrada".$entrada -> getId();
                     $comentarios = CRepositorioComentario::getComentarios(Conexion::getConexion(),$entrada -> getId());
-                    echo "cantidad de comentarios".count($comentarios);
+                    // echo ($comentarios[0]->getTexto());
                     // $entradasAzar = CRepositorioEntrada::getEntradasAzar(Conexion::getConexion(),3);
                     // $entradasAzar = CRepositorioEntrada::getEntradasAzarByAutor(Conexion::getConexion(),$usuario,3);
                     $entradasAzar = CRepositorioEntrada::getEntradasAzar(Conexion::getConexion(),3);

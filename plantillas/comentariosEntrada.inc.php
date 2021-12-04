@@ -7,7 +7,7 @@
                         <?php echo "Ver comentarios  (" . count($comentarios) . ")" ?>
                     </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapseOne" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <?php
                         for ($i = 0; $i < count($comentarios); $i++) {
@@ -25,7 +25,7 @@
                                             </div>
                                             <div class="col-lg-10">
                                                 <p class="card-text"><?php echo $comentario->getFecha() ?></p>
-                                                <!-- <p class="card-text"><?php echo $comentarios -> getTexto()?></p> -->
+                                                <p class="card-text"><?php echo nl2br($comentario -> getTexto())?></p>   
                                             </div>
                                             <a href="#" class="btn btn-primary">Go somewhere</a>
                                         </div>
@@ -39,8 +39,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
