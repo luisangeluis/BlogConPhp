@@ -54,6 +54,9 @@ include_once 'app/CRepositorioComentario.inc.php';
                 case 'registro':
                     $rutaElegida ='vistas/registro.php';
                 break;
+                case 'gestor':
+                    $rutaElegida = 'vistas/gestor.php';
+                break;
                 case 'script-relleno':
                     $rutaElegida = 'vistas/ScriptRelleno.php';
                 break;

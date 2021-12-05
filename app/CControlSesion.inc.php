@@ -1,7 +1,6 @@
 <?php
 class CControlSesion
 {
-
     public static function openSession($pIdUsuario, $pNombreUsuario)
     {
         if (session_id() == '') {
@@ -11,7 +10,6 @@ class CControlSesion
         $_SESSION['idUsuario'] = $pIdUsuario;
         $_SESSION['nombreUsuario'] = $pNombreUsuario;
     }
-
     public static function closeSession()
     {
         if (session_id() == '') {
@@ -27,7 +25,6 @@ class CControlSesion
 
         session_destroy();
     }
-
     public static function sesionIniciada(){
         if (session_id() == '') {
             session_start();

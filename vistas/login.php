@@ -44,7 +44,7 @@ include_once 'plantillas/navbar.inc.php'
                     Introduce tus datos
                 </div>
                 <div class="card-body text-wrap">
-                    <form role="form" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                    <form role="form" method="POST" action="<?php echo RUTA_LOGIN ?>">
                         <div class="mb-3">
                             <label for="" class="form-label">Email</label>
                             <!-- <span class="input-group-text" id="email">Email</span> -->
@@ -56,7 +56,6 @@ include_once 'plantillas/navbar.inc.php'
                                 }
                             ?>
                             > 
-                            
                         </div>
                         <div class=" mb-3">
                             <label for="" class="form-label">Password</label>
@@ -69,10 +68,7 @@ include_once 'plantillas/navbar.inc.php'
                             ?>    
                         </div>
                         <button type="submit" class="btn btn-primary" name="login">Iniciar Sesión</button>
-
-
                     </form>
-
                 </div>
                 <div class="card-footer text-muted">
                     <a href="#">¿Olvidaste tu password?</a>

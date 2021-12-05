@@ -23,7 +23,7 @@ $totalUsuarios =   CRepositorioUsuarios::getNumUsers(Conexion::getConexion());
           <a class="nav-link" aria-current="page" href="#"><i class="far fa-sticky-note"></i> Entradas</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-heart"></i>Favoritos</a>
+          <a class="nav-link" href="#"><i class="fas fa-heart"></i>Favoritos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#"><i class="fas fa-user-edit"></i>Autores</a>
@@ -41,22 +41,16 @@ $totalUsuarios =   CRepositorioUsuarios::getNumUsers(Conexion::getConexion());
               <?php echo ' ' . $_SESSION['nombreUsuario'] ?>
             </a>
           </li>
-          <li class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-clock"></i> Gestor
-            </button>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#">Entradas</a></li>
-              <li><a class="dropdown-item" href="#">Comentarios</a></li>
-              <li><a class="dropdown-item" href="#">Usuarios</a></li>
-              <li><a class="dropdown-item" href="#">Favoritos</a></li>
-
-            </ul>
-          </li>
           <li class="nav-item active">
-            <a class="nav-link" aria-current="page" href="#">
+            <a class="nav-link" aria-current="page" href="<?php echo RUTA_GESTOR?>">
+            <i class="far fa-clock"></i>              
+              Gestor
+            </a>
+          </li>
+          
+          <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="<?php echo  RUTA_LOGOUT?>">
               <i class="fas fa-user-times"></i>
-
               Cerrar Sesion
             </a>
           </li>
