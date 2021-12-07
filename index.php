@@ -39,6 +39,7 @@ include_once 'app/CRepositorioComentario.inc.php';
     $rutaElegida = 'vistas/404.php';
 
     if($partesRuta[0]=='BlogConPhp'){
+
         if(count($partesRuta)==1){
             $rutaElegida = 'vistas/home.php';
 
@@ -56,16 +57,19 @@ include_once 'app/CRepositorioComentario.inc.php';
                 break;
                 case 'gestor':
                     $rutaElegida = 'vistas/gestor.php';
+                    $gestorActual = '';
                 break;
                 case 'script-relleno':
                     $rutaElegida = 'vistas/ScriptRelleno.php';
                 break;
             }
         }else if(count($partesRuta)==3){
+
             if($partesRuta[1]=='registro-correcto'){
                 $nombre = $partesRuta[2];
                 $rutaElegida = 'vistas/registro-correcto.php';
             }
+
             if($partesRuta[1] == 'entrada'){
                 $url = $partesRuta[2];
                 Conexion::openConexion();
@@ -80,10 +84,27 @@ include_once 'app/CRepositorioComentario.inc.php';
                     // $entradasAzar = CRepositorioEntrada::getEntradasAzarByAutor(Conexion::getConexion(),$usuario,3);
                     $entradasAzar = CRepositorioEntrada::getEntradasAzar(Conexion::getConexion(),3);
 
-
                     $rutaElegida = 'vistas/entrada.php';
                 }
             }
+
+            if($partesRuta[1]=='gestor'){
+                switch($partesRuta[2]){
+                    case 'entradas':
+                        $gestorActual = 'entradas';
+                        $rutaElegida = './vistas/gestor.php';
+                    break;
+                    case 'comentarios':
+                        $gestorActual = 'comentarios';
+                        $rutaElegida = './vistas/gestor.php';
+                    break;
+                    case 'favoritos':
+                        $gestorActual = 'favoritos';
+                        $rutaElegida = './vistas/gestor.php';
+                    break;
+                }
+            }
+            
         }
 
     }

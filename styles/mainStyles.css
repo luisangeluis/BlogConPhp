@@ -70,4 +70,11 @@ body{
     text-align: justify;
 }
 
+/*Sidebar*/
+.sidebar{
+    /* background-color: whitesmoke; */
+    margin-top: -5em;
+    padding-top: 5em;
+}
+
 

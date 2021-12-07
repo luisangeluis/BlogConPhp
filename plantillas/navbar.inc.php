@@ -17,6 +17,9 @@ $totalUsuarios =   CRepositorioUsuarios::getNumUsers(Conexion::getConexion());
     </button>
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
+      <?php
+        if(!CControlSesion::sesionIniciada()){
+      ?>
       <!--Navegacion del lado izquierdo-->
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item active">
@@ -29,8 +32,11 @@ $totalUsuarios =   CRepositorioUsuarios::getNumUsers(Conexion::getConexion());
           <a class="nav-link" href="#"><i class="fas fa-user-edit"></i>Autores</a>
         </li>
       </ul>
+      <?php
+        }
+      ?>
       <!--Navegacion del lado derecho-->
-      <ul class="navbar-nav ml-auto mb-2 mb-md-0 ">
+      <ul class="navbar-nav ml-auto margin-left mb-2 mb-md-0 ">
         <?php
         if (CControlSesion::sesionIniciada()) {
         ?>
