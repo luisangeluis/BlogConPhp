@@ -18,6 +18,10 @@ define('RUTA_LOGIN', SERVIDOR.'/login');
 define('RUTA_LOGOUT',SERVIDOR.'/logout');
 define('RUTA_ENTRADA',SERVIDOR.'/entrada');
 define('RUTA_GESTOR',SERVIDOR.'/gestor');
+define('RUTA_GESTOR_ENTRADAS',RUTA_GESTOR.'/entradas');
+define('RUTA_GESTOR_COMENTARIOS',RUTA_GESTOR.'/comentarios');
+define('RUTA_GESTOR_FAVORITOS',RUTA_GESTOR.'/favoritos');
+
 //Recursos
 define('RUTA_CSS',SERVIDOR.'/styles');
 
