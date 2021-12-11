@@ -71,10 +71,15 @@ body{
 }
 
 /*Sidebar*/
-.sidebar{
-    /* background-color: whitesmoke; */
-    margin-top: -5em;
-    padding-top: 5em;
+.sidebar .gg-elemento{
+    background-color: lightseagreen;
+    opacity: .9;
+}
+.gg-elemento:hover{
+    background-color: #2b2b2b !important;
+    color: deepskyblue; 
+    opacity: 1;
+
 }
 
 
