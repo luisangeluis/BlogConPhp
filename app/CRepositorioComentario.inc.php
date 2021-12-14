@@ -59,4 +59,28 @@ class CRepositorioComentario
         }
         return $comentarios;
     }
+
+    public static function getComentariosUser($pConexion,$pIdUsuario){
+        $comentariosUser = 0;
+
+        if(isset($pConexion)){
+            try{
+                $sql = 'SELECT COUNT(*) as totalComentarios FROM comentarios where autor_id = :pIdUsuario';
+                
+                $sentencia = $pConexion -> prepare($sql);
+                $sentencia -> bindParam(':pIdUsuario',$pIdUsuario,PDO::PARAM_STR);
+                $sentencia -> execute();
+                
+                $resultado = $sentencia->fetch();
+
+                if(!empty($resultado)){
+                    $comentariosUser = $resultado['totalComentarios'];
+                }
+                
+            }catch(PDOException $e){
+                print 'ERROR: '. $e->getMessage();
+            }
+        }
+        return $comentariosUser;
+    }
 }

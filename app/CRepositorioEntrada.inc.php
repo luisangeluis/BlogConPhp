@@ -159,9 +159,58 @@ class CRepositorioEntrada
                     } 
                 }
             }catch(PDOException $e){
+                print 'ERROR: '. $e->getMessage();
 
             }
         }
         return $entradas;
+    }
+
+    public static function getEntradasActivasUser($pConexion,$pIdUsuario){
+        $entradasUser = 0;
+
+        if(isset($pConexion)){
+            try{
+                $sql = 'SELECT COUNT(*) as totalEntradas FROM entradas where autor_id = :pIdUsuario AND activa = 1';
+                
+                $sentencia = $pConexion -> prepare($sql);
+                $sentencia -> bindParam(':pIdUsuario',$pIdUsuario,PDO::PARAM_STR);
+                $sentencia -> execute();
+                
+                $resultado = $sentencia->fetch();
+
+                if(!empty($resultado)){
+                    $entradasUser = $resultado['totalEntradas'];
+                }
+                
+            }catch(PDOException $e){
+                print 'ERROR: '. $e->getMessage();
+            }
+        }
+        return $entradasUser;
+    }
+
+    public static function getEntradasInactivasUser($pConexion,$pIdUsuario){
+        $entradasUser = 0;
+
+        if(isset($pConexion)){
+            try{
+                $sql = 'SELECT COUNT(*) as totalEntradas FROM entradas where autor_id = :pIdUsuario AND activa = 0';
+                
+                $sentencia = $pConexion -> prepare($sql);
+                $sentencia -> bindParam(':pIdUsuario',$pIdUsuario,PDO::PARAM_STR);
+                $sentencia -> execute();
+                
+                $resultado = $sentencia->fetch();
+
+                if(!empty($resultado)){
+                    $entradasUser = $resultado['totalEntradas'];
+                }
+                
+            }catch(PDOException $e){
+                print 'ERROR: '. $e->getMessage();
+            }
+        }
+        return $entradasUser;
     }
 }

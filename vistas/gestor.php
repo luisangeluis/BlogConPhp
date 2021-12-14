@@ -5,6 +5,10 @@
 
     switch($gestorActual){
         case '':
+            $entradasActivas = CRepositorioEntrada::getEntradasActivasUser(Conexion::getConexion(),$_SESSION['idUsuario']);
+            $entradasInactivas = CRepositorioEntrada::getEntradasInactivasUser(Conexion::getConexion(),$_SESSION['idUsuario']);
+            $cantidadComentarios = CRepositorioComentario::getComentariosUser(Conexion::getConexion(),$_SESSION['idUsuario']);
+            
             include_once './plantillas/gestorGenerico.inc.php';    
         break;
         case 'entradas':
