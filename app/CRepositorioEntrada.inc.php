@@ -213,4 +213,31 @@ class CRepositorioEntrada
         }
         return $entradasUser;
     }
+    
+    public static function getEntradasUserFechaDescendente($pConexion,$idUsuario){
+        $entradas = [];
+        
+        if(isset($pConexion)){
+            try{
+                $sql = 'SELECT e.id,e.autor_id,e.url,e.titulo,e.texto,e.fecha,e.activa, COUNT(c.id) as totalComentarios
+                FROM entradas AS e
+                INNER JOIN comentarios AS c 
+                ON e.id = c.entrada_id
+                WHERE e.autor_id = :idUsuario
+                GROUP BY e.id
+                ORDER BY e.fecha DESC';
+
+                $sentencia = $pConexion -> prepare($sql);
+                $sentencia -> bindParam(':idUsuario',$idUsuario,PDO::PARAM_STR);
+                $sentencia -> execute();
+
+                $resultado = $sentencia -> fetchAll();
+
+                
+
+            }catch(PDOException $e){
+                print 'ERROR: '.$e->getMessage();
+            }
+        }
+    }
 }
