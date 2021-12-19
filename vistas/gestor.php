@@ -12,6 +12,7 @@
             include_once './plantillas/gestorGenerico.inc.php';    
         break;
         case 'entradas':
+            $arrayEntradas = CRepositorioEntrada::getEntradasUserFechaDescendente(Conexion::getConexion(),$_SESSION['idUsuario']);
             include_once './plantillas/gestorEntradas.inc.php';    
         break;
         case 'comentarios':

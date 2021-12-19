@@ -221,7 +221,7 @@ class CRepositorioEntrada
             try{
                 $sql = 'SELECT e.id,e.autor_id,e.url,e.titulo,e.texto,e.fecha,e.activa, COUNT(c.id) as totalComentarios
                 FROM entradas AS e
-                INNER JOIN comentarios AS c 
+                LEFT JOIN comentarios AS c 
                 ON e.id = c.entrada_id
                 WHERE e.autor_id = :idUsuario
                 GROUP BY e.id
@@ -233,11 +233,21 @@ class CRepositorioEntrada
 
                 $resultado = $sentencia -> fetchAll();
 
-                
+                if(count($resultado)){
+                    foreach($resultado as $fila){
+                        $entradas[]= array(
+                            new CEntrada($fila['id'],$fila['autor_id'],$fila['url'],$fila['titulo'],$fila['texto'],$fila['fecha'],$fila['activa']
+                            ),
+                            $fila['totalComentarios']
+                        );
+                    }
+                }
 
             }catch(PDOException $e){
                 print 'ERROR: '.$e->getMessage();
             }
         }
+
+        return $entradas;
     }
 }
