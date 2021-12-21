@@ -6,11 +6,6 @@ include_once 'app/CRepositorioUsuarios.inc.php';
 include_once 'app/validadorRegisto.inc.php';
 include_once 'app/Redireccion.inc.php';
 
-// include_once 'app/CValidadorLogin.inc.php';
-// include_once 'app/CControlSesion.inc.php';
-
-
-
 if(isset($_POST['enviar'])){
     Conexion:: openConexion();
 

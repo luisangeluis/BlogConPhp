@@ -1,6 +1,10 @@
 <div class="row">
     <div class="col-lg-12">
         <h2>Gestor Entradas</h2>
+        
+        <a href="<?php echo RUTA_NUEVA_ENTRADA?>" class="btn btn-primary btn-lg btn-Gestor-uno" role="button">Crear Entrada</a>
+        <br>
+        <br>
     </div>
 </div>
 <div class="row">
@@ -29,7 +33,10 @@
                             <td><?php echo $entradaActual->getTitulo()?></td>
                             <td><?php echo $entradaActual->getActiva()?></td>
                             <td><?php echo $comentariosEntradaActual?></td>
-                            <td>bla bla bla</td>
+                            <td>
+                            <button class="btn btn-primary btn-sm">Editar</button>
+                            <button class="btn btn-primary btn-sm">Borrar</button>
+                            </td>
                         </tr>
                     <?php
                     }

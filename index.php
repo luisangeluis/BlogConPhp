@@ -59,9 +59,13 @@ include_once 'app/CRepositorioComentario.inc.php';
                     $rutaElegida = 'vistas/gestor.php';
                     $gestorActual = '';
                 break;
+                case 'nueva-entrada':
+                    $rutaElegida = 'vistas/nueva-entrada.php';    
+                break;
                 case 'script-relleno':
                     $rutaElegida = 'vistas/ScriptRelleno.php';
                 break;
+                
             }
         }else if(count($partesRuta)==3){
 
