@@ -250,4 +250,27 @@ class CRepositorioEntrada
 
         return $entradas;
     }
+
+    public static function tituloExiste($pConexion,$pTitulo){
+        $tituloExiste = true;
+
+        if(isset($pConexion)){
+            try{
+                $sql = 'SELECT COUNT(titulo) FROM entradas WHERE titulo = :pTitulo ';
+                
+                $sentencia = $pConexion -> prepare($sql);
+                $sentencia -> bindParam('pTitulo',$pTitulo,PDO::PARAM_STR);
+                $sentencia ->execute();
+
+                $resultado = $sentencia -> fetch();
+
+                if($resultado === 0)
+                    $tituloExiste = false;
+            }catch(PDOException $e){
+                print "ERROR". $e->getMessage();
+            }
+        }   
+        
+        return $tituloExiste;
+    }
 }
