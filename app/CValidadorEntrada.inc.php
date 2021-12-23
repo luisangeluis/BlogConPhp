@@ -13,6 +13,7 @@
         
         private $avisoInicio;
         private $avisoCierre;
+
         public function __construct($pTitulo,$pUrl,$pTexto,$pConexion){
             $this->avisoInicio = '<br><div class="alert alert-danger" role="alert">';
             $this->avisoCierre = '</div>';
@@ -24,6 +25,18 @@
             $this->errorTitulo = $this->validarTitulo($pConexion, $pTitulo);
             $this->errorUrl = $this->validarUrl($pConexion, $pUrl);
             $this->errorTexto = $this->validarTexto($pTexto);
+        }
+        //getters
+        public function getTitulo(){
+            return $this-> titulo;
+        }
+
+        public function getUrl(){
+            return $this-> url;
+        }
+
+        public function getTexto(){
+            return $this-> texto;
         }
 
         private function variableIniciada($pVariable){
@@ -48,11 +61,29 @@
 
             return "";
         }
+
         private function validarUrl($pConexion, $pUrl){
+            if(!$this->variableIniciada($pUrl))
+                return "Debes escribir una url";
+            else
+                $this->url = $pUrl;
+
+            if(strlen($pUrl) > 255)
+                return "El titulo no puede ser mayor a 255 caracteres";
+            //Metodo trim() convierte una cadena  a una cadena sin espacios en blanco.
+            if(strlen($pUrl) !== strlen( trim($pUrl) ) )
+                return "La url no debe tener espacios en blanco.";
+            
+            if(CRepositorioEntrada::URLExiste($pConexion,$pUrl))
+                return "Ya existe un articulo con esta url, elige una diferente";
 
         }
-        private function validarTexto($pTexto){
 
+        private function validarTexto($pTexto){
+            if(!$this->variableIniciada($pTexto))
+                return "Debes escribir un texto";
+            else
+                $this->texto = $pTexto;
         }
             
         

@@ -273,4 +273,29 @@ class CRepositorioEntrada
         
         return $tituloExiste;
     }
+
+    public static function URLExiste($pConexion, $pUrl){
+        $urlExiste = true;
+
+        if(isset($pConexion)){
+            try{
+                $url = "SELECT COUNT(url) FROM entradas WHERE url = :pUrl";
+
+                $sentencia = $pConexion->prepare($url);
+                $sentencia -> bindParam(':pUrl',$pUrl,PDO::PARAM_STR);
+                $sentencia -> execute();
+
+                $resultado = $sentencia-> fetch();
+
+                if($resultado === 0)
+                    $urlExiste = false;
+
+
+            }catch(PDOException $e){
+                print "ERROR ".$e->getMessage();
+            }
+        }
+
+        return $urlExiste;
+    }
 }
