@@ -85,7 +85,43 @@
             else
                 $this->texto = $pTexto;
         }
-            
         
+        public function mostrarTituloEnPantalla(){
+            if($this->titulo !== "")
+                echo "value = '$this->titulo' ";
+        }
+
+        public function mostrarURLEnPantalla(){
+            if($this->url !== "")
+                echo "value = '$this->url' ";
+        }
+
+        public function mostrarTextoEnPantalla(){
+            if($this->texto !== "" && strlen(trim($this->texto)) > 0 )
+                echo $this->texto;
+        }
+
+        public function mostrarErrorTituloEnPantalla(){
+            if($this->errorTitulo !=="")
+                echo "$this->avisoInicio. $this->errorTitulo. $this->avisoCierre";
+        }
+
+        public function mostrarErrorUrlEnPantalla(){
+            if($this->errorUrl !=="")
+                echo "$this->avisoInicio. $this->errorUrl. $this->avisoCierre";
+        }
+
+        public function mostrarErrorTextoEnPantalla(){
+            if($this->errorTexto !=="")
+                echo "$this->avisoInicio.$this->errorTexto. $this->avisoCierre";
+        }
+
+        public function validarFormulario(){
+            if($this->errorTitulo === "" && $this->errorUrl ==="" && $this->errorTexto==="")
+                return true;
+            else
+                return false;
+        }
     }
+
 ?>
