@@ -15,7 +15,6 @@ if(isset($_POST['enviar'])){
     echo $validador->getErrorEmail();
     echo $validador->getErrorClave1();
     echo $validador->getErrorClave2();
-    // $usuario = new CUsuario('',$validador->getNombre(),$validador->getEmail(),$validador->getPassword(),'','');
     if($validador->validarFormulario()){
         
         $usuario = new CUsuario('',$validador->getNombre(),$validador->getEmail(),
