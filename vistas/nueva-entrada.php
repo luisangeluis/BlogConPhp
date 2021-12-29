@@ -12,7 +12,7 @@ $entradaPublica = 0;
 if(isset($_POST['guardar'])){
     Conexion::getConexion();
 
-    $validador = new CValidadorEntrada($_POST['Titulo'],$_POST['url'],htmlspecialchars($_POST['texto']),Conexion::getConexion());
+    $validador = new CValidadorEntrada($_POST['titulo'],$_POST['url'],htmlspecialchars($_POST['texto']),Conexion::getConexion());
 
     if(isset($_POST['check']) && $_POST['check'] == 'publica'){
         $entradaPublica = 1;
@@ -54,24 +54,13 @@ include_once './plantillas/navbar.inc.php';
     <div class="row">
         <div class="col-lg-12">
             <form class="form-uno" method="POST" action="<?php echo RUTA_NUEVA_ENTRADA?>">
-                <div class="mb-3">
-                    <label for="titulo" class="form-label">Titulo</label>
-                    <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Escribe un titulo">
-                </div>
-                <div class="mb-3">
-                    <label for="url" class="form-label">Url</label>
-                    <input type="text" class="form-control" id="url" name="url" placeholder="Escribe una url">
-                </div>
-                <div class="mb-3">
-                    <label for="contenido" class="form-label">Contenido</label>
-                    <textarea name="" id="contenido" cols="30" rows="5" class="form-control" name="contenido" placeholder="Escribe tu publicacion"></textarea>
-                </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" value="publica" name="check">
-                    <label class="form-check-label" for="exampleCheck1">Publicar de forma automatica</label>
-                </div>
-                <br>
-                <button type="submit" class="btn btn-primary" name="guardar">Publicar</button>
+                <?php
+                    if(isset($_POST['guardar']))
+                        include_once './plantillas/formNuevaEntradaValidado.inc.php';
+                    else    
+                        include_once './plantillas/formNuevaEntradaVacio.inc.php';
+
+                ?>
             </form>
             <br>
         </div>

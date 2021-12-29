@@ -103,21 +103,21 @@
 
         public function mostrarErrorTituloEnPantalla(){
             if($this->errorTitulo !=="")
-                echo "$this->avisoInicio. $this->errorTitulo. $this->avisoCierre";
+                echo "$this->avisoInicio $this->errorTitulo $this->avisoCierre";
         }
 
         public function mostrarErrorUrlEnPantalla(){
             if($this->errorUrl !=="")
-                echo "$this->avisoInicio. $this->errorUrl. $this->avisoCierre";
+                echo "$this->avisoInicio $this->errorUrl $this->avisoCierre";
         }
 
         public function mostrarErrorTextoEnPantalla(){
             if($this->errorTexto !=="")
-                echo "$this->avisoInicio.$this->errorTexto. $this->avisoCierre";
+                echo "$this->avisoInicio $this->errorTexto $this->avisoCierre";
         }
 
         public function validarFormulario(){
-            if($this->errorTitulo === "" && $this->errorUrl ==="" && $this->errorTexto==="")
+            if($this->errorTitulo == "" && $this->errorUrl =="" && $this->errorTexto=="")
                 return true;
             else
                 return false;

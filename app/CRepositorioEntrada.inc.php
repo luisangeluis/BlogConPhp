@@ -256,15 +256,15 @@ class CRepositorioEntrada
 
         if(isset($pConexion)){
             try{
-                $sql = 'SELECT COUNT(titulo) FROM entradas WHERE titulo = :pTitulo ';
+                $sql = 'SELECT COUNT(titulo) FROM entradas WHERE titulo = :pTitulo';
                 
                 $sentencia = $pConexion -> prepare($sql);
-                $sentencia -> bindParam('pTitulo',$pTitulo,PDO::PARAM_STR);
+                $sentencia -> bindParam(':pTitulo',$pTitulo,PDO::PARAM_STR);
                 $sentencia ->execute();
 
                 $resultado = $sentencia -> fetch();
 
-                if($resultado === 0)
+                if(count($resultado) === 0)
                     $tituloExiste = false;
             }catch(PDOException $e){
                 print "ERROR". $e->getMessage();
