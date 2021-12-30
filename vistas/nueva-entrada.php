@@ -14,23 +14,29 @@ if(isset($_POST['guardar'])){
 
     $validador = new CValidadorEntrada($_POST['titulo'],$_POST['url'],htmlspecialchars($_POST['texto']),Conexion::getConexion());
 
+    // echo $validador->getTitulo();
     if(isset($_POST['check']) && $_POST['check'] == 'publica'){
         $entradaPublica = 1;
     }
 
     if($validador->validarFormulario()){
+        echo 'form validado';
 
         if(CControlSesion::sesionIniciada()){
+            echo 'sesion iniciada';
+
             $entrada = new CEntrada('',$_SESSION['idUsuario'],$validador->getUrl(),$validador->getTitulo(),
                 $validador->getTexto(),'',$entradaPublica);
             
             $entradaInsertada = CRepositorioEntrada::insertarEntrada(Conexion::getConexion(),$entrada);
-
             if($entradaInsertada){
-                Redireccion::Redirigir(RUTA_GESTOR_ENTRADAS);
+                echo 'entrada insertada';
+                // Redireccion::Redirigir(RUTA_GESTOR_ENTRADAS);
             }
 
         }else{
+            echo 'sesion no iniciada';
+
             Redireccion::Redirigir(RUTA_LOGIN);
         }
         

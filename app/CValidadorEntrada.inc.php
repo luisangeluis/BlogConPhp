@@ -55,10 +55,13 @@
             if(strlen($pTitulo) > 255)
                 return "El titulo no puede ser mayor a 255 caracteres";
 
+            
             if(CRepositorioEntrada::tituloExiste($pConexion,$pTitulo)){
+                echo CRepositorioEntrada::tituloExiste($pConexion,$pTitulo);
                 return "Ya existe una publicacion con este titulo, por favor elige uno diferente.";
+                
             }
-
+            
             return "";
         }
 
@@ -68,14 +71,26 @@
             else
                 $this->url = $pUrl;
 
-            if(strlen($pUrl) > 255)
+            if(strlen($pUrl) > 255){
                 return "El titulo no puede ser mayor a 255 caracteres";
-            //Metodo trim() convierte una cadena  a una cadena sin espacios en blanco.
-            if(strlen($pUrl) !== strlen( trim($pUrl) ) )
-                return "La url no debe tener espacios en blanco.";
+
+            }
+
             
-            if(CRepositorioEntrada::URLExiste($pConexion,$pUrl))
+            $urlTratada = str_replace(' ', '', $pUrl);
+            $urlTratada = preg_replace('/\s+/','',$urlTratada); 
+            //Metodo trim() convierte una cadena  a una cadena sin espacios en blanco.
+            if(strlen($pUrl) !== strlen($urlTratada)){
+                return "La url no debe tener espacios en blanco.";
+
+            }
+            
+            if(CRepositorioEntrada::URLExiste($pConexion,$pUrl)){
                 return "Ya existe un articulo con esta url, elige una diferente";
+
+            }
+                
+            return "";
 
         }
 
@@ -84,6 +99,8 @@
                 return "Debes escribir un texto";
             else
                 $this->texto = $pTexto;
+            
+            return "";
         }
         
         public function mostrarTituloEnPantalla(){

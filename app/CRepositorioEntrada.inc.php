@@ -252,34 +252,43 @@ class CRepositorioEntrada
     }
 
     public static function tituloExiste($pConexion,$pTitulo){
-        $tituloExiste = true;
-
+        
+        $tituloExiste = null;
+        $respuesta = null;
         if(isset($pConexion)){
+
             try{
-                $sql = 'SELECT COUNT(titulo) FROM entradas WHERE titulo = :pTitulo';
+                $sql = 'SELECT * FROM entradas WHERE titulo = :pTitulo';
                 
                 $sentencia = $pConexion -> prepare($sql);
                 $sentencia -> bindParam(':pTitulo',$pTitulo,PDO::PARAM_STR);
                 $sentencia ->execute();
 
-                $resultado = $sentencia -> fetch();
+                $resultado = $sentencia -> fetchAll();
 
-                if(count($resultado) === 0)
+                if(count($resultado)){
+                    $tituloExiste = true;
+                    $respuesta = count($resultado);
+                }
+                else{
                     $tituloExiste = false;
+                    $respuesta = 0;
+                }
+
             }catch(PDOException $e){
                 print "ERROR". $e->getMessage();
             }
+            
         }   
-        
         return $tituloExiste;
     }
 
-    public static function URLExiste($pConexion, $pUrl){
-        $urlExiste = true;
+    public static function URLExiste($pConexion,$pUrl){
+        $urlExiste = null;
 
         if(isset($pConexion)){
             try{
-                $url = "SELECT COUNT(url) FROM entradas WHERE url = :pUrl";
+                $url = "SELECT COUNT(*) AS total FROM entradas WHERE url = :pUrl";
 
                 $sentencia = $pConexion->prepare($url);
                 $sentencia -> bindParam(':pUrl',$pUrl,PDO::PARAM_STR);
@@ -287,8 +296,13 @@ class CRepositorioEntrada
 
                 $resultado = $sentencia-> fetch();
 
-                if($resultado === 0)
+                if(count($resultado['total'])){
+                    $urlExiste = true;
+
+                }
+                else{
                     $urlExiste = false;
+                }
 
 
             }catch(PDOException $e){
