@@ -10,6 +10,7 @@ include_once 'app/Redireccion.inc.php';
 // } else {
 //     Redireccion::Redirigir(SERVIDOR);
 // }
+echo $usuarioInsertado;
 
 $titulo = 'Registro correcto!';
 include_once 'plantillas/documento-declaracion.inc.php';

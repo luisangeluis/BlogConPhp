@@ -21,7 +21,7 @@ if(isset($_POST['enviar'])){
                                 password_hash($validador->getPassword(),PASSWORD_DEFAULT) ,'','');
         
         $usuarioInsertado=CRepositorioUsuarios:: InsertarUsuario(Conexion::getConexion(),$usuario);
-
+        
         if($usuarioInsertado){
             //Redigir a registro correcto
             Redireccion::Redirigir(RUTA_REGISTRO_CORRECTO . '/' . $usuario->getNombre());

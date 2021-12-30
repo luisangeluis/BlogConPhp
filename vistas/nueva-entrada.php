@@ -10,28 +10,28 @@ include_once './app/Redireccion.inc.php';
 $entradaPublica = 0;
 
 if(isset($_POST['guardar'])){
-    Conexion::getConexion();
+    Conexion::openConexion();
 
     $validador = new CValidadorEntrada($_POST['titulo'],$_POST['url'],htmlspecialchars($_POST['texto']),Conexion::getConexion());
 
-    // echo $validador->getTitulo();
     if(isset($_POST['check']) && $_POST['check'] == 'publica'){
         $entradaPublica = 1;
     }
 
     if($validador->validarFormulario()){
-        echo 'form validado';
 
         if(CControlSesion::sesionIniciada()){
-            echo 'sesion iniciada';
 
-            $entrada = new CEntrada('',$_SESSION['idUsuario'],$validador->getUrl(),$validador->getTitulo(),
+            $idUsuario = $_SESSION['idUsuario'];
+            $entrada = new CEntrada('',$idUsuario,$validador->getUrl(),$validador->getTitulo(),
                 $validador->getTexto(),'',$entradaPublica);
-            
+
             $entradaInsertada = CRepositorioEntrada::insertarEntrada(Conexion::getConexion(),$entrada);
+
+            echo 'valor entradaInsertada:'.$entradaInsertada;
             if($entradaInsertada){
-                echo 'entrada insertada';
-                // Redireccion::Redirigir(RUTA_GESTOR_ENTRADAS);
+
+                Redireccion::Redirigir(RUTA_GESTOR_ENTRADAS);
             }
 
         }else{

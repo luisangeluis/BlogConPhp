@@ -10,7 +10,7 @@ class CEntrada{
     private $activa;
 
 
-    public function __construct($pId, $pAutor_id,$pUrl,$pTitulo,$pTexto,$pFecha,$pActiva){
+    public function __construct($pId,$pAutor_id,$pUrl,$pTitulo,$pTexto,$pFecha,$pActiva){
 
         $this->id = $pId;
         $this->autor_id = $pAutor_id;

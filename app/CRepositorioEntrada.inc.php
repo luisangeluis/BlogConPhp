@@ -5,13 +5,13 @@ include_once 'app/config.inc.php';
 
 class CRepositorioEntrada
 {
-    public static function insertarEntrada($pConexion, $pEntrada)
+    public static function insertarEntrada($pConexion,$pEntrada)
     {
         $entradaInsertada = false;
 
         if (isset($pConexion)) {
             try {
-                $sql = 'INSERT INTO entradas(autor_id,url,titulo,texto,fecha,activa) VALUES(:autor_id,:url,:titulo,:texto,NOW(),0)';
+                $sql = 'INSERT INTO entradas(autor_id,url,titulo,texto,fecha,activa) VALUES(:autor_id,:urrl,:titulo,:texto,NOW(),:activa)';
 
                 $sentencia = $pConexion->prepare($sql);
 
@@ -19,18 +19,23 @@ class CRepositorioEntrada
                 $URL = $pEntrada->getUrl();
                 $TITULO = $pEntrada->getTitulo();
                 $TEXTO = $pEntrada->getTexto();
+                $ACTIVA = $pEntrada->getActiva();
+                
+                $sentencia->bindParam(':autor_id', $AUTOR_ID, PDO::PARAM_STR);
+                $sentencia->bindParam(':urrl', $URL, PDO::PARAM_STR);
+                $sentencia->bindParam(':titulo', $TITULO, PDO::PARAM_STR);
+                $sentencia->bindParam(':texto', $TEXTO, PDO::PARAM_STR);
+                $sentencia->bindParam(':activa', $ACTIVA, PDO::PARAM_STR);
 
-                $sentencia->bindparam(':autor_id', $AUTOR_ID, PDO::PARAM_STR);
-                $sentencia->bindparam(':url', $URL, PDO::PARAM_STR);
-                $sentencia->bindparam(':titulo', $TITULO, PDO::PARAM_STR);
-                $sentencia->bindparam(':texto', $TEXTO, PDO::PARAM_STR);
 
                 $entradaInsertada = $sentencia->execute();
+
             } catch (PDOException $e) {
                 print 'ERROR: '. $e->getMessage();
             }
         }
         return $entradaInsertada;
+
     }
 
     public static function GetEntradasFechaDescendiente($pConexion){
@@ -254,7 +259,6 @@ class CRepositorioEntrada
     public static function tituloExiste($pConexion,$pTitulo){
         
         $tituloExiste = null;
-        $respuesta = null;
         if(isset($pConexion)){
 
             try{
@@ -268,11 +272,10 @@ class CRepositorioEntrada
 
                 if(count($resultado)){
                     $tituloExiste = true;
-                    $respuesta = count($resultado);
+                    
                 }
                 else{
                     $tituloExiste = false;
-                    $respuesta = 0;
                 }
 
             }catch(PDOException $e){
@@ -296,7 +299,7 @@ class CRepositorioEntrada
 
                 $resultado = $sentencia-> fetch();
 
-                if(count($resultado['total'])){
+                if($resultado['total']){
                     $urlExiste = true;
 
                 }
