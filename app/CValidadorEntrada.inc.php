@@ -76,7 +76,6 @@
 
             }
 
-            
             $urlTratada = str_replace(' ', '', $pUrl);
             $urlTratada = preg_replace('/\s+/','',$urlTratada); 
             //Metodo trim() convierte una cadena  a una cadena sin espacios en blanco.
@@ -91,7 +90,6 @@
             }
                 
             return "";
-
         }
 
         private function validarTexto($pTexto){
