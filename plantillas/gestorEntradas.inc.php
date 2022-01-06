@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-lg-12">
         <h2>Gestor Entradas</h2>
-        
-        <a href="<?php echo RUTA_NUEVA_ENTRADA?>" class="btn btn-primary btn-lg btn-Gestor-uno" role="button">Crear Entrada</a>
+
+        <a href="<?php echo RUTA_NUEVA_ENTRADA ?>" class="btn btn-primary btn-lg btn-Gestor-uno" role="button">Crear Entrada</a>
         <br>
         <br>
     </div>
@@ -12,14 +12,16 @@
         <?php
         if (count($arrayEntradas)) {
         ?>
-            <table class="table bg-light">
+            <table class="table bg-light text-center">
                 <thead>
                     <tr>
                         <th scope="col">Fecha</th>
                         <th scope="col">Título</th>
                         <th scope="col">Estado</th>
                         <th scope="col">comentarios</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -29,14 +31,20 @@
                         $comentariosEntradaActual  = $arrayEntradas[$i][1];
                     ?>
                         <tr>
-                            <td><?php echo $entradaActual->getFecha()?></td>
-                            <td><?php echo $entradaActual->getTitulo()?></td>
-                            <td><?php echo $entradaActual->getActiva()?></td>
-                            <td><?php echo $comentariosEntradaActual?></td>
+                            <td><?php echo $entradaActual->getFecha() ?></td>
+                            <td><?php echo $entradaActual->getTitulo() ?></td>
+                            <td><?php echo $entradaActual->getActiva() ?></td>
+                            <td><?php echo $comentariosEntradaActual ?></td>
                             <td>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-primary btn-sm">Borrar</button>
+                                <button class="btn btn-primary btn-sm">Editar</button>
                             </td>
+                            <td>
+                                <form action="<?php echo RUTA_BORRAR_ENTRADA?>" method="post">
+                                    <input type="hidden" name=id-borrar value="<?php echo $entradaActual ->getId()?>">
+                                    <button type="submit" class="btn btn-primary btn-sm" name="borrar-entrada">Borrar</button>
+                                </form>
+                            </td>
+
                         </tr>
                     <?php
                     }
