@@ -13,19 +13,24 @@ class CRepositorioEntrada
             try {
                 $sql = 'INSERT INTO entradas(autor_id,url,titulo,texto,fecha,activa) VALUES(:autor_id,:urrl,:titulo,:texto,NOW(),:activa)';
 
+                $activa = 0;
+
+                if($pEntrada -> estaActiva())
+                    $activa =1;
+                
                 $sentencia = $pConexion->prepare($sql);
 
                 $AUTOR_ID = $pEntrada->getAutor();
                 $URL = $pEntrada->getUrl();
                 $TITULO = $pEntrada->getTitulo();
                 $TEXTO = $pEntrada->getTexto();
-                $ACTIVA = $pEntrada->getActiva();
+                // $ACTIVA = $pEntrada->getActiva();
 
                 $sentencia->bindParam(':autor_id', $AUTOR_ID, PDO::PARAM_STR);
                 $sentencia->bindParam(':urrl', $URL, PDO::PARAM_STR);
                 $sentencia->bindParam(':titulo', $TITULO, PDO::PARAM_STR);
                 $sentencia->bindParam(':texto', $TEXTO, PDO::PARAM_STR);
-                $sentencia->bindParam(':activa', $ACTIVA, PDO::PARAM_STR);
+                $sentencia->bindParam(':activa', $activa, PDO::PARAM_STR);
 
 
                 $entradaInsertada = $sentencia->execute();
@@ -366,5 +371,39 @@ class CRepositorioEntrada
                 $pConexion -> rollBack();
             }
         }
+    }
+
+    public static function getEntradaById($pConexion,$pIdEntrada){
+        $entrada = null;
+
+        if(isset($pConexion)){
+
+            try{
+                $sql = 'SELECT * FROM entradas WHERE id = :pIdEntrada';
+
+                $sentencia = $pConexion -> prepare($sql);
+                $sentencia -> bindParam(':pIdEntrda',$pIdEntrada,PDO::PARAM_STR);
+                $sentencia -> execute();
+                
+                $resultado = $sentencia->fetch();
+
+                if(!empty($resultado)){
+                    $entrada = new CEntrada(
+                        $resultado['id'],
+                        $resultado['autor_id'],
+                        $resultado['url'],
+                        $resultado['titulo'],
+                        $resultado['texto'],
+                        $resultado['fecha'],
+                        $resultado['activa']
+                    );
+                }
+                
+            }catch(PDOException $e){
+                print 'ERROR: '. $e -> getMessage();
+            }
+
+        }
+        return $entrada;
     }
 }

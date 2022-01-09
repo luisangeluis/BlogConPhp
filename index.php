@@ -65,6 +65,9 @@ include_once 'app/CRepositorioComentario.inc.php';
                 case 'borrar-entrada':
                     $rutaElegida = './vistas/borrar-entrada.php';
                 break;
+                case 'editar-entrada':
+                    $rutaElegida = './vistas/editar-entrada.php';
+                break;
                 case 'script-relleno':
                     $rutaElegida = 'vistas/ScriptRelleno.php';
                 break;

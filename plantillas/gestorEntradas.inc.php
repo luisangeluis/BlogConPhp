@@ -36,11 +36,14 @@
                             <td><?php echo $entradaActual->getActiva() ?></td>
                             <td><?php echo $comentariosEntradaActual ?></td>
                             <td>
-                                <button class="btn btn-primary btn-sm">Editar</button>
+                                <form action="<?php echo RUTA_EDITAR_ENTRADA?>" method="POST">
+                                    <input type="hidden" name="id-editar" value="<?php echo $entradaActual->getId()?>">
+                                    <button type="submit" class="btn btn-primary btn-sm" name="editar-entrada">Editar</button>
+                                </form>
                             </td>
                             <td>
-                                <form action="<?php echo RUTA_BORRAR_ENTRADA?>" method="post">
-                                    <input type="hidden" name=id-borrar value="<?php echo $entradaActual ->getId()?>">
+                                <form action="<?php echo RUTA_BORRAR_ENTRADA ?>" method="post">
+                                    <input type="hidden" name=id-borrar value="<?php echo $entradaActual->getId() ?>">
                                     <button type="submit" class="btn btn-primary btn-sm" name="borrar-entrada">Borrar</button>
                                 </form>
                             </td>

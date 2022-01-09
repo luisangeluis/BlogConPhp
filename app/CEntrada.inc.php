@@ -57,6 +57,13 @@ class CEntrada{
     public function setActiva($pActiva){
         $this->activa = $pActiva;
     }
+
+    public function estaActiva(){
+        if($this -> activa == 1 )
+            return true;
+
+        return false;
+    }
     
 
 }
