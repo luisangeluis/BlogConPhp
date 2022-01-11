@@ -382,7 +382,7 @@ class CRepositorioEntrada
                 $sql = 'SELECT * FROM entradas WHERE id = :pIdEntrada';
 
                 $sentencia = $pConexion -> prepare($sql);
-                $sentencia -> bindParam(':pIdEntrda',$pIdEntrada,PDO::PARAM_STR);
+                $sentencia -> bindParam(':pIdEntrada',$pIdEntrada,PDO::PARAM_STR);
                 $sentencia -> execute();
                 
                 $resultado = $sentencia->fetch();

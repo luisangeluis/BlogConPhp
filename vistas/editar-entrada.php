@@ -4,15 +4,7 @@ include_once './app/CRepositorioEntrada.inc.php';
 include_once './app/Conexion.inc.php';
 include_once './app/Redireccion.inc.php';
 
-if (isset($_POST['editar-entrada'])) {
-    $idEntrada = $_POST['id-editar'];
-    
-    Conexion::openConexion();
-    $entrada = CRepositorioEntrada::getEntradaById(Conexion::getConexion(),$idEntrada);
-    Conexion::closeConexion();
 
-
-}
 
 $titulo = 'Editar entrada';
 
@@ -28,7 +20,19 @@ include_once './plantillas/navbar.inc.php';
     <div class="row">
         <div class="col-lg-12">
             <form class="form-editar-entrada" method="POST" action="<?php echo RUTA_EDITAR_ENTRADA ?>">
-                
+            <?php
+                if(isset($_POST['editar-entrada'])){
+                    $idEntrada = $_POST['id-editar'];
+
+                    Conexion::openConexion();
+                    $entradaAEditar = CRepositorioEntrada::getEntradaById(Conexion::getConexion(),$idEntrada);
+
+                    if(!is_null($entradaAEditar)){
+                        include_once './plantillas/formEntradaAEditar.inc.php';
+                    }
+                    Conexion::closeConexion();
+                }
+            ?>
             </form>
         </div>
     </div>
