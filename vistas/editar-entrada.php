@@ -25,11 +25,13 @@ include_once './plantillas/navbar.inc.php';
                     $idEntrada = $_POST['id-editar'];
 
                     Conexion::openConexion();
+                    
                     $entradaAEditar = CRepositorioEntrada::getEntradaById(Conexion::getConexion(),$idEntrada);
 
                     if(!is_null($entradaAEditar)){
                         include_once './plantillas/formEntradaAEditar.inc.php';
                     }
+                    
                     Conexion::closeConexion();
                 }
             ?>
