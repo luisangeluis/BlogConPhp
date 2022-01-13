@@ -10,7 +10,7 @@ class CValidadorLogin{
     public function __construct($pCorreo,$pClave,$pConexion)
     {   
         $this->error = "";
-        if($pCorreo==null || $pClave==null){
+        if(!$this->variableIniciada($pCorreo) || !$this->variableIniciada($pClave)){
             $this->error = "Debes escribir tu usuario y contraseña";
         }else{
             $this->usuario = CRepositorioUsuarios::getUserPorEmail($pConexion,$pCorreo);  
