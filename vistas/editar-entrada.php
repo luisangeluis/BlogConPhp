@@ -1,6 +1,7 @@
 <?php
 include_once './app/config.inc.php';
 include_once './app/CRepositorioEntrada.inc.php';
+include_once './app/CValidadorEntradaAEditar.php';
 include_once './app/Conexion.inc.php';
 include_once './app/Redireccion.inc.php';
 
@@ -9,12 +10,12 @@ Conexion::openConexion();
 if(isset($_POST['guardar-cambios-entrada'])){
     $entradaPublicaNueva = 0;
 
-    if(isset($_POST['check']) && $_POST['check'] == 'publica'){
+    if(isset($_POST['publica']) && $_POST['publica'] == 'publica'){
         $entradaPublicaNueva = 1;
     }
 
     $validador = new CValidadorEntradaAEditar($_POST['titulo'],$_POST['titulo-original'],$_POST['url'],$_POST['url-original'],
-        htmlspecialchars($_POST['texto']),$_POST['texto-original'],$_POST['check'],$_POST['publicar-originall'],
+    htmlspecialchars($_POST['texto']),$_POST['texto-original'],$entradaPublicaNueva,$_POST['publicar-original'],
         Conexion::getConexion());
 }
 
@@ -45,8 +46,10 @@ include_once './plantillas/navbar.inc.php';
                     
                     Conexion::closeConexion();
                 }else if(isset($_POST['guardar-cambios-entrada'])){
-                    $idEntrada = $_POST['id-editar'];
-                    
+                    $idEntrada = $_POST['id-entrada'];
+                    $entradaAEditar = CRepositorioEntrada::getEntradaById(Conexion::getConexion(),$idEntrada);
+
+                    include_once './plantillas/formEntradaAEditarValidada.inc.php';
                     //plantilla validada
                 }
             ?>

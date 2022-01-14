@@ -53,14 +53,14 @@ class CValidadorEntradaAEditar extends CValidador{
             }
 
             if($this->texto!== $this->textoOriginal){
-                $this->errorTexto = $this->validarTexto($pConexion,$this->texto);
+                $this->errorTexto = $this->validarTexto($this->texto);
             }else{
                 $this->errorTexto ='';
             }
-
         }else{
             echo 'no hay cambios';
-            //Redirigir;
+            
+            //Redirigir
         }
 
     }
