@@ -406,4 +406,34 @@ class CRepositorioEntrada
         }
         return $entrada;
     }
+
+    public static function updateEntrada($pConexion,$pId,$pTitulo,$pUrl,$pTexto,$pActiva){
+        $entradaActualizada = false;
+        if(isset($pConexion)){
+
+            try{
+                $sql='UPDATE entradas SET titulo=:titulo,url=:url,texto=:texto,activa=:activa WHERE id = :id';
+
+                $sentencia = $pConexion->prepare($sql);
+
+                $sentencia ->bindParam(':id',$pId,PDO::PARAM_STR);
+                $sentencia ->bindParam(':titulo',$pTitulo,PDO::PARAM_STR);
+                $sentencia ->bindParam(':url',$pUrl,PDO::PARAM_STR);
+                $sentencia ->bindParam(':texto',$pTexto,PDO::PARAM_STR);
+                $sentencia ->bindParam(':activa',$pActiva,PDO::PARAM_STR);
+
+                $sentencia -> execute();
+                //rowCount devuelve el numero de filas que fueron afectadas por la sentencia sql
+                $resultado = $sentencia->rowCount();
+
+                if($resultado){
+                    $entradaActualizada = true;  
+                }
+
+            }catch(PDOException $e){
+                print 'Error: '. $e->getMessage();
+            }
+        }
+        return $entradaActualizada;
+    }
 }

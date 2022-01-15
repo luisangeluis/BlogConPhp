@@ -7,6 +7,8 @@ include_once './app/Redireccion.inc.php';
 
 Conexion::openConexion();
 
+// if(CControlSesion::sesionIniciada()){
+
 if(isset($_POST['guardar-cambios-entrada'])){
     $entradaPublicaNueva = 0;
 
@@ -17,8 +19,23 @@ if(isset($_POST['guardar-cambios-entrada'])){
     $validador = new CValidadorEntradaAEditar($_POST['titulo'],$_POST['titulo-original'],$_POST['url'],$_POST['url-original'],
     htmlspecialchars($_POST['texto']),$_POST['texto-original'],$entradaPublicaNueva,$_POST['publicar-original'],
         Conexion::getConexion());
-}
 
+    if($validador->hayCambios()){
+        if($validador->validarFormulario()){
+           
+            //actualizar en bd
+            $cambiosEfectuados = CRepositorioEntrada::updateEntrada(Conexion::getConexion(),$_POST['id-entrada'],
+                $validador->getTitulo(),$validador->getUrl(),$validador->getTexto(),$validador->getCheckbox());
+
+            if($cambiosEfectuados)
+            //redireccionar a gestor entradas
+            Redireccion::Redirigir(RUTA_GESTOR_ENTRADAS);
+        }
+    }else{
+        Redireccion::Redirigir(RUTA_GESTOR_ENTRADAS);
+    }
+}
+// }
 $titulo = 'Editar entrada';
 
 include_once './plantillas/documento-declaracion.inc.php';

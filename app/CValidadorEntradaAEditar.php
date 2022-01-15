@@ -36,7 +36,6 @@ class CValidadorEntradaAEditar extends CValidador{
         }
 
         if($this->cambiosRealizados){
-            echo 'hay cambios';
             $this->avisoInicio = '<br><div class="alert alert-danger" role="alert">';
             $this->avisoCierre = '</div>';
 
@@ -58,7 +57,6 @@ class CValidadorEntradaAEditar extends CValidador{
                 $this->errorTexto ='';
             }
         }else{
-            echo 'no hay cambios';
             
             //Redirigir
         }
