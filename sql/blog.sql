@@ -43,3 +43,15 @@ CREATE TABLE comentarios(
         ON UPDATE CASCADE
         ON DELETE RESTRICT
 );
+
+CREATE TABLE recuperacion_password(
+    id INT NOT NULL UNIQUE AUTO_INCREMENT,
+    usuario_id INT NOT NULL,
+    url_secreta VARCHAR(255) NOT NULL,
+    fecha DATETIME NOT null,
+    PRIMARY KEY(id),
+    FOREIGN KEY(usuario_id)
+        REFERENCES usuarios(id)
+            ON UPDATE CASCADE
+            ON DELETE RESTRICT
+);
