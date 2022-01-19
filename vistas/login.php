@@ -71,7 +71,7 @@ include_once 'plantillas/navbar.inc.php'
                     </form>
                 </div>
                 <div class="card-footer text-muted">
-                    <a href="#">¿Olvidaste tu password?</a>
+                    <a href="<?php echo RUTA_RECUPERAR_PASSWORD?>">¿Olvidaste tu password?</a>
                 </div>
             </div>
         </div>

@@ -24,6 +24,8 @@ define('RUTA_GESTOR_FAVORITOS',RUTA_GESTOR.'/favoritos');
 define('RUTA_NUEVA_ENTRADA',SERVIDOR.'/nueva-entrada');
 define('RUTA_BORRAR_ENTRADA',SERVIDOR. '/borrar-entrada');
 define('RUTA_EDITAR_ENTRADA',SERVIDOR.'/editar-entrada');
+define('RUTA_RECUPERAR_PASSWORD',SERVIDOR.'/recuperar-password');
+define('RUTA_GENERAR_URL_SECRETA',SERVIDOR.'/generar-url-secreta');
 
 //Recursos
 define('RUTA_CSS',SERVIDOR.'/styles');

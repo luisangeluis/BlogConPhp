@@ -71,6 +71,13 @@ include_once 'app/CRepositorioComentario.inc.php';
                 case 'script-relleno':
                     $rutaElegida = 'vistas/ScriptRelleno.php';
                 break;
+                case 'recuperar-password':
+                    $rutaElegida = 'vistas/recuperar-password.php';
+                break;
+                case 'generar-url-secreta':
+                    $rutaElegida = 'scripts/generar-url-secreta.php';
+                break;
+
                 
             }
         }else if(count($partesRuta)==3){
