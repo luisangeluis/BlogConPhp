@@ -110,7 +110,7 @@ class CRepositorioUsuarios
 
     public static function emailExiste($pConexion, $pEmail)
     {
-        $emailExiste = true;
+        $emailExiste = false;
         if (isset($pConexion)) {
             try {
 

@@ -23,7 +23,7 @@ include_once './plantillas/navbar.inc.php';
             <form role="form" method="POST" action="<?php echo RUTA_GENERAR_URL_SECRETA?>">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Introduce tu email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required autofocus>
+                    <input type="email" name="email"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required autofocus>
                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <button type="submit" class="btn btn-primary" name="enviar-email">Recuperar clave</button>
