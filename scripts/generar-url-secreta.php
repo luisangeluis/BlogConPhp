@@ -1,5 +1,9 @@
 <?php
+include_once './app/Conexion.inc.php';
+include_once './app/CRepositorioUsuarios.inc.php';
+include_once './app/CRepositorioRecuperacionPassword.inc.php';
 
+include_once './app/Redireccion.inc.php';
 function crearStringAleatorio($pLongitud)
 {
     $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -30,6 +34,12 @@ if(isset($_POST['enviar-email'])){
     //Se genera una url de 64 caracteres
     $urlSecreta = hash('sha256',$StringAleatorio.$nombreUsuario);
 
+    $peticionGenerada = CRepositorioRecuperacionPassword::generarPeticion(Conexion::getConexion(),$usuario->getId(),
+        $urlSecreta);
+
     Conexion::closeConexion();
 
+    if($peticionGenerada){
+        Redireccion::Redirigir(SERVIDOR);
+    }
 }
