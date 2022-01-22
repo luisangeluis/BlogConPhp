@@ -26,6 +26,8 @@ define('RUTA_BORRAR_ENTRADA',SERVIDOR. '/borrar-entrada');
 define('RUTA_EDITAR_ENTRADA',SERVIDOR.'/editar-entrada');
 define('RUTA_RECUPERAR_PASSWORD',SERVIDOR.'/recuperar-password');
 define('RUTA_GENERAR_URL_SECRETA',SERVIDOR.'/generar-url-secreta');
+define('RUTA_ENVIAR_EMAIL',SERVIDOR.'/enviar-email');
+
 
 //Recursos
 define('RUTA_CSS',SERVIDOR.'/styles');

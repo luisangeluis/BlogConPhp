@@ -77,6 +77,9 @@ include_once 'app/CRepositorioComentario.inc.php';
                 case 'generar-url-secreta':
                     $rutaElegida = 'scripts/generar-url-secreta.php';
                 break;
+                case 'email':
+                    $rutaElegida = 'vistas/prueba-email.php';
+                break;
 
                 
             }
