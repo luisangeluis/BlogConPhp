@@ -124,6 +124,11 @@ include_once 'app/CRepositorioComentario.inc.php';
                     break;
                 }
             }
+
+            if($partesRuta[1]=='recuperando-password'){
+                $urlPersonal = $partesRuta[2];
+                $rutaElegida = './vistas/recuperando-password.php';
+            }
             
         }
 

@@ -23,4 +23,52 @@ class CRepositorioRecuperacionPassword{
 
         return $peticionGenerada;
     }
+
+    public static function urlSecretaExiste($pConexion,$urlSecreta){
+        $urlExiste = false;
+
+        if(isset($pConexion)){
+            try{
+                $sql = 'SELECT * FROM recuperacion_password WHERE url_secreta=:urlSecreta';
+
+                $sentencia = $pConexion->prepare($sql);
+                $sentencia->bindParam(':urlSecreta',$urlSecreta,PDO::PARAM_STR);   
+                $sentencia -> execute();
+                
+                $resultado = $sentencia->fetch();
+                if(count($resultado)){
+                    $urlExiste = true;  
+                }
+            }catch(PDOException $e){
+                print 'ERROR: '.$e->getMessage();
+            }
+        }
+
+        return $urlExiste;
+    }
+
+    public static function getIdUsuarioByUrlSecreta($pConexion,$pUrlSecreta){
+        $idUsuario = null;
+
+        if(isset($pConexion)){
+            try{
+                include_once './app/CRecuperacionPassword.inc.php';
+
+                $sql = 'SELECT * FROM recuperacion_password WHERE url_secreta=:urlSecreta';
+
+                $sentencia = $pConexion->prepare($sql);
+                $sentencia->bindParam(':urlSecreta',$pUrlSecreta,PDO::PARAM_STR);   
+                $sentencia -> execute();
+                
+                $resultado = $sentencia->fetch();
+                if(!empty($resultado)){
+                    $idUsuario = $resultado['usuario_id'];  
+                }
+            }catch(PDOException $e){
+                print 'ERROR: '.$e->getMessage();
+            }
+        }
+
+        return $idUsuario;
+    }
 }
