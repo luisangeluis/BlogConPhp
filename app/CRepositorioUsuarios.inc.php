@@ -198,4 +198,30 @@ class CRepositorioUsuarios
 
         return $usuario;
     }
+
+    public static function cambiarPassword($pConexion,$pPassword,$pId){
+        $passwordCambiado = false;
+
+        if(isset($pConexion)){
+            try{
+                $sql = 'UPDATE usuarios SET password = :password WHERE id = :id';
+
+                $sentencia = $pConexion->prepare($sql);
+
+                $sentencia->bindParam(':password',$pPassword,PDO::PARAM_STR);
+                $sentencia->bindParam(':id',$pId,PDO::PARAM_STR);
+                $sentencia -> execute();
+
+                $resultado = $sentencia->rowCount();
+
+                if($resultado)
+                    $passwordCambiado = true;
+
+            }catch(PDOException $e){
+                print 'ERROR: '. $e->getMessage();
+            }
+        }
+
+        return $passwordCambiado;
+    }
 }
