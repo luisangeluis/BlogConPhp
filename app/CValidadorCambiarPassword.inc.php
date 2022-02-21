@@ -59,7 +59,7 @@ class CValidadorCambiarPassword
         if (!$this->variableIniciada($pPassword1))
             return 'debes escribir el password 1';
 
-        if ($this->pPassword1 !== $this->pPassword2)
+        if ($pPassword1 !== $pPassword2)
             return 'Los password deben coincidir';
 
         if (!$this->variableIniciada($pPassword2))
@@ -84,8 +84,11 @@ class CValidadorCambiarPassword
     }
 
     public function formValidado(){
-        if($this->errorPassword1 ==='' && $this->errorPassword2==='')
+        if($this->errorPassword1 ==='' && $this->errorPassword2===''){
+            echo 'retorne true';
             return true;
+
+        }
         else
             return false;
     }
