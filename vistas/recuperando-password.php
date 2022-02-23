@@ -19,7 +19,8 @@ if (isset($_POST['guardar-password'])) {
     //Validaciones
     //Validar clave 1 y comprobar si la 2 coincide
     $validador = new CValidadorCambiarPassword($_POST['password1'], $_POST['password2']);
-
+    
+    //Crear una transaccion para que al actualizar el password se elimine la url de la tabla recuperacion_password
     if ($validador->formValidado()) {
         $passwordCifrado = password_hash($validador->getPassword(), PASSWORD_DEFAULT);
 

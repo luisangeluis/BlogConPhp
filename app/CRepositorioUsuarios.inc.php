@@ -204,21 +204,31 @@ class CRepositorioUsuarios
 
         if(isset($pConexion)){
             try{
+                $pConexion->beginTransaction();
                 $sql = 'UPDATE usuarios SET password = :password WHERE id = :id';
 
                 $sentencia = $pConexion->prepare($sql);
-
                 $sentencia->bindParam(':password',$pPassword,PDO::PARAM_STR);
                 $sentencia->bindParam(':id',$pId,PDO::PARAM_STR);
                 $sentencia -> execute();
 
                 $resultado = $sentencia->rowCount();
 
-                if($resultado)
-                    $passwordCambiado = true;
+                $sql2 = 'DELETE FROM recuperacion_password WHERE usuario_id=:pId';
 
+                $sentencia = $pConexion->prepare($sql2);
+                $sentencia ->bindParam('pId',$pId,PDO::PARAM_STR);
+                $sentencia ->execute();
+
+                $resultado2 = $sentencia->rowCount();
+
+                if($resultado && $resultado2)
+                    $passwordCambiado = true;
+                $pConexion->commit();   
             }catch(PDOException $e){
                 print 'ERROR: '. $e->getMessage();
+                $pConexion -> rollBack();
+
             }
         }
 
