@@ -80,7 +80,9 @@ include_once 'app/CRepositorioComentario.inc.php';
                 case 'email':
                     $rutaElegida = 'vistas/prueba-email.php';
                 break;
-
+                case 'buscador':
+                    $rutaElegida = 'vistas/buscador.php';
+                break;
                 
             }
         }else if(count($partesRuta)==3){

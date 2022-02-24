@@ -25,15 +25,18 @@ include_once './plantillas/navbar.inc.php';
     <div class="col-lg-4">
       <div class="row">
         <div class="col md-12">
+
           <div class="card">
             <div class="card-header"><i class="fas fa-search"></i>
               busqueda
             </div>
             <div class="card-body">
-              <div class="form-group mb-3">
-                <input type="search" class="form-control" placeholder="¿Qué buscas? ">
-              </div>
-              <button class="form-control">BUSCAR</button>
+              <form role="form" method="POST" action="<?php echo RUTA_BUSCADOR?>">
+                <div class="form-group mb-3">
+                  <input type="search" class="form-control" placeholder="¿Qué buscas?" name="termino-a-buscar" required>
+                </div>
+                <button class="form-control btn btn-primary" type="submit" name="buscar">BUSCAR</button>
+              </form>
             </div>
           </div>
 
@@ -71,7 +74,7 @@ include_once './plantillas/navbar.inc.php';
     <!--COLUMNA PRINCIPAL DERECHA-->
     <div class="col-lg-8">
       <?php
-        EscritorioDeEntradas::GetAllEntradas();
+      EscritorioDeEntradas::GetAllEntradas();
       ?>
     </div>
   </div>
