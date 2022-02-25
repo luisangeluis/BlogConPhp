@@ -436,4 +436,34 @@ class CRepositorioEntrada
         }
         return $entradaActualizada;
     }
+
+    public static function busquedaEntradaTodosLosCampos($pConexion,$pTerminoBusqueda){
+        
+        $entradas = [];
+        if(isset($pConexion)){
+            try{
+                $sql = 'SELECT * FROM entradas WHERE titulo LIKE :terminoBusqueda OR texto LIKE :terminoBusqueda ORDER BY
+                    fecha DESC LIMIT 25';
+
+                $sentencia = $pConexion->prepare($sql);
+                $sentencia->bindParam(':terminoBusqueda',$pTerminoBusqueda,PDO::PARAM_STR);
+                $sentencia->execute();
+                
+                $resultado = $sentencia->fetchAll();
+
+                if (count($resultado)) {
+                    foreach ($resultado as $entrada) {
+                        $entradas[] = new CEntrada($entrada['id'],$entrada['autor_id'],$entrada['url'],$entrada['titulo'],
+                            $entrada['texto'],$entrada['fecha'],$entrada['activa']);
+                    }
+                }
+
+            }catch(PDOException $e){
+                print 'ERROR: '.$e->getMessage();
+            }
+        }
+
+        return $entradas;
+        
+    }
 }

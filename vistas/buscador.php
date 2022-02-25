@@ -6,6 +6,8 @@ include_once 'plantillas/navbar.inc.php';
 
 $terminoABuscar = null;
 if(isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])){
+    //TO DO
+    //Hacer validaciones con el termino a buscar $terminoAbuscar
     $terminoABuscar = $_POST['termino-a-buscar'];
 }
 
