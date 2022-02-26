@@ -71,7 +71,6 @@ abstract class CValidador
         }
 
         $urlTratada = str_replace(' ', '', $pUrl);
-        $urlTratada = preg_replace('/\s+/', '', $urlTratada);
         //Metodo trim() convierte una cadena  a una cadena sin espacios en blanco.
         if (strlen($pUrl) !== strlen($urlTratada)) {
             return "La url no debe tener espacios en blanco.";

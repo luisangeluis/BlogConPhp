@@ -30,6 +30,7 @@ define('RUTA_ENVIAR_EMAIL',SERVIDOR.'/enviar-email');
 define('RUTA_CAMBIAR_PASSWORD',SERVIDOR.'/recuperando-password');
 define('RUTA_BUSCADOR',SERVIDOR.'/buscador');
 
+define('RUTA_PRUEBAS',SERVIDOR.'/pruebas-grales');
 
 //Recursos
 define('RUTA_CSS',SERVIDOR.'/styles');

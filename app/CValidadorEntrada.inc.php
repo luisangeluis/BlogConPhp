@@ -10,7 +10,7 @@
 
             $this->titulo="";
             $this->url="";
-            $this->texto="";
+            $this->texto=""; 
 
             $this->errorTitulo = $this->validarTitulo($pConexion, $pTitulo);
             $this->errorUrl = $this->validarUrl($pConexion, $pUrl);

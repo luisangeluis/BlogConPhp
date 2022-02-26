@@ -71,6 +71,9 @@ include_once 'app/CRepositorioComentario.inc.php';
                 case 'script-relleno':
                     $rutaElegida = 'vistas/ScriptRelleno.php';
                 break;
+                case 'pruebas-grales':
+                    $rutaElegida = 'vistas/pruebas-generales.php';
+                break;
                 case 'recuperar-password':
                     $rutaElegida = 'vistas/recuperar-password.php';
                 break;
