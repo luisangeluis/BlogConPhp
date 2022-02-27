@@ -4,11 +4,28 @@ $titulo = 'buscar';
 include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'plantillas/navbar.inc.php';
 
+include_once 'app/CValidadorBuscador.inc.php';
+
 $terminoABuscar = null;
+
 if(isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])){
     //TO DO
     //Hacer validaciones con el termino a buscar $terminoAbuscar
+
     $terminoABuscar = $_POST['termino-a-buscar'];
+
+    $validador = new CValidadorBuscador($terminoABuscar);
+
+    if($validador->terminoCorrecto()){
+        Conexion::openConexion();
+        $resultados = CRepositorioEntrada::busquedaEntradaTodosLosCampos(Conexion::getConexion(),$terminoABuscar);
+
+        if(count($resultados)){
+            print_r($resultados);
+        }
+        
+    }
+
 }
 
 ?>

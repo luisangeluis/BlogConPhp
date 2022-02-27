@@ -5,7 +5,7 @@ class CValidadorBuscador{
 
     public function __construct($pTermino)
     {
-        
+        $this->errorTermino = $this->validarTermino($pTermino);
     }
 
     private function variableIniciada($pTermino){
@@ -15,7 +15,7 @@ class CValidadorBuscador{
             return false;
     }
 
-    public function validarTermino($pTermino){
+    private function validarTermino($pTermino){
 
         $pTerminoTratado = str_replace(' ', '', $pTermino);
         $pTerminoTratado = preg_replace('/\s+/', '', $pTerminoTratado);
@@ -27,6 +27,18 @@ class CValidadorBuscador{
         }
 
         return '';
+    }
+
+    public function terminoCorrecto(){
+        if($this->errorTermino ==''){
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getTermino(){
+        return $this->termino;
     }
 }
 ?>
