@@ -440,6 +440,7 @@ class CRepositorioEntrada
     public static function busquedaEntradaTodosLosCampos($pConexion,$pTerminoBusqueda){
         
         $entradas = [];
+        $pTerminoBusqueda = '%'.$pTerminoBusqueda.'%';
         if(isset($pConexion)){
             try{
                 $sql = 'SELECT * FROM entradas WHERE titulo LIKE :terminoBusqueda OR texto LIKE :terminoBusqueda ORDER BY

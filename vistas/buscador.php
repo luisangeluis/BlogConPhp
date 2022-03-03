@@ -1,4 +1,5 @@
 <?php
+include_once 'app/EscritorDeEntradas.inc.php';
 $titulo = 'buscar';
 
 include_once 'plantillas/documento-declaracion.inc.php';
@@ -8,7 +9,7 @@ include_once 'app/CValidadorBuscador.inc.php';
 
 $terminoABuscar = null;
 
-if(isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])){
+if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])) {
     //TO DO
     //Hacer validaciones con el termino a buscar $terminoAbuscar
 
@@ -16,16 +17,10 @@ if(isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POST
 
     $validador = new CValidadorBuscador($terminoABuscar);
 
-    if($validador->terminoCorrecto()){
-        Conexion::openConexion();
-        $resultados = CRepositorioEntrada::busquedaEntradaTodosLosCampos(Conexion::getConexion(),$terminoABuscar);
-
-        if(count($resultados)){
-            print_r($resultados);
-        }
-        
+    if ($validador->terminoCorrecto()) {
+        //Conexion::openConexion();
+        $resultados = CRepositorioEntrada::busquedaEntradaTodosLosCampos(Conexion::getConexion(), $terminoABuscar);
     }
-
 }
 
 ?>
@@ -39,14 +34,40 @@ if(isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POST
             <div class="col-lg-8">
                 <form action="" role="form" method="Post" action="<?php echo RUTA_BUSCADOR ?>">
                     <div class="form-group mb-3">
-                        <input type="search" class="form-control" placeholder="¿Qué buscas?" name="termino-a-buscar" required
-                        value="<?php echo $terminoABuscar?>">
+                        <input type="search" class="form-control" placeholder="¿Qué buscas?" name="termino-a-buscar" required value="<?php echo $terminoABuscar ?>">
                     </div>
                     <button class="form-control btn btn-primary btn-buscador" type="submit" name="buscar">BUSCAR</button>
                 </form>
             </div>
         </div>
     </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>
+                <?php
+                if (count($resultados)) {
+                    echo '<small>' . count($resultados) . '</small> resultados';
+                }
+
+                ?>
+            </h1>
+        </div>
+    </div>
+
+    <?php
+    if (count($resultados)) {
+        EscritorioDeEntradas::mostrarEntradasBusqueda($resultados);
+    } else {
+    ?>
+        <p>No existen coincidencias</p>
+    <?php
+
+    }
+    ?>
+
 </div>
 
 <?php
