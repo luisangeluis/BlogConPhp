@@ -10,9 +10,7 @@ include_once 'app/CValidadorBuscador.inc.php';
 $terminoABuscar = null;
 
 if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])) {
-    //TO DO
-    //Hacer validaciones con el termino a buscar $terminoAbuscar
-
+    
     $terminoABuscar = $_POST['termino-a-buscar'];
 
     $validador = new CValidadorBuscador($terminoABuscar);
@@ -21,6 +19,14 @@ if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POS
         //Conexion::openConexion();
         $resultados = CRepositorioEntrada::busquedaEntradaTodosLosCampos(Conexion::getConexion(), $terminoABuscar);
     }
+}
+
+if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])) {
+    
+    $terminoABuscar = $_POST['termino-a-buscar'];
+
+    print_r($_POST['campos']);
+    echo $_POST['fecha'];
 }
 
 ?>
@@ -48,44 +54,50 @@ if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POS
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">
-                        <a class="" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            Busqueda avanzada
-                        </a>
-                    </div>
+
+                    <a class="text-white" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Busqueda avanzada
+                    </a>
+
                 </div>
                 <div class="collapse show" id="collapseExample">
                     <div class="card card-body">
                         <form action="" role="form" method="Post" action="<?php echo RUTA_BUSCADOR ?>">
+                            <div class="form-group mb-3">
+                                <input type="search" class="form-control" placeholder="¿Qué buscas?" name="termino-a-buscar" required value="<?php echo $terminoABuscar ?>">
+                            </div>
                             <p>Buscar en los siguientes campos:</p>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+
+                                <!--poner a todos los campos relacionados el mis name con corchetes ejem campos[]-->
+
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="campos[]" value="titulo" checked>
                                 <label class="form-check-label" for="inlineCheckbox1">Titulo</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="contenido" checked>
                                 <label class="form-check-label" for="inlineCheckbox2">Contenido</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="tags" checked>
                                 <label class="form-check-label" for="inlineCheckbox3">Tags</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="autor">
                                 <label class="form-check-label" for="inlineCheckbox3">Autor</label>
                             </div>
                             <hr>
                             <p>Ordenar por:</p>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <input class="form-check-input" type="radio" name="fecha" id="inlineRadio1" value="recientes" checked>
                                 <label class="form-check-label" for="inlineRadio1">Entradas mas recientes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <input class="form-check-input" type="radio" name="fecha" id="inlineRadio2" value="antiguas">
                                 <label class="form-check-label" for="inlineRadio2">Entradas mas antigüas</label>
                             </div>
                             <hr>
-                            <button class=" btn btn-primary btn-buscador" type="submit" name="buscar">Busqueda Avanzada</button>
+                            <button class=" btn btn-primary btn-buscador" type="submit" name="busqueda-avanzada">Busqueda Avanzada</button>
 
                         </form>
                     </div>
