@@ -42,7 +42,58 @@ if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POS
         </div>
     </div>
 </div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <a class="" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Busqueda avanzada
+                        </a>
+                    </div>
+                </div>
+                <div class="collapse show" id="collapseExample">
+                    <div class="card card-body">
+                        <form action="" role="form" method="Post" action="<?php echo RUTA_BUSCADOR ?>">
+                            <p>Buscar en los siguientes campos:</p>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox1">Titulo</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox2">Contenido</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox3">Tags</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox3">Autor</label>
+                            </div>
+                            <hr>
+                            <p>Ordenar por:</p>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Entradas mas recientes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <label class="form-check-label" for="inlineRadio2">Entradas mas antigüas</label>
+                            </div>
+                            <hr>
+                            <button class=" btn btn-primary btn-buscador" type="submit" name="buscar">Busqueda Avanzada</button>
 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">

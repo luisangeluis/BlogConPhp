@@ -50,30 +50,25 @@ class EscritorioDeEntradas
 
     public static function mostrarEntradasbusqueda($entradas)
     {
-        for ($i = 1; $i <= count($entradas); $i++) {
-            $e = 0;
-            if ($i % 3 == 1) { // si es un elemento al inicio del renglon
-                echo 'el residuo es igual a 1 valor de i' . $i;
-        ?>
-
+        for($i=1; $i<=count($entradas); $i++){
+            if($i % 3==1){
+                ?>
                 <div class="row">
-
                 <?php
             }
-            $entrada = $entradas[$i - 1];
-            self::mostrarEntradaBusqueda($entrada);
-
-            if ($i % 3 == 0) {
+            $entrada = $entradas[$i-1];
+            EscritorioDeEntradas::mostrarEntradaBusqueda($entrada);
+            if($i % 3==0){
                 ?>
                 </div>
-            <?php
+                <?php
             }
+
+            
         }
-        if ($i % 3 !== 0) { //cierra el último renglón si tiene uno o dos elementos
-            ?>
-            </div>
-        <?php
-        }
+
+        
+        
     }
 
     public static function mostrarEntradaBusqueda($entrada)
