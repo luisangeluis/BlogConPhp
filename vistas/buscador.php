@@ -8,6 +8,7 @@ include_once 'plantillas/navbar.inc.php';
 include_once 'app/CValidadorBuscador.inc.php';
 
 $terminoABuscar = null;
+$resultados =null;
 
 if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])) {
     
@@ -111,9 +112,12 @@ if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !
         <div class="col-lg-12">
             <h1>
                 <?php
-                if (count($resultados)) {
-                    echo '<small>' . count($resultados) . '</small> resultados';
+                if(isset($resultados)){
+                    if (count($resultados)) {
+                        echo '<small>' . count($resultados) . '</small> resultados';
+                    }
                 }
+                
 
                 ?>
             </h1>
@@ -121,13 +125,16 @@ if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !
     </div>
 
     <?php
-    if (count($resultados)) {
-        EscritorioDeEntradas::mostrarEntradasBusqueda($resultados);
-    } else {
-    ?>
-        <p>No existen coincidencias</p>
-    <?php
-
+    if(isset($resultados)){
+        if (count($resultados)) {
+            EscritorioDeEntradas::mostrarEntradasBusqueda($resultados);
+        } else {
+        ?>
+            <p>No existen coincidencias</p>
+        <?php
+    
+        }
+        
     }
     ?>
 

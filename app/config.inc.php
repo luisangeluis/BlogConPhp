@@ -11,7 +11,7 @@ define('password','');
 define('nombreBaseDatos','blog');
 
 //Rutas de la web
-define('SERVIDOR','http://localhost/BlogConPhp');
+define('SERVIDOR','http://localhost:8080/BlogConPhp');
 define('RUTA_REGISTRO', SERVIDOR.'/registro');
 define('RUTA_REGISTRO_CORRECTO', SERVIDOR.'/registro-correcto');
 define('RUTA_LOGIN', SERVIDOR.'/login');
