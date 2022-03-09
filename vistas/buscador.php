@@ -10,7 +10,10 @@ include_once 'app/CValidadorBuscador.inc.php';
 $terminoABuscar = null;
 $resultados =null;
 
+$resultadosMultiples = null;
+
 if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])) {
+    $resultadosMultiples = false;
     
     $terminoABuscar = $_POST['termino-a-buscar'];
 
@@ -23,7 +26,8 @@ if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POS
 }
 
 if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])) {
-    
+    $resultadosMultiples = true;
+    //Construir validador para termino a buscar avanzado
     $terminoABuscar = $_POST['termino-a-buscar'];
 
     print_r($_POST['campos']);
@@ -117,8 +121,6 @@ if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !
                         echo '<small>' . count($resultados) . '</small> resultados';
                     }
                 }
-                
-
                 ?>
             </h1>
         </div>
@@ -127,8 +129,14 @@ if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !
     <?php
     if(isset($resultados)){
         if (count($resultados)) {
-            EscritorioDeEntradas::mostrarEntradasBusqueda($resultados);
+            if(!$resultadosMultiples){
+                EscritorioDeEntradas::mostrarEntradasBusqueda($resultados);
+            }else{
+                //mostrar resultados
+            }
         } else {
+            //Construir validador para termino a buscar avanzado y no usar variables post directamente
+            $parametros = count($_POST['campos']);
         ?>
             <p>No existen coincidencias</p>
         <?php
