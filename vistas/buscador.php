@@ -6,6 +6,7 @@ include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'plantillas/navbar.inc.php';
 
 include_once 'app/CValidadorBuscador.inc.php';
+include_once 'app/CValidadorBuscadorAvanzado.inc.php';
 
 $terminoABuscar = null;
 $resultados =null;
@@ -29,6 +30,11 @@ if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !
     $resultadosMultiples = true;
     //Construir validador para termino a buscar avanzado
     $terminoABuscar = $_POST['termino-a-buscar'];
+
+    $validadorAvanzado = new CValidadorBuscadorAvanzado($_POST['termino-a-buscar'],$_POST['campos[0]'],
+        $_POST['campos[1]'],$_POST["campos[2]"],$_POST['campos[3]'],$_POST['fecha[0]'],$_POST['fecha[1]']);
+
+    echo $validadorAvanzado->formValido();
 
     print_r($_POST['campos']);
     echo $_POST['fecha'];
@@ -80,11 +86,11 @@ if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !
                                 <label class="form-check-label" for="inlineCheckbox1">Titulo</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="contenido" checked>
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="contenido" >
                                 <label class="form-check-label" for="inlineCheckbox2">Contenido</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="tags" checked>
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="tags" >
                                 <label class="form-check-label" for="inlineCheckbox3">Tags</label>
                             </div>
                             <div class="form-check form-check-inline">

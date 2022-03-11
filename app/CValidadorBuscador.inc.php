@@ -8,7 +8,7 @@ class CValidadorBuscador{
         $this->errorTermino = $this->validarTermino($pTermino);
     }
 
-    private function variableIniciada($pTermino){
+    public function variableIniciada($pTermino){
         if(isset($pTermino) && !empty($pTermino))
             return true;
         else
