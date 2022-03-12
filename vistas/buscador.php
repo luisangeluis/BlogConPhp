@@ -31,13 +31,27 @@ if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !
     //Construir validador para termino a buscar avanzado
     $terminoABuscar = $_POST['termino-a-buscar'];
 
-    $validadorAvanzado = new CValidadorBuscadorAvanzado($_POST['termino-a-buscar'],$_POST['campos[0]'],
-        $_POST['campos[1]'],$_POST["campos[2]"],$_POST['campos[3]'],$_POST['fecha[0]'],$_POST['fecha[1]']);
+    // $validadorAvanzado = new CValidadorBuscadorAvanzado($_POST['campos'],$_POST['fecha'],$_POST['termino-a-buscar']);
 
-    echo $validadorAvanzado->formValido();
 
-    print_r($_POST['campos']);
-    echo $_POST['fecha'];
+    // if($validadorAvanzado->isFormValido()){
+
+    // }else{
+    //     echo 'se detecto vacio';
+    //     array_push($_POST['campos'],'titulo');
+    // }
+    
+    $campos[] = 'titulo';
+    if(isset($_POST['campos'])){
+        $campos = $_POST['campos'];
+
+    }
+
+    print_r($campos);
+    
+    // if(isset($_POST['']))
+    // print_r($_POST['campos']);
+    // echo $_POST['fecha'];
 }
 
 ?>
