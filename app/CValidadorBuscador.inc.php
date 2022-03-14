@@ -15,7 +15,7 @@ class CValidadorBuscador{
             return false;
     }
 
-    private function validarTermino($pTermino){
+    public function validarTermino($pTermino){
 
         $pTerminoTratado = str_replace(' ', '', $pTermino);
         $pTerminoTratado = preg_replace('/\s+/', '', $pTerminoTratado);

@@ -9,13 +9,13 @@ include_once 'app/CValidadorBuscador.inc.php';
 include_once 'app/CValidadorBuscadorAvanzado.inc.php';
 
 $terminoABuscar = null;
-$resultados =null;
+$resultados = null;
 
 $resultadosMultiples = null;
 
 if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])) {
     $resultadosMultiples = false;
-    
+
     $terminoABuscar = $_POST['termino-a-buscar'];
 
     $validador = new CValidadorBuscador($terminoABuscar);
@@ -27,31 +27,30 @@ if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POS
 }
 
 if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])) {
-    $resultadosMultiples = true;
-    //Construir validador para termino a buscar avanzado
-    $terminoABuscar = $_POST['termino-a-buscar'];
-
-    // $validadorAvanzado = new CValidadorBuscadorAvanzado($_POST['campos'],$_POST['fecha'],$_POST['termino-a-buscar']);
-
-
-    // if($validadorAvanzado->isFormValido()){
-
-    // }else{
-    //     echo 'se detecto vacio';
-    //     array_push($_POST['campos'],'titulo');
-    // }
     
-    $campos[] = 'titulo';
-    if(isset($_POST['campos'])){
-        $campos = $_POST['campos'];
+    $campos = [];
+    $fecha = '';
 
+    if(!isset($_POST['campos'])){
+        array_push($campos,'titulo');
+    }else{
+        $campos = $_POST['campos'];
     }
 
-    print_r($campos);
-    
-    // if(isset($_POST['']))
-    // print_r($_POST['campos']);
-    // echo $_POST['fecha'];
+    if(!isset($_POST['fecha'])){
+        $fecha = 'recientes';
+    }else{
+        $fecha = $_POST['fecha'];
+    }
+
+    $validadorAvanzado = new CValidadorBuscadorAvanzado($_POST['termino-a-buscar'],$campos,$fecha);
+
+    if($validadorAvanzado->isFormValido()){
+        echo 'es valido';
+    }else{
+        echo 'no es valido';    
+    }
+
 }
 
 ?>
@@ -100,11 +99,11 @@ if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !
                                 <label class="form-check-label" for="inlineCheckbox1">Titulo</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="contenido" >
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="contenido">
                                 <label class="form-check-label" for="inlineCheckbox2">Contenido</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="tags" >
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="tags">
                                 <label class="form-check-label" for="inlineCheckbox3">Tags</label>
                             </div>
                             <div class="form-check form-check-inline">
@@ -136,7 +135,7 @@ if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !
         <div class="col-lg-12">
             <h1>
                 <?php
-                if(isset($resultados)){
+                if (isset($resultados)) {
                     if (count($resultados)) {
                         echo '<small>' . count($resultados) . '</small> resultados';
                     }
@@ -147,22 +146,21 @@ if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !
     </div>
 
     <?php
-    if(isset($resultados)){
+    if (isset($resultados)) {
         if (count($resultados)) {
-            if(!$resultadosMultiples){
+            if (!$resultadosMultiples) {
                 EscritorioDeEntradas::mostrarEntradasBusqueda($resultados);
-            }else{
+            } else {
                 //mostrar resultados
             }
         } else {
             //Construir validador para termino a buscar avanzado y no usar variables post directamente
             $parametros = count($_POST['campos']);
-        ?>
+    ?>
             <p>No existen coincidencias</p>
-        <?php
-    
+    <?php
+
         }
-        
     }
     ?>
 
