@@ -3,9 +3,19 @@ class CValidadorBuscador{
     private $termino;
     private $errorTermino;
 
+    private $avisoInicio;
+    private $avisoCierre;
+
     public function __construct($pTermino)
     {
+        $this->avisoInicio = '<br><div class="alert alert-danger" role="alert">';
+        $this->avisoCierre = '</div>';
+
         $this->errorTermino = $this->validarTermino($pTermino);
+    }
+
+    public function getTermino(){
+        return $this->termino;
     }
 
     public function variableIniciada($pTermino){
@@ -15,7 +25,7 @@ class CValidadorBuscador{
             return false;
     }
 
-    public function validarTermino($pTermino){
+    private function validarTermino($pTermino){
 
         $pTerminoTratado = str_replace(' ', '', $pTermino);
         $pTerminoTratado = preg_replace('/\s+/', '', $pTerminoTratado);
@@ -29,6 +39,16 @@ class CValidadorBuscador{
         return '';
     }
 
+    public function mostrarTerminoEnPantalla(){
+        echo "value = '$this->termino'";
+    }
+
+    public function mostrarErrorTermino(){
+        if($this->errorTermino!=''){
+            echo "$this->avisoInicio $this->errorTermino $this->avisoCierre";
+        }
+    }
+
     public function terminoCorrecto(){
         if($this->errorTermino ==''){
             return true;
@@ -37,8 +57,6 @@ class CValidadorBuscador{
         return false;
     }
 
-    public function getTermino(){
-        return $this->termino;
-    }
+    
 }
 ?>

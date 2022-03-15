@@ -50,7 +50,7 @@ class CValidadorBuscadorAvanzado extends CValidadorBuscador
     }
 
     public function isFormValido(){
-        if($this->hayCampos && $this->hayFecha){
+        if($this->hayCampos && $this->hayFecha && $this->terminoCorrecto()){
             return true;
         }
 

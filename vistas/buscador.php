@@ -26,11 +26,12 @@ if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POS
     }
 }
 
-if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])) {
-    
+// if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])) {
+if (isset($_POST['busqueda-avanzada'])){
+
     $campos = [];
     $fecha = '';
-
+    
     if(!isset($_POST['campos'])){
         array_push($campos,'titulo');
     }else{
@@ -42,14 +43,16 @@ if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !
     }else{
         $fecha = $_POST['fecha'];
     }
-
+    
     $validadorAvanzado = new CValidadorBuscadorAvanzado($_POST['termino-a-buscar'],$campos,$fecha);
 
     if($validadorAvanzado->isFormValido()){
         echo 'es valido';
     }else{
+        
         echo 'no es valido';    
     }
+    
 
 }
 
@@ -88,8 +91,9 @@ if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !
                     <div class="card card-body">
                         <form action="" role="form" method="Post" action="<?php echo RUTA_BUSCADOR ?>">
                             <div class="form-group mb-3">
-                                <input type="search" class="form-control" placeholder="¿Qué buscas?" name="termino-a-buscar" required value="<?php echo $terminoABuscar ?>">
+                                <input type="search" class="form-control" placeholder="¿Qué buscas?" name="termino-a-buscar" value="<?php echo $terminoABuscar ?>">
                             </div>
+                            <?php if(isset($_POST['busqueda-avanzada'])){$validadorAvanzado->mostrarErrorTermino();} ?>
                             <p>Buscar en los siguientes campos:</p>
                             <div class="form-check form-check-inline">
 
