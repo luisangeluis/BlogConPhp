@@ -23,37 +23,37 @@ if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POS
     if ($validador->terminoCorrecto()) {
         //Conexion::openConexion();
         $resultados = CRepositorioEntrada::busquedaEntradaTodosLosCampos(Conexion::getConexion(), $terminoABuscar);
+        echo 'hay resultados';
     }
 }
 
 // if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])) {
-if (isset($_POST['busqueda-avanzada'])){
+if (isset($_POST['busqueda-avanzada'])) {
+    $resultadosMultiples = true;
 
     $campos = [];
     $fecha = '';
-    
-    if(!isset($_POST['campos'])){
-        array_push($campos,'titulo');
-    }else{
+
+    if (!isset($_POST['campos'])) {
+        array_push($campos, 'titulo');
+    } else {
         $campos = $_POST['campos'];
     }
 
-    if(!isset($_POST['fecha'])){
+    if (!isset($_POST['fecha'])) {
         $fecha = 'recientes';
-    }else{
+    } else {
         $fecha = $_POST['fecha'];
     }
-    
-    $validadorAvanzado = new CValidadorBuscadorAvanzado($_POST['termino-a-buscar'],$campos,$fecha);
 
-    if($validadorAvanzado->isFormValido()){
+    $validadorAvanzado = new CValidadorBuscadorAvanzado($_POST['termino-a-buscar'], $campos, $fecha);
+
+    if ($validadorAvanzado->isFormValido()) {
         echo 'es valido';
-    }else{
-        
-        echo 'no es valido';    
-    }
-    
+    } else {
 
+        echo 'no es valido';
+    }
 }
 
 ?>
@@ -93,7 +93,9 @@ if (isset($_POST['busqueda-avanzada'])){
                             <div class="form-group mb-3">
                                 <input type="search" class="form-control" placeholder="¿Qué buscas?" name="termino-a-buscar" value="<?php echo $terminoABuscar ?>">
                             </div>
-                            <?php if(isset($_POST['busqueda-avanzada'])){$validadorAvanzado->mostrarErrorTermino();} ?>
+                            <?php if (isset($_POST['busqueda-avanzada'])) {
+                                $validadorAvanzado->mostrarErrorTermino();
+                            } ?>
                             <p>Buscar en los siguientes campos:</p>
                             <div class="form-check form-check-inline">
 
@@ -150,22 +152,42 @@ if (isset($_POST['busqueda-avanzada'])){
     </div>
 
     <?php
-    if (isset($resultados)) {
-        if (count($resultados)) {
-            if (!$resultadosMultiples) {
-                EscritorioDeEntradas::mostrarEntradasBusqueda($resultados);
-            } else {
-                //mostrar resultados
-            }
-        } else {
-            //Construir validador para termino a buscar avanzado y no usar variables post directamente
-            $parametros = count($_POST['campos']);
-    ?>
-            <p>No existen coincidencias</p>
-    <?php
 
+    //TO DO en el video se puso count en lugar de isset
+    if (isset($resultados)) {
+        if (!$resultadosMultiples) {
+            EscritorioDeEntradas::mostrarEntradasBusqueda($resultados);
+        } else {
+            //mostrar resultados
+        }
+    } else {
+
+        //Construir validador para termino a buscar avanzado y no usar variables post directamente
+        if (isset($_POST['busqueda-avanzada'])) {
+            $campos = count($validadorAvanzado->getArrayCampos());
+            $anchoColumna = 12 / $campos;
+
+    ?>
+            <div class="row text-center">
+                <?php
+                for ($i = 0; $i < $campos; $i++) {
+                ?>
+
+                    <div class="<?php echo 'col-lg-'.$anchoColumna?>">
+                        <h4><?php echo 'Resultados en ' .$validadorAvanzado->getArrayCampos()[$i]?></h4>
+                        <br>
+                    </div>
+
+                <?php
+                }
+                ?>
+
+            </div>
+
+    <?php
         }
     }
+
     ?>
 
 </div>
