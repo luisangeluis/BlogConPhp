@@ -27,7 +27,7 @@ if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POS
     }
 }
 
-// if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])) {
+//if (isset($_POST['busqueda-avanzada']) && isset($_POST['termino-a-buscar']) && !empty($_POST['termino-a-buscar'])) {
 if (isset($_POST['busqueda-avanzada'])) {
     $resultadosMultiples = true;
 
@@ -163,7 +163,7 @@ if (isset($_POST['busqueda-avanzada'])) {
     } else {
 
         //Construir validador para termino a buscar avanzado y no usar variables post directamente
-        if (isset($_POST['busqueda-avanzada'])) {
+        if (isset($_POST['busqueda-avanzada']) && $validadorAvanzado->isFormValido()) {
             $campos = count($validadorAvanzado->getArrayCampos());
             $anchoColumna = 12 / $campos;
 
