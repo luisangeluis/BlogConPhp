@@ -467,4 +467,101 @@ class CRepositorioEntrada
         return $entradas;
         
     }
+
+    public static function busquedaEntradaByTitulo($pConexion,$pTerminoBusqueda){
+        
+        $entradas = [];
+        $pTerminoBusqueda = '%'.$pTerminoBusqueda.'%';
+        if(isset($pConexion)){
+            try{
+                $sql = 'SELECT * FROM entradas WHERE titulo LIKE :terminoBusqueda ORDER BY
+                    fecha DESC LIMIT 25';
+
+                $sentencia = $pConexion->prepare($sql);
+                $sentencia->bindParam(':terminoBusqueda',$pTerminoBusqueda,PDO::PARAM_STR);
+                $sentencia->execute();
+                
+                $resultado = $sentencia->fetchAll();
+
+                if (count($resultado)) {
+                    foreach ($resultado as $entrada) {
+                        $entradas[] = new CEntrada($entrada['id'],$entrada['autor_id'],$entrada['url'],$entrada['titulo'],
+                            $entrada['texto'],$entrada['fecha'],$entrada['activa']);
+                    }
+                }
+
+            }catch(PDOException $e){
+                print 'ERROR: '.$e->getMessage();
+            }
+        }
+
+        return $entradas;
+        
+    }
+
+    public static function busquedaEntradaByTexto($pConexion,$pTerminoBusqueda){
+        
+        $entradas = [];
+        $pTerminoBusqueda = '%'.$pTerminoBusqueda.'%';
+        if(isset($pConexion)){
+            try{
+                $sql = 'SELECT * FROM entradas WHERE texto LIKE :terminoBusqueda ORDER BY
+                    fecha DESC LIMIT 25';
+
+                $sentencia = $pConexion->prepare($sql);
+                $sentencia->bindParam(':terminoBusqueda',$pTerminoBusqueda,PDO::PARAM_STR);
+                $sentencia->execute();
+                
+                $resultado = $sentencia->fetchAll();
+
+                if (count($resultado)) {
+                    foreach ($resultado as $entrada) {
+                        $entradas[] = new CEntrada($entrada['id'],$entrada['autor_id'],$entrada['url'],$entrada['titulo'],
+                            $entrada['texto'],$entrada['fecha'],$entrada['activa']);
+                    }
+                }
+
+            }catch(PDOException $e){
+                print 'ERROR: '.$e->getMessage();
+            }
+        }
+
+        return $entradas;
+        
+    }
+
+    public static function busquedaEntradaByAutor($pConexion,$pTerminoBusqueda){
+        
+        $entradas = [];
+        $pTerminoBusqueda = '%'.$pTerminoBusqueda.'%';
+        if(isset($pConexion)){
+            try{
+                $sql = 'SELECT * FROM entradas AS e 
+                        JOIN usuarios AS u 
+                        ON u.id = e.autor_id 
+                        WHERE u.nombre like :terminoBusqueda
+                        ORDER BY e.fecha DESC
+                        LIMIT 25';
+
+                $sentencia = $pConexion->prepare($sql);
+                $sentencia->bindParam(':terminoBusqueda',$pTerminoBusqueda,PDO::PARAM_STR);
+                $sentencia->execute();
+                
+                $resultado = $sentencia->fetchAll();
+
+                if (count($resultado)) {
+                    foreach ($resultado as $entrada) {
+                        $entradas[] = new CEntrada($entrada['id'],$entrada['autor_id'],$entrada['url'],$entrada['titulo'],
+                            $entrada['texto'],$entrada['fecha'],$entrada['activa']);
+                    }
+                }
+
+            }catch(PDOException $e){
+                print 'ERROR: '.$e->getMessage();
+            }
+        }
+
+        return $entradas;
+        
+    }
 }
