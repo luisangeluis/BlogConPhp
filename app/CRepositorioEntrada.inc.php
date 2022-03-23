@@ -468,14 +468,14 @@ class CRepositorioEntrada
         
     }
 
-    public static function busquedaEntradaByTitulo($pConexion,$pTerminoBusqueda){
+    public static function busquedaEntradaByTitulo($pConexion,$pTerminoBusqueda,$pOrden){
         
         $entradas = [];
         $pTerminoBusqueda = '%'.$pTerminoBusqueda.'%';
         if(isset($pConexion)){
             try{
-                $sql = 'SELECT * FROM entradas WHERE titulo LIKE :terminoBusqueda ORDER BY
-                    fecha DESC LIMIT 25';
+                $sql = "SELECT * FROM entradas WHERE titulo LIKE :terminoBusqueda ORDER BY
+                    fecha $pOrden LIMIT 25";
 
                 $sentencia = $pConexion->prepare($sql);
                 $sentencia->bindParam(':terminoBusqueda',$pTerminoBusqueda,PDO::PARAM_STR);
@@ -499,14 +499,14 @@ class CRepositorioEntrada
         
     }
 
-    public static function busquedaEntradaByTexto($pConexion,$pTerminoBusqueda){
+    public static function busquedaEntradaByTexto($pConexion,$pTerminoBusqueda,$pOrden){
         
         $entradas = [];
         $pTerminoBusqueda = '%'.$pTerminoBusqueda.'%';
         if(isset($pConexion)){
             try{
-                $sql = 'SELECT * FROM entradas WHERE texto LIKE :terminoBusqueda ORDER BY
-                    fecha DESC LIMIT 25';
+                $sql = "SELECT * FROM entradas WHERE texto LIKE :terminoBusqueda ORDER BY
+                    fecha $pOrden LIMIT 25";
 
                 $sentencia = $pConexion->prepare($sql);
                 $sentencia->bindParam(':terminoBusqueda',$pTerminoBusqueda,PDO::PARAM_STR);
@@ -530,18 +530,18 @@ class CRepositorioEntrada
         
     }
 
-    public static function busquedaEntradaByAutor($pConexion,$pTerminoBusqueda){
+    public static function busquedaEntradaByAutor($pConexion,$pTerminoBusqueda,$pOrden){
         
         $entradas = [];
         $pTerminoBusqueda = '%'.$pTerminoBusqueda.'%';
         if(isset($pConexion)){
             try{
-                $sql = 'SELECT * FROM entradas AS e 
+                $sql = "SELECT * FROM entradas AS e 
                         JOIN usuarios AS u 
                         ON u.id = e.autor_id 
                         WHERE u.nombre like :terminoBusqueda
-                        ORDER BY e.fecha DESC
-                        LIMIT 25';
+                        ORDER BY fecha $pOrden
+                        LIMIT 25";
 
                 $sentencia = $pConexion->prepare($sql);
                 $sentencia->bindParam(':terminoBusqueda',$pTerminoBusqueda,PDO::PARAM_STR);

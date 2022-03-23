@@ -40,16 +40,39 @@ if (isset($_POST['busqueda-avanzada'])) {
         $campos = $_POST['campos'];
     }
 
-    if (!isset($_POST['fecha'])) {
-        $fecha = 'recientes';
+    if ($_POST['fecha']="desc") {
+        $fecha = 'desc';
     } else {
-        $fecha = $_POST['fecha'];
+        $fecha = "asc";
     }
 
     $validadorAvanzado = new CValidadorBuscadorAvanzado($_POST['termino-a-buscar'], $campos, $fecha);
 
     if ($validadorAvanzado->isFormValido()) {
-        echo 'es valido';
+        
+        Conexion::openConexion();
+        if(in_array("titulo",$validadorAvanzado->getArrayCampos())){
+            // echo "titulo";
+            $entradasByTitulo = CRepositorioEntrada::busquedaEntradaByTitulo(Conexion::getConexion(),
+                $validadorAvanzado->getTermino(),$validadorAvanzado->getFecha());
+        }
+        if(in_array("contenido",$validadorAvanzado->getArrayCampos())){
+            // echo "contenido";
+            $entradasByContenido = CRepositorioEntrada::busquedaEntradaByTexto(Conexion::getConexion(),
+                $validadorAvanzado->getTermino(),$validadorAvanzado->getFecha());
+        }
+        if(in_array("tags",$validadorAvanzado->getArrayCampos())){
+            // echo "tags";
+
+        }
+        if(in_array("autor",$validadorAvanzado->getArrayCampos())){
+            // echo "autor";
+            $entradasByAutor = CRepositorioEntrada::busquedaEntradaByAutor(Conexion::getConexion(),
+                $validadorAvanzado->getTermino(),$validadorAvanzado->getFecha());
+        }
+
+        foreach($validadorAvanzado->getArrayCampos() as $c)
+            echo $c;
     } else {
 
         echo 'no es valido';
@@ -119,11 +142,11 @@ if (isset($_POST['busqueda-avanzada'])) {
                             <hr>
                             <p>Ordenar por:</p>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="fecha" id="inlineRadio1" value="recientes" checked>
+                                <input class="form-check-input" type="radio" name="fecha" id="inlineRadio1" value="desc" checked>
                                 <label class="form-check-label" for="inlineRadio1">Entradas mas recientes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="fecha" id="inlineRadio2" value="antiguas">
+                                <input class="form-check-input" type="radio" name="fecha" id="inlineRadio2" value="asc">
                                 <label class="form-check-label" for="inlineRadio2">Entradas mas antigüas</label>
                             </div>
                             <hr>
