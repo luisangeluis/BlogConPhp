@@ -9,6 +9,7 @@
     include_once 'app/CRepositorioUsuarios.inc.php';
     include_once 'app/CRepositorioEntrada.inc.php';
     include_once 'app/CRepositorioComentario.inc.php';
+    
 
     Conexion::openConexion();
 
@@ -30,7 +31,7 @@
         $entrada = new CEntrada('',$autor,$url,$titulo,$texto,'','');
         CRepositorioEntrada::insertarEntrada(Conexion::getConexion(),$entrada);
     }
-    for($comentarios =0;$comentarios<97;$comentarios++){
+    for($comentarios =0;$comentarios<100;$comentarios++){
         $autorId = rand(1,100);
         $entradaId = rand(1,100);
         $titulo = crearStringAleatorio(10);

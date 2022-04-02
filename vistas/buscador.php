@@ -40,7 +40,7 @@ if (isset($_POST['busqueda-avanzada'])) {
         $campos = $_POST['campos'];
     }
 
-    if ($_POST['fecha']="desc") {
+    if ($_POST['fecha'] == "desc") {
         $fecha = 'desc';
     } else {
         $fecha = "asc";
@@ -49,29 +49,38 @@ if (isset($_POST['busqueda-avanzada'])) {
     $validadorAvanzado = new CValidadorBuscadorAvanzado($_POST['termino-a-buscar'], $campos, $fecha);
 
     if ($validadorAvanzado->isFormValido()) {
-        
+
         Conexion::openConexion();
-        if(in_array("titulo",$validadorAvanzado->getArrayCampos())){
+        if (in_array("titulo", $validadorAvanzado->getArrayCampos())) {
             // echo "titulo";
-            $entradasByTitulo = CRepositorioEntrada::busquedaEntradaByTitulo(Conexion::getConexion(),
-                $validadorAvanzado->getTermino(),$validadorAvanzado->getFecha());
+            $entradasByTitulo = CRepositorioEntrada::busquedaEntradaByTitulo(
+                Conexion::getConexion(),
+                $validadorAvanzado->getTermino(),
+                $validadorAvanzado->getFecha()
+            );
         }
-        if(in_array("contenido",$validadorAvanzado->getArrayCampos())){
+        if (in_array("contenido", $validadorAvanzado->getArrayCampos())) {
             // echo "contenido";
-            $entradasByContenido = CRepositorioEntrada::busquedaEntradaByTexto(Conexion::getConexion(),
-                $validadorAvanzado->getTermino(),$validadorAvanzado->getFecha());
+            $entradasByContenido = CRepositorioEntrada::busquedaEntradaByTexto(
+                Conexion::getConexion(),
+                $validadorAvanzado->getTermino(),
+                $validadorAvanzado->getFecha()
+            );
         }
-        if(in_array("tags",$validadorAvanzado->getArrayCampos())){
+        if (in_array("tags", $validadorAvanzado->getArrayCampos())) {
             // echo "tags";
 
         }
-        if(in_array("autor",$validadorAvanzado->getArrayCampos())){
+        if (in_array("autor", $validadorAvanzado->getArrayCampos())) {
             // echo "autor";
-            $entradasByAutor = CRepositorioEntrada::busquedaEntradaByAutor(Conexion::getConexion(),
-                $validadorAvanzado->getTermino(),$validadorAvanzado->getFecha());
+            $entradasByAutor = CRepositorioEntrada::busquedaEntradaByAutor(
+                Conexion::getConexion(),
+                $validadorAvanzado->getTermino(),
+                $validadorAvanzado->getFecha()
+            );
         }
 
-        foreach($validadorAvanzado->getArrayCampos() as $c)
+        foreach ($validadorAvanzado->getArrayCampos() as $c)
             echo $c;
     } else {
 
@@ -124,29 +133,69 @@ if (isset($_POST['busqueda-avanzada'])) {
 
                                 <!--poner a todos los campos relacionados el mis name con corchetes ejem campos[]-->
 
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="campos[]" value="titulo" checked>
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="campos[]" value="titulo" <?php
+                                                                                                                                    if (isset($_POST['busqueda-avanzada'])) {
+                                                                                                                                        if (in_array('titulo', $validadorAvanzado->getArrayCampos())) {
+                                                                                                                                            echo 'checked';
+                                                                                                                                        }
+                                                                                                                                    } else {
+                                                                                                                                        echo 'checked';
+                                                                                                                                    }
+
+
+                                                                                                                                    ?>>
                                 <label class="form-check-label" for="inlineCheckbox1">Titulo</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="contenido">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="contenido" <?php
+                                                                                                                                        if (isset($_POST['busqueda-avanzada'])) {
+                                                                                                                                            if (in_array('contenido', $validadorAvanzado->getArrayCampos())) {
+                                                                                                                                                echo 'checked';
+                                                                                                                                            }
+                                                                                                                                        }
+                                                                                                                                        ?>>
                                 <label class="form-check-label" for="inlineCheckbox2">Contenido</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="tags">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="tags" <?php
+                                                                                                                                    if (isset($_POST['busqueda-avanzada'])) {
+                                                                                                                                        if (in_array('tags', $validadorAvanzado->getArrayCampos())) {
+                                                                                                                                            echo 'checked';
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                    ?>>
                                 <label class="form-check-label" for="inlineCheckbox3">Tags</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="autor">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="campos[]" value="autor" <?php
+                                                                                                                                    if (isset($_POST['busqueda-avanzada'])) {
+                                                                                                                                        if (in_array('autor', $validadorAvanzado->getArrayCampos())) {
+                                                                                                                                            echo 'checked';
+                                                                                                                                        }
+                                                                                                                                    }
+                                                                                                                                    ?>>
                                 <label class="form-check-label" for="inlineCheckbox3">Autor</label>
                             </div>
                             <hr>
                             <p>Ordenar por:</p>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="fecha" id="inlineRadio1" value="desc" checked>
+                                <input class="form-check-input" type="radio" name="fecha" id="inlineRadio1" value="desc" <?php
+                                                                                                                            if (isset($_POST['busqueda-avanzada'])) {
+                                                                                                                                if ($validadorAvanzado->getFecha() === 'desc') {
+                                                                                                                                    echo 'checked';
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                            ?>>
                                 <label class="form-check-label" for="inlineRadio1">Entradas mas recientes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="fecha" id="inlineRadio2" value="asc">
+                                <input class="form-check-input" type="radio" name="fecha" id="inlineRadio2" value="asc" <?php
+                                                                                                                        if (isset($_POST['busqueda-avanzada'])) {
+                                                                                                                            if ($validadorAvanzado->getFecha() === 'asc') {
+                                                                                                                                echo 'checked';
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                        ?>>
                                 <label class="form-check-label" for="inlineRadio2">Entradas mas antigüas</label>
                             </div>
                             <hr>
@@ -164,10 +213,12 @@ if (isset($_POST['busqueda-avanzada'])) {
         <div class="col-lg-12">
             <h1>
                 <?php
-                if (isset($resultados)) {
+                if (isset($_POST['buscar'])) {
                     if (count($resultados)) {
                         echo '<small>' . count($resultados) . '</small> resultados';
                     }
+                } else if (isset($_POST['busqueda-avanzada'])) {
+                    //PENDIENTE
                 }
                 ?>
             </h1>
@@ -179,36 +230,42 @@ if (isset($_POST['busqueda-avanzada'])) {
     //TO DO en el video se puso count en lugar de isset
     if (isset($resultados)) {
         if (!$resultadosMultiples) {
+            echo 'un solo resultado';
+
             EscritorioDeEntradas::mostrarEntradasBusqueda($resultados);
         } else {
             //mostrar resultados
-        }
-    } else {
-
-        //Construir validador para termino a buscar avanzado y no usar variables post directamente
-        if (isset($_POST['busqueda-avanzada']) && $validadorAvanzado->isFormValido()) {
-            $campos = count($validadorAvanzado->getArrayCampos());
-            $anchoColumna = 12 / $campos;
+            //Construir validador para termino a buscar avanzado y no usar variables post directamente
+            echo 'resultados multiples';
+            if (isset($_POST['busqueda-avanzada']) && $validadorAvanzado->isFormValido()) {
+                $campos = count($validadorAvanzado->getArrayCampos());
+                $anchoColumna = 12 / $campos;
 
     ?>
-            <div class="row text-center">
-                <?php
-                for ($i = 0; $i < $campos; $i++) {
-                ?>
+                <div class="row text-center">
+                    <?php
+                    for ($i = 0; $i < $campos; $i++) {
+                    ?>
 
-                    <div class="<?php echo 'col-lg-'.$anchoColumna?>">
-                        <h4><?php echo 'Resultados en ' .$validadorAvanzado->getArrayCampos()[$i]?></h4>
-                        <br>
-                    </div>
+                        <div class="<?php echo 'col-lg-' . $anchoColumna ?>">
+                            <h4><?php echo 'Resultados en ' . $validadorAvanzado->getArrayCampos()[$i] ?></h4>
+                            <br>
+                        </div>
 
-                <?php
-                }
-                ?>
+                    <?php
+                    }
+                    ?>
 
-            </div>
+                </div>
+
+        <?php
+            }
+        }
+    } else {
+        ?>
+        <h3>Sin coincidencias</h3>
 
     <?php
-        }
     }
 
     ?>

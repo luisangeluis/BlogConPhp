@@ -10,6 +10,9 @@ include_once 'app/CRepositorioUsuarios.inc.php';
 include_once 'app/CRepositorioEntrada.inc.php';
 include_once 'app/CRepositorioComentario.inc.php';
 
+// include_once 'scripts/ScriptRelleno.php';
+
+
 
     //Las primeras 2 lineas obtienen la ruta
     $componentesUrl = parse_url($_SERVER["REQUEST_URI"]);
@@ -69,7 +72,7 @@ include_once 'app/CRepositorioComentario.inc.php';
                     $rutaElegida = './vistas/editar-entrada.php';
                 break;
                 case 'script-relleno':
-                    $rutaElegida = 'vistas/ScriptRelleno.php';
+                    $rutaElegida = 'scripts/ScriptRelleno.php';
                 break;
                 case 'pruebas-grales':
                     $rutaElegida = 'vistas/pruebas-generales.php';
