@@ -23,7 +23,8 @@ if (isset($_POST['buscar']) && isset($_POST['termino-a-buscar']) && !empty($_POS
     if ($validador->terminoCorrecto()) {
         //Conexion::openConexion();
         $resultados = CRepositorioEntrada::busquedaEntradaTodosLosCampos(Conexion::getConexion(), $terminoABuscar);
-        echo 'hay resultados';
+        // echo 'hay resultados';
+        // echo count($resultados);
     }
 }
 
@@ -49,7 +50,9 @@ if (isset($_POST['busqueda-avanzada'])) {
     $validadorAvanzado = new CValidadorBuscadorAvanzado($_POST['termino-a-buscar'], $campos, $fecha);
 
     if ($validadorAvanzado->isFormValido()) {
-
+        $entradasByTitulo=[];
+        $entradasByContenido = [];
+        $entradasByAutor = [];
         Conexion::openConexion();
         if (in_array("titulo", $validadorAvanzado->getArrayCampos())) {
             // echo "titulo";
@@ -141,8 +144,6 @@ if (isset($_POST['busqueda-avanzada'])) {
                                                                                                                                     } else {
                                                                                                                                         echo 'checked';
                                                                                                                                     }
-
-
                                                                                                                                     ?>>
                                 <label class="form-check-label" for="inlineCheckbox1">Titulo</label>
                             </div>
@@ -208,67 +209,64 @@ if (isset($_POST['busqueda-avanzada'])) {
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container" id="resultados">
     <div class="row">
         <div class="col-lg-12">
-            <h1>
+            <h2>Resultados
                 <?php
-                if (isset($_POST['buscar'])) {
-                    if (count($resultados)) {
-                        echo '<small>' . count($resultados) . '</small> resultados';
+
+                if (isset($_POST['buscar']) && count($resultados)) {
+                ?>
+                    <small><?php echo count($resultados) ?></small>
+                <?php
+                }else if(isset($_POST['busqueda-avanzada'])){
+                    
+                    if(count($entradasByTitulo) || count($entradasByContenido) || count($entradasByAutor)){
+                        // echo 'hay varios resultados';
                     }
-                } else if (isset($_POST['busqueda-avanzada'])) {
-                    //PENDIENTE
                 }
                 ?>
-            </h1>
+            </h2>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <?php
 
-    <?php
+            if (isset($_POST['buscar'])){
+                if(count($resultados)){
+                    EscritorioDeEntradas::mostrarEntradasbusqueda($resultados);
 
-    //TO DO en el video se puso count en lugar de isset
-    if (isset($resultados)) {
-        if (!$resultadosMultiples) {
-            echo 'un solo resultado';
-
-            EscritorioDeEntradas::mostrarEntradasBusqueda($resultados);
-        } else {
-            //mostrar resultados
-            //Construir validador para termino a buscar avanzado y no usar variables post directamente
-            echo 'resultados multiples';
-            if (isset($_POST['busqueda-avanzada']) && $validadorAvanzado->isFormValido()) {
-                $campos = count($validadorAvanzado->getArrayCampos());
-                $anchoColumna = 12 / $campos;
-
-    ?>
-                <div class="row text-center">
-                    <?php
-                    for ($i = 0; $i < $campos; $i++) {
+                }else{
                     ?>
-
-                        <div class="<?php echo 'col-lg-' . $anchoColumna ?>">
-                            <h4><?php echo 'Resultados en ' . $validadorAvanzado->getArrayCampos()[$i] ?></h4>
-                            <br>
-                        </div>
-
+                    <h3>Sin Resultados</h3>
+                    <br>
                     <?php
-                    }
+                }
+            }else if(isset($_POST['busqueda-avanzada'])){
+                // echo 'holasssss';
+                if(count($entradasByTitulo) || count($entradasByContenido) || count($entradasByAutor)){
+                    $numParametros = count($validadorAvanzado->getArrayCampos());
+                    $anchoColumnas = 12 / $numParametros;
+
                     ?>
-
-                </div>
-
-        <?php
+                    <div class="row">
+                        <?php
+                        for($i=0;$i<$numParametros;$i++){
+                        ?>
+                            <div class="<?php echo "col-lg-$anchoColumnas";?>">
+                               <h4><?php echo 'Coincidencias en'. $_POST['campos'][$i]; ?></h4> 
+                            </div>        
+                        <?php
+                        }
+                        ?>
+                    </div>
+                    <?php
+                }
             }
-        }
-    } else {
-        ?>
-        <h3>Sin coincidencias</h3>
-
-    <?php
-    }
-
-    ?>
+            ?>
+        </div>
+    </div>
 
 </div>
 
