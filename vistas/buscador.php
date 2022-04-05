@@ -48,11 +48,11 @@ if (isset($_POST['busqueda-avanzada'])) {
     }
 
     $validadorAvanzado = new CValidadorBuscadorAvanzado($_POST['termino-a-buscar'], $campos, $fecha);
-
+    $entradasByTitulo = [];
+    $entradasByContenido = [];
+    $entradasByAutor = [];
     if ($validadorAvanzado->isFormValido()) {
-        $entradasByTitulo=[];
-        $entradasByContenido = [];
-        $entradasByAutor = [];
+
         Conexion::openConexion();
         if (in_array("titulo", $validadorAvanzado->getArrayCampos())) {
             // echo "titulo";
@@ -212,17 +212,32 @@ if (isset($_POST['busqueda-avanzada'])) {
 <div class="container" id="resultados">
     <div class="row">
         <div class="col-lg-12">
-            <h2>Resultados
+            <h2>Resultados:
                 <?php
 
                 if (isset($_POST['buscar']) && count($resultados)) {
                 ?>
                     <small><?php echo count($resultados) ?></small>
                 <?php
-                }else if(isset($_POST['busqueda-avanzada'])){
-                    
-                    if(count($entradasByTitulo) || count($entradasByContenido) || count($entradasByAutor)){
-                        // echo 'hay varios resultados';
+                } else if (isset($_POST['busqueda-avanzada'])) {
+
+                    if (count($entradasByTitulo) || count($entradasByContenido) || count($entradasByAutor)) {
+                        $numResultados = 0;
+                        // echo 'holasssss';
+                        if (count($entradasByTitulo)) {
+                            echo "hay " . count($entradasByTitulo) . "entradas titulo";
+                            $numResultados++;
+                        }
+                        if (count($entradasByContenido)) {
+                            echo "hay " . count($entradasByContenido) . "entradas contenido";
+                            $numResultados++;
+                        }
+                        if (count($entradasByAutor)) {
+                            echo "hay " . count($entradasByAutor) . "entradas autor";
+                            $numResultados++;
+                        }
+                    } else {
+                        echo ' Sin resultados';
                     }
                 }
                 ?>
@@ -233,34 +248,55 @@ if (isset($_POST['busqueda-avanzada'])) {
         <div class="col-lg-12">
             <?php
 
-            if (isset($_POST['buscar'])){
-                if(count($resultados)){
+            if (isset($_POST['buscar'])) {
+                if (count($resultados)) {
                     EscritorioDeEntradas::mostrarEntradasbusqueda($resultados);
-
-                }else{
-                    ?>
+                } else {
+            ?>
                     <h3>Sin Resultados</h3>
                     <br>
-                    <?php
+                <?php
                 }
-            }else if(isset($_POST['busqueda-avanzada'])){
-                // echo 'holasssss';
-                if(count($entradasByTitulo) || count($entradasByContenido) || count($entradasByAutor)){
-                    $numParametros = count($validadorAvanzado->getArrayCampos());
+            } else if (isset($_POST['busqueda-avanzada'])) {
+
+                if (count($entradasByTitulo) || count($entradasByContenido) || count($entradasByAutor)) {
+                    $numParametros = $numResultados;
                     $anchoColumnas = 12 / $numParametros;
 
-                    ?>
+                ?>
                     <div class="row">
                         <?php
-                        for($i=0;$i<$numParametros;$i++){
+                        for ($i = 0; $i < $numParametros; $i++) {
                         ?>
-                            <div class="<?php echo "col-lg-$anchoColumnas";?>">
-                               <h4><?php echo 'Coincidencias en'. $_POST['campos'][$i]; ?></h4> 
-                            </div>        
+                            <div class="<?php echo "col-lg-$anchoColumnas"; ?>">
+                                <h4><?php echo 'Coincidencias en ' . $_POST['campos'][$i]; ?></h4>
+                            </div>
                         <?php
+                            switch ($_POST['campos'][$i]) {
+                                case 'titulo':
+                                    if (count($entradasByTitulo))
+                                        EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByTitulo);
+                                    break;
+                                case 'contenido':
+                                    if (count($entradasByContenido))
+
+                                        EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByContenido);
+
+                                    break;
+                                case 'autor':
+                                    if (count($entradasByAutor))
+
+                                        EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByAutor);
+
+                                    break;
+                            }
                         }
                         ?>
                     </div>
+            <?php
+                }else{
+                    ?>
+                        <h3>Sin coincidencias</h3>
                     <?php
                 }
             }
