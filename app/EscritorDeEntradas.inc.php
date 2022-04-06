@@ -66,22 +66,6 @@ class EscritorioDeEntradas
         }
     }
 
-    public static function mostrarEntradasbusquedaMultiple($entradas)
-    {
-        for ($i = 1; $i < count($entradas); $i++) {
-            ?>
-            <div class="row">
-                <?php
-
-                $entrada = $entradas[$i - 1];
-                EscritorioDeEntradas::mostrarEntradaBusquedaMultiple($entrada);
-                ?>
-            </div>
-        <?php
-
-        }
-    }
-
     public static function mostrarEntradaBusqueda($entrada)
     {
 
@@ -109,16 +93,38 @@ class EscritorioDeEntradas
             <br />
         </div>
 
-<?php
+    <?php
+    }
+
+    public static function mostrarEntradasbusquedaMultiple($entradas)
+    {
+
+        
+        for ($i = 0; $i < count($entradas); $i++) {
+            
+            ?>
+            <div class="row">
+                <?php
+                // echo count($entradas);
+
+                $entrada = $entradas[$i];
+                EscritorioDeEntradas::mostrarEntradaBusquedaMultiple($entrada);
+                ?>
+            </div>
+        <?php
+
+        }
     }
 
     public static function mostrarEntradaBusquedaMultiple($entrada)
     {
-
         if (!isset($entrada)) {
+
             return;
         }
-        ?>
+        // echo 'no hay entrada';
+
+    ?>
 
         <div class="col-lg-12">
             <div class="card ">

@@ -225,15 +225,15 @@ if (isset($_POST['busqueda-avanzada'])) {
                         $numResultados = 0;
                         // echo 'holasssss';
                         if (count($entradasByTitulo)) {
-                            echo "hay " . count($entradasByTitulo) . "entradas titulo";
+                            echo "hay " . count($entradasByTitulo) . " entradas titulo";
                             $numResultados++;
                         }
                         if (count($entradasByContenido)) {
-                            echo "hay " . count($entradasByContenido) . "entradas contenido";
+                            echo "hay " . count($entradasByContenido) . " entradas contenido";
                             $numResultados++;
                         }
                         if (count($entradasByAutor)) {
-                            echo "hay " . count($entradasByAutor) . "entradas autor";
+                            echo "hay " . count($entradasByAutor) . " entradas autor";
                             $numResultados++;
                         }
                     } else {
@@ -260,44 +260,42 @@ if (isset($_POST['busqueda-avanzada'])) {
             } else if (isset($_POST['busqueda-avanzada'])) {
 
                 if (count($entradasByTitulo) || count($entradasByContenido) || count($entradasByAutor)) {
+                    // echo 'otra vez num de resultados '.$numResultados;
                     $numParametros = $numResultados;
                     $anchoColumnas = 12 / $numParametros;
+                    // echo 'ancho de columnas: '.$anchoColumnas;
 
                 ?>
                     <div class="row">
+
                         <?php
                         for ($i = 0; $i < $numParametros; $i++) {
                         ?>
                             <div class="<?php echo "col-lg-$anchoColumnas"; ?>">
                                 <h4><?php echo 'Coincidencias en ' . $_POST['campos'][$i]; ?></h4>
                             </div>
+
                         <?php
                             switch ($_POST['campos'][$i]) {
                                 case 'titulo':
-                                    if (count($entradasByTitulo))
-                                        EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByTitulo);
+                                    EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByTitulo);
                                     break;
                                 case 'contenido':
-                                    if (count($entradasByContenido))
-
-                                        EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByContenido);
-
+                                    // echo 'case de contenido';
+                                    EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByContenido);
                                     break;
                                 case 'autor':
-                                    if (count($entradasByAutor))
-
-                                        EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByAutor);
-
+                                    EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByAutor);
                                     break;
                             }
                         }
                         ?>
                     </div>
+                <?php
+                } else {
+                ?>
+                    <h3>Sin coincidencias</h3>
             <?php
-                }else{
-                    ?>
-                        <h3>Sin coincidencias</h3>
-                    <?php
                 }
             }
             ?>
