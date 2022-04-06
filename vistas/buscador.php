@@ -261,8 +261,10 @@ if (isset($_POST['busqueda-avanzada'])) {
 
                 if (count($entradasByTitulo) || count($entradasByContenido) || count($entradasByAutor)) {
                     // echo 'otra vez num de resultados '.$numResultados;
-                    $numParametros = $numResultados;
+                    // $numParametros = $numResultados;
+                    $numParametros = count($validadorAvanzado->getArrayCampos());
                     $anchoColumnas = 12 / $numParametros;
+                    
                     // echo 'ancho de columnas: '.$anchoColumnas;
 
                 ?>
@@ -272,22 +274,35 @@ if (isset($_POST['busqueda-avanzada'])) {
                         for ($i = 0; $i < $numParametros; $i++) {
                         ?>
                             <div class="<?php echo "col-lg-$anchoColumnas"; ?>">
-                                <h4><?php echo 'Coincidencias en ' . $_POST['campos'][$i]; ?></h4>
+                                <h4><?php echo 'Coincidencias en: ' . $_POST['campos'][$i]; ?></h4>
                             </div>
 
                         <?php
-                            switch ($_POST['campos'][$i]) {
-                                case 'titulo':
-                                    EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByTitulo);
-                                    break;
-                                case 'contenido':
-                                    // echo 'case de contenido';
-                                    EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByContenido);
-                                    break;
-                                case 'autor':
-                                    EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByAutor);
-                                    break;
-                            }
+                        }
+                        for ($i = 0; $i < $numParametros; $i++) {
+                        ?>
+                            <div class="<?php echo "col-lg-$anchoColumnas"; ?>">
+                                <?php
+                                echo "$numParametros";
+                                switch ($_POST['campos'][$i]) {
+                                    case 'titulo':
+                                        // echo "case de titulo";
+                                        EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByTitulo);
+
+                                        break;
+                                    case 'contenido':
+                                        // echo 'case de contenido';
+                                        EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByContenido);
+                                        break;
+                                    case 'autor':
+                                        // echo 'case de autor';
+
+                                        EscritorioDeEntradas::mostrarEntradasbusquedaMultiple($entradasByAutor);
+                                        break;
+                                }
+                                ?>
+                            </div>
+                        <?php
                         }
                         ?>
                     </div>
