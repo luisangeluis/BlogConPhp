@@ -89,7 +89,9 @@ include_once 'app/CRepositorioComentario.inc.php';
                 case 'buscador':
                     $rutaElegida = 'vistas/buscador.php';
                 break;
-                
+                case 'perfil':
+                    $rutaElegida ='vistas/perfil.php'; 
+                break;
             }
         }else if(count($partesRuta)==3){
 

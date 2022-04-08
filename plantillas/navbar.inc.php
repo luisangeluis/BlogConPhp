@@ -41,7 +41,7 @@ $totalUsuarios =   CRepositorioUsuarios::getNumUsers(Conexion::getConexion());
         if (CControlSesion::sesionIniciada()) {
         ?>
           <li class="nav-item active">
-            <a class="nav-link" aria-current="page" href="#">
+            <a class="nav-link" aria-current="page" href="<?php echo RUTA_PERFIL?>">
               <i class="fas fa-user-friends"></i>
               <!--Usuarios Registrados-->
               <?php echo ' ' . $_SESSION['nombreUsuario'] ?>
@@ -88,3 +88,4 @@ $totalUsuarios =   CRepositorioUsuarios::getNumUsers(Conexion::getConexion());
     </div>
   </div>
 </nav>
+<br>

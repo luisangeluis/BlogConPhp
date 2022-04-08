@@ -29,6 +29,8 @@ define('RUTA_GENERAR_URL_SECRETA',SERVIDOR.'/generar-url-secreta');
 define('RUTA_ENVIAR_EMAIL',SERVIDOR.'/enviar-email');
 define('RUTA_CAMBIAR_PASSWORD',SERVIDOR.'/recuperando-password');
 define('RUTA_BUSCADOR',SERVIDOR.'/buscador');
+define('RUTA_PERFIL',SERVIDOR.'/perfil');
+
 
 define('RUTA_PRUEBAS',SERVIDOR.'/pruebas-grales');
 
