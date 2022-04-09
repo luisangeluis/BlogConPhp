@@ -31,11 +31,14 @@ define('RUTA_CAMBIAR_PASSWORD',SERVIDOR.'/recuperando-password');
 define('RUTA_BUSCADOR',SERVIDOR.'/buscador');
 define('RUTA_PERFIL',SERVIDOR.'/perfil');
 
-
 define('RUTA_PRUEBAS',SERVIDOR.'/pruebas-grales');
 
 //Recursos
 define('RUTA_CSS',SERVIDOR.'/styles');
+
+//realpath() devuelve la ruta que va a ser comprobada.
+//__DIR__ devuelve el directorio del fichero actual(archivo)
+define('DIRECTORIO_RAIZ',realpath(__DIR__.'/..'));
 
 
 ?>

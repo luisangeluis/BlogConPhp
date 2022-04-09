@@ -18,11 +18,28 @@ if (!CControlSesion::sesionIniciada()) {
     $usuario = CRepositorioUsuarios::GetUserById(Conexion::getConexion(), $id);
 }
 
-
+//$_FILES['perfil_imagen']['tmp_name'] se obtiene el nombre temporal de la imagen para saber
+//si en realidad se selecciono una imagen.
+if(isset($_POST['guardar-imagen']) && !empty($_FILES['perfil_imagen']['tmp_ name'])){
+    //Con ayuda de la constante y contatenando /subidas/ se obtiene la carpeta subidas
+    //Revisar la configuracion de la constante DIRECTORIO_RAIZ
+    $directorioImages = DIRECTORIO_RAIZ.'/subidas/';
+    //Se obtiene la ruta completa, el nombre que maneja el archivo y se concatenan.
+    $archivoObjetivo =  $directorio.basename($_FILES['perfil_imagen']['name']);
+}
 ?>
 <div class="container perfil bg-light text-dark">
-    <div class="row">
+    <div class="row py-1 py-lg-3">
         <div class="col-lg-3">
+            <img src="./img/user-default.png" class="img-fluid"alt="user-default">
+            <form action="<?php echo RUTA_PERFIL?>" method="POST" enctype="multipart/form-data" class="text-center">
+                <label for="perfil_imagen" id="label_archivo" class="btn btn-outline-secondary laber_archivo">Sube una imagen</label>
+                <input type="file" name="perfil_imagen" id="perfil_imagen" class="btn-subir">
+                <br>
+                <br>
+                <input type="submit" value="guardar" name="guardar-imagen" class="btn btn-primary form-control">
+                
+            </form>
         </div>
         <div class="col-lg-9">
             <h4><small>Nombre de usuario </small></h4>
